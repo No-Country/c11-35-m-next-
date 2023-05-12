@@ -1,4 +1,10 @@
-import { Heading } from '@chakra-ui/react'
+import Navbar from '@/components/Navbar/Navbar'
+
 export default function Home() {
-  return <Heading as='h1' fontWeight='bold' fontSize='8xl'>Hello World</Heading>
+  return (
+    <>
+      <Navbar />
+      <h1>Pagina root del proyecto</h1>
+    </>
+  )
 }

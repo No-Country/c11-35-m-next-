@@ -1,4 +1,4 @@
-import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
@@ -37,8 +37,4 @@ const dataSlice = createSlice({
   }
 })
 
-export default configureStore({
-  reducer: {
-    data: dataSlice.reducer
-  }
-})
+export default dataSlice.reducer

@@ -1,6 +1,4 @@
 import {
-  Link as ChakraLink,
-  Text,
   Box,
   Flex,
   Image,
@@ -28,33 +26,15 @@ export default function Navbar() {
     >
       <Box>
         <Flex alignItems='center'>
-          <NextLink href='/home'>
-            <ChakraLink
-              className='navlink'
-              mr={4}
-            >
-              Home
-            </ChakraLink>
-          </NextLink>
-          <NextLink href='/services'>
-            <ChakraLink
-              className='navlink'
-              mr={4}
-            >
-              Services
-            </ChakraLink>
-          </NextLink>
-          <NextLink href='/about'>
-            <ChakraLink className='navlink'>About</ChakraLink>
-          </NextLink>
+          <NextLink href='/home'>Home</NextLink>
+          <NextLink href='/services'>Services</NextLink>
+          <NextLink href='/about'>About</NextLink>
         </Flex>
       </Box>
       <Box>
         {!user ? (
           <Button>
-            <NextLink href='/api/auth/login'>
-              <ChakraLink className='navlink'>Login</ChakraLink>
-            </NextLink>
+            <NextLink href='/api/auth/login'>Login</NextLink>
           </Button>
         ) : (
           <Menu>

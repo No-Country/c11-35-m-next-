@@ -27,7 +27,7 @@ export default function ProductCard({ title, descripction, price, image }) {
           <Heading size='md'>{title}</Heading>
           <Text>{descripction}...</Text>
           <Text
-            color='blue.600'
+            color='teal.600'
             fontSize='2xl'
           >
             ${price}
@@ -39,13 +39,13 @@ export default function ProductCard({ title, descripction, price, image }) {
         <ButtonGroup spacing='2'>
           <Button
             variant='solid'
-            colorScheme='blue'
+            colorScheme='teal'
           >
             Buy now
           </Button>
           <Button
             variant='ghost'
-            colorScheme='blue'
+            colorScheme='teal'
           >
             Add to cart
           </Button>

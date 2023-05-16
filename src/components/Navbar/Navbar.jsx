@@ -25,7 +25,10 @@ export default function Navbar() {
       color='white'
     >
       <Box>
-        <Flex alignItems='center'>
+        <Flex
+          alignItems='center'
+          gap={5}
+        >
           <NextLink href='/home'>Home</NextLink>
           <NextLink href='/services'>Services</NextLink>
           <NextLink href='/about'>About</NextLink>

@@ -9,7 +9,8 @@ const initialState = {
 
 export const fetchData = createAsyncThunk('data/fetchData', async () => {
   try {
-    const response = await axios.get('https://localhost:3001')
+    const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+    console.log(response)
     return response.data
   } catch (error) {
     throw Error(error)

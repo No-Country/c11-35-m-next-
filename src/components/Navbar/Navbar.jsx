@@ -10,7 +10,7 @@ export default function Navbar() {
       <div>
         <Link
           className='navlink'
-          href='/'
+          href='/home'
         >
           Home
         </Link>

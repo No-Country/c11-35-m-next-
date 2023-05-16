@@ -11,10 +11,17 @@ import {
   Image
 } from '@chakra-ui/react'
 
-export default function ProductCard({ title, descripction, price, image }) {
+export default function ProductCard({ title, descripction, price, image, onClick }) {
   return (
-    <Card maxW='sm'>
-      <CardBody>
+    <Card
+      maxW='sm'
+      onClick={onClick}
+    >
+      <CardBody
+        _hover={{
+          cursor: 'pointer'
+        }}
+      >
         <Image
           src={image}
           alt='Green double couch with wooden legs'

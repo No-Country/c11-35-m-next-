@@ -4,10 +4,12 @@ import { fetchData } from '@/store/reducers/data'
 import { SimpleGrid, Text, useBreakpointValue } from '@chakra-ui/react'
 import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
+  const router = useRouter()
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 8
@@ -22,11 +24,15 @@ export default function Home() {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = data && data.slice(indexOfFirstItem, indexOfLastItem)
-
+  console.log(currentItems)
   const totalPages = Math.ceil((data && data.length) / itemsPerPage)
 
   const handlePageChange = page => {
     setCurrentPage(page)
+  }
+  const handleClick = productId => {
+    console.log(productId)
+    router.push(`/product-details/${productId}`)
   }
 
   return (
@@ -40,6 +46,7 @@ export default function Home() {
           {currentItems &&
             currentItems.map(item => (
               <ProductCard
+                onClick={() => handleClick(item.id)}
                 key={item.name}
                 title={item.name}
                 description={item.description}

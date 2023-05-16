@@ -3,15 +3,21 @@ import axios from 'axios'
 
 const initialState = {
   data: null,
+  filter: null,
   loading: false,
   error: null
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async () => {
+export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
-    const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
-    console.log(response)
-    return response.data
+    console.log('estas son las props', props)
+    if (props === undefined) {
+      const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
+      return response.data
+    } else {
+      const response = await axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=${props}`)
+      return response.data
+    }
   } catch (error) {
     throw Error(error)
   }

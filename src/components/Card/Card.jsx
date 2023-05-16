@@ -25,7 +25,7 @@ export default function ProductCard({ title, descripction, price, image }) {
           spacing='3'
         >
           <Heading size='md'>{title}</Heading>
-          <Text>{descripction.substring(0, 100)}...</Text>
+          <Text>{descripction}...</Text>
           <Text
             color='blue.600'
             fontSize='2xl'

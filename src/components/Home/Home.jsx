@@ -24,7 +24,6 @@ export default function Home() {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = data && data.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(currentItems)
   const totalPages = Math.ceil((data && data.length) / itemsPerPage)
 
   const handlePageChange = page => {

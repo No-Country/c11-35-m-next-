@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
-import { SimpleGrid, Button, HStack, Text, Flex } from '@chakra-ui/react'
+import {
+  SimpleGrid,
+  Button,
+  HStack,
+  Text,
+  Flex,
+  useBreakpointValue
+} from '@chakra-ui/react'
 import ProductCard from '@/components/Card/Card'
 
 export default function Home() {
@@ -17,6 +24,7 @@ export default function Home() {
     }
   }, [])
 
+  const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = data && data.slice(indexOfFirstItem, indexOfLastItem)
@@ -43,7 +51,7 @@ export default function Home() {
     <>
       <main className='main'>
         <SimpleGrid
-          columns={4}
+          columns={cardColumns}
           spacing={10}
           margin='50px'
         >

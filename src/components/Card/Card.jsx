@@ -8,56 +8,61 @@ import {
   Heading,
   Stack,
   Text,
-  Image
+  Image,
+  IconButton,
+  Flex
 } from '@chakra-ui/react'
+import { BsCart2 } from 'react-icons/bs'
 
-export default function ProductCard({ title, descripction, price, image, onClick }) {
+export default function ProductCard({
+  title,
+  description,
+  price,
+  image,
+  onClick
+}) {
   return (
-    <Card
-      maxW='sm'
-      onClick={onClick}
-    >
-      <CardBody
-        _hover={{
-          cursor: 'pointer'
-        }}
+    <Card onClick={onClick}>
+      <Flex
+        direction='column'
+        align='center'
       >
         <Image
           src={image}
           alt='Green double couch with wooden legs'
           borderRadius='lg'
         />
-        <Stack
-          mt='6'
-          spacing='3'
+        <CardBody
+          _hover={{
+            cursor: 'pointer'
+          }}
         >
-          <Heading size='md'>{title}</Heading>
-          <Text>{descripction}...</Text>
-          <Text
-            color='teal.600'
-            fontSize='2xl'
+          <Stack
+            mt='6'
+            spacing='3'
           >
-            ${price}
-          </Text>
-        </Stack>
-      </CardBody>
-      <Divider />
-      <CardFooter>
-        <ButtonGroup spacing='2'>
-          <Button
-            variant='solid'
-            colorScheme='teal'
+            <Heading size='md'>{title}</Heading>
+            <Text
+              color='#1A1A1A'
+              fontSize='2xl'
+            >
+              ${price}
+            </Text>
+          </Stack>
+        </CardBody>
+        <CardFooter>
+          <ButtonGroup
+            spacing='2'
+            ml='auto'
           >
-            Buy now
-          </Button>
-          <Button
-            variant='ghost'
-            colorScheme='teal'
-          >
-            Add to cart
-          </Button>
-        </ButtonGroup>
-      </CardFooter>
+            <IconButton
+              icon={<BsCart2 />}
+              bg='#C43F6D'
+              textColor='#FAFAFA'
+            />
+          </ButtonGroup>
+        </CardFooter>
+      </Flex>
     </Card>
   )
 }

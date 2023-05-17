@@ -32,7 +32,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             key={index + 1}
             onClick={() => onPageChange(index + 1)}
             variant={currentPage === index + 1 ? 'solid' : 'outline'}
-            colorScheme={currentPage === index + 1 ? 'teal' : 'gray'}
+            bg={currentPage === index + 1 ? '#C43F6D' : ''}
+            textColor={currentPage === index + 1 ? '#FAFAFA' : ''}
           >
             {index + 1}
           </Button>

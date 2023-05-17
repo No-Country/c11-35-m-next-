@@ -14,9 +14,10 @@ export default function ProductColors({ colors }) {
             p='4'
             bg={color.hex_value}
             color='white'
-          >
-            {color.colour_name}
-          </Box>
+            borderRadius='50%'
+            margin='15px'
+            marginLeft='0px'
+          />
         ))}
       </Flex>
     </>

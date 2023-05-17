@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Button,
   Input,
@@ -6,7 +7,6 @@ import {
   InputRightAddon
 } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
-import { useState } from 'react'
 
 export const SearchBar = ({ data, search }) => {
   const [value, setValue] = useState('')
@@ -14,12 +14,18 @@ export const SearchBar = ({ data, search }) => {
   const onChange = e => {
     setValue(e.target.value)
   }
+
   const handleSearch = () => {
     const searchedData = data.filter(product => {
       const nameLowerCase = product.name.toLowerCase()
-      return nameLowerCase.includes(value)
+      return nameLowerCase.includes(value.toLowerCase())
     })
-    search(searchedData)
+    search(searchedData) // Llamar a la función de búsqueda pasando los datos filtrados
+  }
+
+  const handleOnSubmit = e => {
+    e.preventDefault()
+    handleSearch() // Llamar a la función de búsqueda
   }
 
   return (
@@ -27,6 +33,8 @@ export const SearchBar = ({ data, search }) => {
       <InputGroup
         borderRadius={5}
         size='sm'
+        as='form'
+        onSubmit={handleOnSubmit}
       >
         <InputLeftElement pointerEvents='none'>
           <Search2Icon color='gray.600' />
@@ -43,7 +51,7 @@ export const SearchBar = ({ data, search }) => {
           border='none'
         >
           <Button
-            onClick={handleSearch}
+            type='submit'
             size='sm'
             borderLeftRadius={0}
             borderRightRadius={3.3}

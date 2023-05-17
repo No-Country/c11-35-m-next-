@@ -15,9 +15,10 @@ import {
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
 import { BsCart2 } from 'react-icons/bs'
+import { SearchBar } from '../SearchBar/SearchBar'
 
 export default function Navbar() {
   const { user } = useUser()
@@ -26,6 +27,7 @@ export default function Navbar() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
+  const data = useSelector(state => state.data.data)
 
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
 
@@ -38,6 +40,7 @@ export default function Navbar() {
     <>
       {isMobile && (
         <>
+          <SearchBar data={data} />
           {isSidebarOpen && (
             <Flex
               as='nav'

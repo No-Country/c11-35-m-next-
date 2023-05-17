@@ -5,6 +5,7 @@ import { Image, SimpleGrid, Text, useBreakpointValue } from '@chakra-ui/react'
 import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
+import { SearchBar } from '../SearchBar/SearchBar'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -20,16 +21,34 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    setSearchedData(null) // Restablecer los datos de búsqueda al cambiar de página
+  }, [currentPage])
+
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = data && data.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(currentItems)
-  const totalPages = Math.ceil((data && data.length) / itemsPerPage)
+  // const [searchedData, setSearchedData] = useState(null) // Nuevo estado para los datos de búsqueda
+  const [searchedData, setSearchedData] = useState([])
+  const currentItems =
+    searchedData && searchedData.length > 0
+      ? searchedData.slice(indexOfFirstItem, indexOfLastItem)
+      : data && data.slice(indexOfFirstItem, indexOfLastItem)
+  const totalPages = Math.ceil(
+    (searchedData && searchedData.length > 0
+      ? searchedData.length
+      : data && data.length) / itemsPerPage
+  )
 
   const handlePageChange = page => {
     setCurrentPage(page)
   }
+
+  const handleSearch = searchData => {
+    setSearchedData(searchData)
+    setCurrentPage(1) // Restablecer la página actual a 1 al aplicar el filtro de búsqueda
+  }
+
   const handleClick = productId => {
     console.log(productId)
     router.push(`/product-details/${productId}`)
@@ -38,10 +57,13 @@ export default function Home() {
   return (
     <>
       <main className='main'>
+        <SearchBar
+          data={data}
+          search={handleSearch}
+        />
         <Image
           src='images/carousel1.jpg'
           alt='Descripción de la imagen'
-          width='100%'
         />
         <SimpleGrid
           columns={cardColumns}

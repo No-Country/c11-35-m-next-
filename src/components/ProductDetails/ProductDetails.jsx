@@ -10,8 +10,10 @@ import {
   Button,
   Image,
   Text,
-  ButtonGroup
+  ButtonGroup,
+  Box
 } from '@chakra-ui/react'
+import { StarIcon } from '@chakra-ui/icons'
 import ProductColors from '../ProductColors/ProductColors'
 import { useRouter } from 'next/router'
 
@@ -36,7 +38,7 @@ export default function ProductDetails({ id }) {
           overflow='hidden'
           variant='outline'
           padding='2rem'
-          width='60vw'
+          width='90vw'
           margin='2rem auto'
         >
           <Image
@@ -51,6 +53,20 @@ export default function ProductDetails({ id }) {
             <CardBody>
               <Heading size='md'>{product.name}</Heading>
               <Text py='2'>Brand: {product.brand.toUpperCase()}</Text>
+              <Box
+                display='flex'
+                mt='2'
+                alignItems='center'
+              >
+                {Array(5)
+                  .fill('')
+                  .map((_, i) => (
+                    <StarIcon
+                      key={i}
+                      color={i < product.rating ? 'teal.500' : 'gray.300'}
+                    />
+                  ))}
+              </Box>
               <Text py='2'>{product.description}</Text>
               <Text
                 color='teal.600'
@@ -84,7 +100,7 @@ export default function ProductDetails({ id }) {
                   variant='solid'
                   colorScheme='teal'
                   onClick={() => {
-                    router.push('/home')
+                    router.back()
                   }}
                 >
                   Back to Store

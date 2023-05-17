@@ -5,6 +5,7 @@ import { SimpleGrid, Text, useBreakpointValue } from '@chakra-ui/react'
 import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
+import { SearchBar } from '../SearchBar/SearchBar'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -23,20 +24,31 @@ export default function Home() {
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = data && data.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(currentItems)
+  const items = data && data.slice(indexOfFirstItem, indexOfLastItem)
+  const [currentItems, setCurrentItems] = useState(items)
+  // const currentItems = items
+  console.log(items)
   const totalPages = Math.ceil((data && data.length) / itemsPerPage)
 
   const handlePageChange = page => {
+    console.log(page)
     setCurrentPage(page)
   }
   const handleClick = productId => {
-    console.log(productId)
     router.push(`/product-details/${productId}`)
+  }
+
+  const search = searchedData => {
+    console.log(searchedData)
+    setCurrentItems(searchedData)
   }
 
   return (
     <>
+      <SearchBar
+        data={data}
+        search={search}
+      />
       <main className='main'>
         <SimpleGrid
           columns={cardColumns}

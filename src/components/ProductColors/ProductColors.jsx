@@ -7,7 +7,7 @@ export default function ProductColors({ colors }) {
   console.log(colors)
   return (
     <>
-      <Flex>
+      <Flex wrap='wrap'>
         {colors.map(color => (
           <Box
             key={color.hex_value}

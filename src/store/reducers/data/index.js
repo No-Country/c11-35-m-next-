@@ -3,14 +3,12 @@ import axios from 'axios'
 
 const initialState = {
   data: null,
-  filter: null,
   loading: false,
   error: null
 }
 
 export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
-    console.log('estas son las props', props)
     if (props === undefined) {
       const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
       return response.data

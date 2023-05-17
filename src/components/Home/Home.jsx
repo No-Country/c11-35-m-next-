@@ -24,10 +24,12 @@ export default function Home() {
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
+
   const items = data && data.slice(indexOfFirstItem, indexOfLastItem)
   const [currentItems, setCurrentItems] = useState(items)
   // const currentItems = items
   console.log(items)
+
   const totalPages = Math.ceil((data && data.length) / itemsPerPage)
 
   const handlePageChange = page => {

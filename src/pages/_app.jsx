@@ -1,4 +1,4 @@
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme, Box } from '@chakra-ui/react'
 import { UserProvider } from '@auth0/nextjs-auth0/client'
 import { Provider } from 'react-redux'
 import store from '../store/index'
@@ -20,7 +20,13 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <UserProvider>
         <ChakraProvider theme={theme}>
-          <Navbar />
+          <Box
+            position='sticky'
+            top='0'
+            zIndex='9999'
+          >
+            <Navbar />
+          </Box>
           <Component {...pageProps} />
         </ChakraProvider>
       </UserProvider>

@@ -4,7 +4,7 @@ import { Flex, Box } from '@chakra-ui/react'
 export default function ProductColors({ colors }) {
   /* {colors.map(color => ({<li>{color.colour_name}</li>}))}
    */
-  console.log(colors)
+  // console.log(colors)
   return (
     <>
       <Flex wrap='wrap'>

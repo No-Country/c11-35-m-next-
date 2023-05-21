@@ -13,7 +13,7 @@ export default function ProductCounter({ initial, stock, onAdd }) {
       setCounter(counter + 1)
     }
   }
-  console.log('render')
+  // console.log('render')
   return (
     <Flex
       marginTop='20px'

@@ -1,7 +1,9 @@
+import Home from '@/components/Home/Home'
+
 export default function Landing() {
   return (
     <>
-      <h1>esto va a desaparecer</h1>
+      <Home />
     </>
   )
 }

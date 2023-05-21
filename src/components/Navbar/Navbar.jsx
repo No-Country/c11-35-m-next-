@@ -22,7 +22,9 @@ import { fetchData } from '@/store/reducers/data'
 import { BsCart2 } from 'react-icons/bs'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
+
 import { CartContext } from '@/context/CartContextProvider'
+
 
 export default function Navbar() {
   const router = useRouter()
@@ -32,7 +34,6 @@ export default function Navbar() {
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
   const { user } = useUser()
-  const dispatch = useDispatch()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -41,7 +42,8 @@ export default function Navbar() {
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
 
   const handleClick = itemName => {
-    dispatch(fetchData(itemName))
+    // console.log(itemName)
+    router.push(`/?type=${itemName}`)
   }
 
   return (
@@ -62,6 +64,7 @@ export default function Navbar() {
               top={0}
               left={0}
               zIndex={10}
+              marginTop={0}
             >
               <Flex
                 direction='column'
@@ -109,17 +112,12 @@ export default function Navbar() {
                       padding: 0,
                       margin: 10
                     }}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('home')}
                   >
-                    <NextLink href='/home'>
-                      <Text
-                        fontFamily='Playfair'
-                        color={textColor}
-                      >
-                        Home
-                      </Text>
-                    </NextLink>
+                    Home
                   </Button>
-
                   <Button
                     style={{
                       background: 'none',
@@ -301,7 +299,7 @@ export default function Navbar() {
             bg={primaryColor}
             color='white'
             zIndex={1}
-            position='fixed'
+            marginTop={0}
           >
             <IconButton
               color={textColor}
@@ -354,7 +352,7 @@ export default function Navbar() {
           justifyContent='space-between'
         >
           <Flex gap={5}>
-            <NextLink href='/home'>
+            <NextLink href='/'>
               <Text color={textColor}>Home</Text>
             </NextLink>
             <Menu>

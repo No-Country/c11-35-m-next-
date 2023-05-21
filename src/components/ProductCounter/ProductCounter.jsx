@@ -1,10 +1,17 @@
 import { Flex, Box, Text, Square } from '@chakra-ui/react'
 
-export default function ProductCounter({
-  decreaseCounter,
-  increaseCounter,
-  counter
-}) {
+export default function ProductCounter({ initial, stock, onAdd }) {
+  const [counter, setCounter] = useState(initial)
+  const decreaseCounter = () => {
+    if (counter > 1) {
+      setCounter(counter - 1)
+    }
+  }
+  const increaseCounter = () => {
+    if (counter < stock) {
+      setCounter(counter + 1)
+    }
+  }
   return (
     <Flex>
       <Box

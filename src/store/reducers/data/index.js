@@ -11,11 +11,7 @@ export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
     let url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
     if (props === undefined) {
-      url += '?brand=maybelline'
-    } else if (['Blush', 'Bronzer', 'Eyebrow', 'Eyeliner', 'Eyeshadow', 'Foundation', 'Lip liner', 'Lipstick', 'Mascara', 'Nail polish'].includes(props)) {
-      url += `?brand=covergirl&product_type=${props}`
-    } else {
-      url += '?brand=maybelline'
+      url += ''
     }
 
     const response = await axios.get(url)

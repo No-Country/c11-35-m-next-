@@ -15,6 +15,7 @@ import {
 export default function Profile() {
   const { user } = useUser()
 
+
   return (
     <Flex
       direction='column'

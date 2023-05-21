@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
   Box,
   Flex,
@@ -11,7 +11,8 @@ import {
   IconButton,
   useBreakpointValue,
   Text,
-  useTheme
+  useTheme,
+  Badge
 } from '@chakra-ui/react'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
@@ -20,9 +21,14 @@ import { useDispatch } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
 import { BsCart2 } from 'react-icons/bs'
 import { SearchBar } from '../SearchBar/SearchBar'
+import { useRouter } from 'next/router'
+import { CartContext } from '@/context/CartContextProvider'
 
 export default function Navbar() {
+  const router = useRouter()
   const theme = useTheme()
+  const { countItems } = useContext(CartContext)
+  const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
   const { user } = useUser()
@@ -35,7 +41,6 @@ export default function Navbar() {
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
 
   const handleClick = itemName => {
-    // console.log(itemName)
     dispatch(fetchData(itemName))
   }
 
@@ -316,16 +321,26 @@ export default function Navbar() {
             >
               <SearchBar />
             </Box>
-            <IconButton
-              color={textColor}
-              size='lg'
-              icon={<BsCart2 />}
-              variant='ghost'
-              onClick={toggleSidebar}
-              aria-label='Toggle Sidebar'
-              position='absolute'
-              right={0}
-            />
+            <Flex alignItems='center'>
+              <IconButton
+                color={textColor}
+                size='lg'
+                icon={<BsCart2 />}
+                variant='ghost'
+                onClick={() => router.push('/cart')}
+                right={0}
+              />
+              <Badge
+                position='absolute'
+                right={5}
+                top={6}
+                fontSize='10px'
+                colorScheme='green'
+                borderRadius='50%'
+              >
+                {qty}
+              </Badge>
+            </Flex>
           </Box>
         </>
       )}
@@ -451,6 +466,26 @@ export default function Navbar() {
                 </MenuList>
               </Menu>
             )}
+          </Flex>
+          <Flex alignItems='center'>
+            <IconButton
+              color={textColor}
+              size='lg'
+              icon={<BsCart2 />}
+              variant='ghost'
+              onClick={() => router.push('/cart')}
+              right={0}
+            />
+            <Badge
+              position='absolute'
+              right={5}
+              top={6}
+              fontSize='10px'
+              colorScheme='green'
+              borderRadius='50%'
+            >
+              {qty}
+            </Badge>
           </Flex>
         </Flex>
       )}

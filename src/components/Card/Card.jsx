@@ -1,3 +1,4 @@
+import { CartContext } from '@/context/CartContextProvider'
 import {
   Button,
   ButtonGroup,
@@ -12,6 +13,7 @@ import {
   IconButton,
   Flex
 } from '@chakra-ui/react'
+import { useContext } from 'react'
 import { BsCart2 } from 'react-icons/bs'
 
 export default function ProductCard({
@@ -21,8 +23,13 @@ export default function ProductCard({
   image,
   onClick
 }) {
+  const item = { title, description, price, image }
+  const { addToCart } = useContext(CartContext)
+  const handleAdd = () => {
+    // addToCart(item, 1) TODO: hay que identificar el producto al que se le hizo click para agregarlo a la bolsa
+  }
   return (
-    <Card onClick={onClick}>
+    <Card>
       <Flex
         direction='column'
         align='center'
@@ -33,6 +40,7 @@ export default function ProductCard({
           borderRadius='lg'
         />
         <CardBody
+          onClick={onClick}
           _hover={{
             cursor: 'pointer'
           }}
@@ -59,6 +67,7 @@ export default function ProductCard({
               icon={<BsCart2 />}
               bg='#C43F6D'
               textColor='#FAFAFA'
+              onClick={() => handleAdd()}
             />
           </ButtonGroup>
         </CardFooter>

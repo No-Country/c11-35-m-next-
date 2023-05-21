@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
 import {
   Box,
-  Flex,
   Image,
   SimpleGrid,
   Text,
@@ -12,7 +11,6 @@ import {
 import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
-import { SearchBar } from '../SearchBar/SearchBar'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -40,7 +38,6 @@ export default function Home() {
   }
 
   const handleClick = productId => {
-    console.log(productId)
     router.push(`/product-details/${productId}`)
   }
 

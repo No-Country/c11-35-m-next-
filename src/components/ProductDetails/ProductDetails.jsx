@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
 import {
@@ -15,17 +15,21 @@ import {
   TabPanel,
   TabPanels,
   TabList,
-  TabIndicator
+  TabIndicator,
+  Button,
+  Flex
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import ProductColors from '../ProductColors/ProductColors'
-import { useRouter } from 'next/router'
 import ProductCounter from '../ProductCounter/ProductCounter'
+import { CartContext } from '@/context/CartContextProvider'
+import useCount from '@/hooks/useCount'
 
 export default function ProductDetails({ id }) {
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
-  const router = useRouter()
+
+  const { addToCart } = useContext(CartContext)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -34,10 +38,13 @@ export default function ProductDetails({ id }) {
   }, [])
 
   const product = data && data.find(product => product.id === parseInt(id))
+
+
   const handleAdd = qty => {
-    // console.log('se estan agregando', qty)
+    addToCart(product, qty)
   }
 
+  const { counter, increaseCounter, decreaseCounter } = useCount(1)
   return (
     <>
       {product ? (
@@ -90,12 +97,27 @@ export default function ProductDetails({ id }) {
               >
                 ${product.price}
               </Text>
-
-              <ProductCounter
-                initial={1}
-                stock={10}
-                onAdd={n => handleAdd(n)}
-              />
+              <Flex
+                marginTop='20px'
+                justifyContent='space-between'
+              >
+                <ProductCounter
+                  decreaseCounter={decreaseCounter}
+                  increaseCounter={increaseCounter}
+                  counter={counter}
+                />
+                <Button
+                  onClick={() => {
+                    handleAdd(counter)
+                  }}
+                  variant='solid'
+                  backgroundColor='#C42F6D'
+                  color='#FAFAFA'
+                  width='200px'
+                >
+                  Add to cart
+                </Button>
+              </Flex>
             </CardBody>
 
             <CardFooter padding='0px'>

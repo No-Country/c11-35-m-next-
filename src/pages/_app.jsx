@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import store from '../store/index'
 import Navbar from '@/components/Navbar/Navbar'
 import '../styles/fonts.css'
+import CartContextProvider from '@/context/CartContextProvider'
 
 const theme = extendTheme({
   colors: {
@@ -19,15 +20,18 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <UserProvider>
-        <ChakraProvider theme={theme}>
-          <Box
+        <ChakraProvider theme={theme}>        
+          <Component {...pageProps} />
+          <CartContextProvider>
+            <Box
             position='sticky'
             top='0'
             zIndex='9999'
           >
             <Navbar />
           </Box>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
+          </CartContextProvider>
         </ChakraProvider>
       </UserProvider>
     </Provider>

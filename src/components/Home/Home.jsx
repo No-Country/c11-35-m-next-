@@ -124,6 +124,9 @@ export default function Home() {
     setCurrentPage(page)
   }
 
+  const handleClick = productId => {
+    router.push(`/product-details/${productId}`)
+  }
   return (
     <>
       <main

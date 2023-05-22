@@ -11,10 +11,6 @@ import {
   FormLabel,
   Select,
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
   Icon,
   Input
@@ -23,6 +19,7 @@ import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
+import Footer from '../Footer/footer'
 
 export default function Home() {
   const router = useRouter()
@@ -49,9 +46,6 @@ export default function Home() {
   const handleOptionSelect = () => {
     setIsDropdownOpen(false)
   }
-
-  console.log(filteredDataLength)
-
   const totalPages = Math.ceil(filteredDataLength / itemsPerPage)
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -92,7 +86,6 @@ export default function Home() {
 
     if (selectedBrand !== '') {
       sortedItems = sortedItems.filter(item => item.brand === selectedBrand)
-      console.log(sortedItems.length)
       filteredDataLength = sortedItems.length
     }
 

@@ -25,7 +25,6 @@ import { useRouter } from 'next/router'
 
 import { CartContext } from '@/context/CartContextProvider'
 
-
 export default function Navbar() {
   const router = useRouter()
   const theme = useTheme()
@@ -42,7 +41,6 @@ export default function Navbar() {
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
 
   const handleClick = itemName => {
-    // console.log(itemName)
     router.push(`/?type=${itemName}`)
   }
 

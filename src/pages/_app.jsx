@@ -5,6 +5,7 @@ import store from '../store/index'
 import Navbar from '@/components/Navbar/Navbar'
 import '../styles/fonts.css'
 import CartContextProvider from '@/context/CartContextProvider'
+import Footer from '@/components/Footer/footer'
 
 const theme = extendTheme({
   colors: {
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }) {
               <Navbar />
             </Box>
             <Component {...pageProps} />
+            <Footer />
           </CartContextProvider>
         </ChakraProvider>
       </UserProvider>

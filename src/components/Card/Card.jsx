@@ -1,11 +1,9 @@
 import { CartContext } from '@/context/CartContextProvider'
 import {
-  Button,
   ButtonGroup,
   Card,
   CardBody,
   CardFooter,
-  Divider,
   Heading,
   Stack,
   Text,

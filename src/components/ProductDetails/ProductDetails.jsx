@@ -39,7 +39,6 @@ export default function ProductDetails({ id }) {
 
   const product = data && data.find(product => product.id === parseInt(id))
 
-
   const handleAdd = qty => {
     addToCart(product, qty)
   }

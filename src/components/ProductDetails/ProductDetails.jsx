@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '@/store/reducers/data'
 import {
@@ -35,10 +35,9 @@ export default function ProductDetails({ id }) {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-  }, [])
+  }, [dispatch])
 
   const product = data && data.find(product => product.id === parseInt(id))
-
   const handleAdd = qty => {
     addToCart(product, qty)
   }

@@ -52,7 +52,7 @@ export default function Profile() {
           </Stack>
         </CardBody>
         <CardFooter>
-          <Button colorScheme='blue'>Edit Profile</Button>
+          <Button colorScheme='red'>Edit Profile</Button>
         </CardFooter>
       </Card>
     </Flex>

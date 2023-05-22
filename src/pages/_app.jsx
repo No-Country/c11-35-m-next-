@@ -5,7 +5,7 @@ import store from '../store/index'
 import Navbar from '@/components/Navbar/Navbar'
 import '../styles/fonts.css'
 import CartContextProvider from '@/context/CartContextProvider'
-import Footer from '@/components/Footer/footer'
+import Footer from '@/components/Footer/Footer'
 
 const theme = extendTheme({
   colors: {

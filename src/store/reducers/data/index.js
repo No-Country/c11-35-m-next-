@@ -9,15 +9,22 @@ const initialState = {
 
 export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
+    let url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
     if (props === undefined) {
-      const response = await axios.get('http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
-      return response.data
-    } else {
-      const response = await axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=${props}`)
-      return response.data
+      url += ''
     }
+
+    const response = await axios.get(url)
+    let data = response.data
+
+    if (props !== undefined) {
+      const lowercaseProps = props.toLowerCase()
+      data = data.filter(item => item.name.toLowerCase().includes(lowercaseProps))
+    }
+
+    return data
   } catch (error) {
-    throw Error(error)
+    throw new Error(error)
   }
 })
 

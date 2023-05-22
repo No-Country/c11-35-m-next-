@@ -14,7 +14,6 @@ import { useDispatch } from 'react-redux'
 export const SearchBar = () => {
   const theme = useTheme()
   const textColor = theme.colors.custom.text
-  const primaryColor = theme.colors.custom.primary
   const [value, setValue] = useState([])
   const dispatch = useDispatch()
 

@@ -1,14 +1,11 @@
 import { CartContext } from '@/context/CartContextProvider'
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext } from 'react'
 
 import {
   Box,
   Flex,
-  Heading,
   HStack,
-  Link,
   Stack,
-  useColorModeValue as mode,
   Text,
   Button,
   Drawer,

@@ -11,10 +11,6 @@ import {
   FormLabel,
   Select,
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
   Icon,
   Input
@@ -103,7 +99,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (itemType && data) {
@@ -213,8 +209,7 @@ export default function Home() {
                             id='brand'
                             value={selectedBrand}
                             onChange={event =>
-                              setSelectedBrand(event.target.value)
-                            }
+                              setSelectedBrand(event.target.value)}
                             border='1px solid'
                             borderColor='gray.200'
                           >

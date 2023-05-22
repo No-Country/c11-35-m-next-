@@ -20,16 +20,15 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <UserProvider>
-        <ChakraProvider theme={theme}>        
-          <Component {...pageProps} />
+        <ChakraProvider theme={theme}>
           <CartContextProvider>
             <Box
-            position='sticky'
-            top='0'
-            zIndex='9999'
-          >
-            <Navbar />
-          </Box>
+              position='sticky'
+              top='0'
+              zIndex='9999'
+            >
+              <Navbar />
+            </Box>
             <Component {...pageProps} />
           </CartContextProvider>
         </ChakraProvider>

@@ -56,7 +56,7 @@ export default function Home() {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
 
-  const handleClick = productId => {
+  const handleClickProduct = productId => {
     router.push(`/product-details/${productId}`)
   }
 
@@ -124,9 +124,6 @@ export default function Home() {
     setCurrentPage(page)
   }
 
-  const handleClick = productId => {
-    router.push(`/product-details/${productId}`)
-  }
   return (
     <>
       <main
@@ -254,7 +251,7 @@ export default function Home() {
           >
             {sortedItems.slice(indexOfFirstItem, indexOfLastItem).map(item => (
               <ProductCard
-                onClick={() => handleClick(item.id)}
+                onClick={() => handleClickProduct(item.id)}
                 key={item.name}
                 title={item.name}
                 description={item.description}

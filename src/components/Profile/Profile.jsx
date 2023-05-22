@@ -34,12 +34,14 @@ export default function Profile() {
             spacing={4}
             align='center'
           >
-            <Image
-              src={user.picture}
-              alt={user.name}
-              borderRadius='full'
-              boxSize='150px'
-            />
+            {user && (
+              <Image
+                src={user.picture}
+                alt={user.name}
+                borderRadius='full'
+                boxSize='150px'
+              />
+            )}
             <Heading
               as='h2'
               size='lg'

@@ -1,4 +1,4 @@
-import { CartContext } from '@/context/CartContextProvider'
+// import { CartContext } from '@/context/CartContextProvider'
 import {
   ButtonGroup,
   Card,
@@ -11,7 +11,7 @@ import {
   IconButton,
   Flex
 } from '@chakra-ui/react'
-import { useContext } from 'react'
+// import { useContext } from 'react'
 import { BsCart2 } from 'react-icons/bs'
 
 export default function ProductCard({
@@ -21,8 +21,8 @@ export default function ProductCard({
   image,
   onClick
 }) {
-  const item = { title, description, price, image }
-  const { addToCart } = useContext(CartContext)
+  // const item = { title, description, price, image }
+  // const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
     // addToCart(item, 1) TODO: hay que identificar el producto al que se le hizo click para agregarlo a la bolsa
   }

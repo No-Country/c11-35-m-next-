@@ -13,7 +13,7 @@ export default function ProductColors({ colors }) {
             color='white'
             borderRadius='50%'
             margin='15px'
-            marginLeft='0px'
+            marginLeft='1px'
           />
         ))}
       </Flex>

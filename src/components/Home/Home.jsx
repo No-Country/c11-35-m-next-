@@ -19,8 +19,6 @@ import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
-import Footer from '../Footer/footer'
-
 export default function Home() {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -96,7 +94,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (itemType && data) {
@@ -206,8 +204,7 @@ export default function Home() {
                             id='brand'
                             value={selectedBrand}
                             onChange={event =>
-                              setSelectedBrand(event.target.value)
-                            }
+                              setSelectedBrand(event.target.value)}
                             border='1px solid'
                             borderColor='gray.200'
                           >

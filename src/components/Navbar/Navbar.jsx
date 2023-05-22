@@ -17,8 +17,6 @@ import {
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { useDispatch } from 'react-redux'
-import { fetchData } from '@/store/reducers/data'
 import { BsCart2 } from 'react-icons/bs'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'

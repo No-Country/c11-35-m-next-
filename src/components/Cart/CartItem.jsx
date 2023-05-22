@@ -1,14 +1,11 @@
 import {
-  CloseButton,
   Text,
   Flex,
-  Link,
   Image,
   Stack,
   useColorModeValue as mode
 } from '@chakra-ui/react'
-import { PriceTag } from './PriceTag'
-import { CartProductMeta } from './CartProductMeta'
+
 import { useContext } from 'react'
 import { CartContext } from '@/context/CartContextProvider'
 import ProductCounter from '../ProductCounter/ProductCounter'
@@ -17,7 +14,7 @@ import { DeleteIcon } from '@chakra-ui/icons'
 
 export const CartItem = props => {
   const { deleteItem } = useContext(CartContext)
-  const { id, isGiftWrapping, name, currency, price, qty } = props
+  const { id, name, price, qty } = props
 
   const { counter, increaseCounter, decreaseCounter } = useCount(qty, id)
 
@@ -62,7 +59,10 @@ export const CartItem = props => {
             counter={counter}
           />
         </Stack>
-        <DeleteIcon fontSize='xl' onClick={() => onClickDelete(id)} />
+        <DeleteIcon
+          fontSize='xl'
+          onClick={() => onClickDelete(id)}
+        />
 
         {/*  <Flex
           width='full'

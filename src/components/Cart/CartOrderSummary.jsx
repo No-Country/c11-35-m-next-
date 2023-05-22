@@ -1,13 +1,11 @@
 import {
-  Button,
   Flex,
-  Heading,
   Link,
   Stack,
   Text,
   useColorModeValue as mode
 } from '@chakra-ui/react'
-import { FaArrowRight } from 'react-icons/fa'
+
 import { formatPrice } from './PriceTag'
 import { useContext } from 'react'
 import { CartContext } from '@/context/CartContextProvider'
@@ -43,7 +41,7 @@ export const CartOrderSummary = () => {
       padding='8'
       width='full'
     >
-     {/*  <Heading size='md'>Order Summary</Heading> */}
+      {/*  <Heading size='md'>Order Summary</Heading> */}
 
       <Stack spacing='6'>
         <OrderSummaryItem

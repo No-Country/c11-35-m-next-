@@ -156,7 +156,7 @@ export default function ProductDetails({ id }) {
           </Stack>
         </Card>
       ) : (
-        <p>Loading...</p>
+        <p>Loading....</p>
       )}
     </>
   )

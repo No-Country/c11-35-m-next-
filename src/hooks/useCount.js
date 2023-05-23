@@ -1,7 +1,7 @@
 import { CartContext } from '@/context/CartContextProvider'
 import { useContext, useState } from 'react'
 
-export default function useCount(initialValue, id) {
+export default function useCount (initialValue, id) {
   const [counter, setCounter] = useState(initialValue)
   const { updateItemQty } = useContext(CartContext)
 

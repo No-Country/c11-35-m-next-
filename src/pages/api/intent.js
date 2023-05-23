@@ -4,7 +4,7 @@ const stripe = new Stripe(process.env.STRIPE_KEY_SECRET, {
   apiVersion: '2022-11-15'
 })
 
-export default async function handler(req, res) {
+export default async function handler (req, res) {
   if (req.method === 'POST') {
     try {
       console.log(req.body)

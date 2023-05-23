@@ -14,7 +14,7 @@ import {
 // import { useContext } from 'react'
 import { BsCart2 } from 'react-icons/bs'
 
-export default function ProductCard({
+export default function ProductCard ({
   title,
   description,
   price,

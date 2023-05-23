@@ -18,7 +18,7 @@ const steps = [
   { title: 'Confirmation' }
 ]
 
-export default function Steps() {
+export default function Steps () {
   const { activeStep } = useSteps({
     index: 0,
     count: steps.length

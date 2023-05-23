@@ -3,7 +3,7 @@ import Steps from '../Stepper/Steps'
 import PurchaseDetails from '../PurchaseDetails/PurchaseDetails'
 import UserForm from '../UserForm/UserForm'
 
-export default function Checkout() {
+export default function Checkout () {
   return (
     <>
       <Steps />

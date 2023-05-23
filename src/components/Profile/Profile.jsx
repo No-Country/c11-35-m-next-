@@ -12,7 +12,7 @@ import {
   Flex
 } from '@chakra-ui/react'
 
-export default function Profile() {
+export default function Profile () {
   const { user } = useUser()
 
   return (

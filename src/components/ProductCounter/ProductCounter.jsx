@@ -1,6 +1,6 @@
 import { Flex, Box, Text, Square } from '@chakra-ui/react'
 
-export default function ProductCounter({
+export default function ProductCounter ({
   decreaseCounter,
   increaseCounter,
   counter

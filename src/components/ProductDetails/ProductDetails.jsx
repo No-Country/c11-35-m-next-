@@ -35,9 +35,7 @@ export default function ProductDetails({ id }) {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-
   }, [dispatch])
-
 
   const product = data && data.find(product => product.id === parseInt(id))
 

@@ -19,6 +19,7 @@ import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
+import Cart from '../Cart/Cart'
 export default function Home() {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -117,6 +118,7 @@ export default function Home() {
 
   return (
     <>
+      <Cart />
       <main
         className='main'
         style={{ width: '100%' }}

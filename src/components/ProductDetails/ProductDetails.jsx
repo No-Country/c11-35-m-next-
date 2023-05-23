@@ -24,6 +24,7 @@ import ProductColors from '../ProductColors/ProductColors'
 import ProductCounter from '../ProductCounter/ProductCounter'
 import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
+import Cart from '../Cart/Cart'
 
 export default function ProductDetails({ id }) {
   const dispatch = useDispatch()
@@ -35,9 +36,7 @@ export default function ProductDetails({ id }) {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-
   }, [dispatch])
-
 
   const product = data && data.find(product => product.id === parseInt(id))
 
@@ -48,6 +47,7 @@ export default function ProductDetails({ id }) {
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
   return (
     <>
+      <Cart />
       {product ? (
         <Card
           direction={{ base: 'column', sm: 'row' }}

@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }) {
             <Box
               position='sticky'
               top='0'
-              zIndex='9999'
+              zIndex='10'
             >
               <Navbar />
             </Box>

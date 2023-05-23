@@ -44,7 +44,6 @@ export default function Navbar() {
   }
   const handleCartClick = () => {
     toggleCart()
-    router.push('/cart')
   }
 
   return (

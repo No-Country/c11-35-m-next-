@@ -1,10 +1,8 @@
 import {
-  Button,
   ButtonGroup,
   Card,
   CardBody,
   CardFooter,
-  Divider,
   Heading,
   Stack,
   Text,
@@ -14,13 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { BsCart2 } from 'react-icons/bs'
 
-export default function ProductCard({
-  title,
-  description,
-  price,
-  image,
-  onClick
-}) {
+export default function ProductCard({ title, price, image, onClick }) {
   return (
     <Card onClick={onClick}>
       <Flex

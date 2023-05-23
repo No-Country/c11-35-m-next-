@@ -15,7 +15,6 @@ import {
 export default function Profile() {
   const { user } = useUser()
 
-
   return (
     <Flex
       direction='column'
@@ -24,38 +23,40 @@ export default function Profile() {
       minHeight='100vh'
       bg='gray.100'
     >
-      <Card
-        maxWidth='500px'
-        width='100%'
-        bg='white'
-        boxShadow='lg'
-      >
-        <CardBody>
-          <Stack
-            spacing={4}
-            align='center'
-          >
-            <Image
-              src={user.picture}
-              alt={user.name}
-              borderRadius='full'
-              boxSize='150px'
-            />
-            <Heading
-              as='h2'
-              size='lg'
+      {user && ( // Verificación de seguridad para 'user'
+        <Card
+          maxWidth='500px'
+          width='100%'
+          bg='white'
+          boxShadow='lg'
+        >
+          <CardBody>
+            <Stack
+              spacing={4}
+              align='center'
             >
-              {user.name}
-            </Heading>
-            <Text>{user.email}</Text>
-            <Divider />
-            <Text>Additional profile information goes here...</Text>
-          </Stack>
-        </CardBody>
-        <CardFooter>
-          <Button colorScheme='blue'>Edit Profile</Button>
-        </CardFooter>
-      </Card>
+              <Image
+                src={user.picture}
+                alt={user.name}
+                borderRadius='full'
+                boxSize='150px'
+              />
+              <Heading
+                as='h2'
+                size='lg'
+              >
+                {user.name}
+              </Heading>
+              <Text>{user.email}</Text>
+              <Divider />
+              <Text>Additional profile information goes here...</Text>
+            </Stack>
+          </CardBody>
+          <CardFooter>
+            <Button colorScheme='red'>Edit Profile</Button>
+          </CardFooter>
+        </Card>
+      )}
     </Flex>
   )
 }

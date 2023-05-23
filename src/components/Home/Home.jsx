@@ -19,7 +19,6 @@ import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
-
 export default function Home() {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -45,9 +44,6 @@ export default function Home() {
   const handleOptionSelect = () => {
     setIsDropdownOpen(false)
   }
-
-  console.log(filteredDataLength)
-
   const totalPages = Math.ceil(filteredDataLength / itemsPerPage)
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -88,7 +84,6 @@ export default function Home() {
 
     if (selectedBrand !== '') {
       sortedItems = sortedItems.filter(item => item.brand === selectedBrand)
-      console.log(sortedItems.length)
       filteredDataLength = sortedItems.length
     }
 
@@ -99,7 +94,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
-  })
+  }, [dispatch])
 
   useEffect(() => {
     if (itemType && data) {

@@ -40,7 +40,6 @@ export default function Navbar() {
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
 
   const handleClick = itemName => {
-    // console.log(itemName)
     router.push(`/?type=${itemName}`)
   }
   const handleCartClick = () => {

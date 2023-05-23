@@ -9,7 +9,7 @@ const initialState = {
 
 export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
-    let url = 'http://makeup-api.herokuapp.com/api/v1/products.json'
+    let url = 'https://makeup-api.herokuapp.com/api/v1/products.json'
     if (props === undefined) {
       url += ''
     }

@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Step,
-  StepDescription,
   StepIcon,
   StepIndicator,
   StepNumber,

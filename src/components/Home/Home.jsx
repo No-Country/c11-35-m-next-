@@ -204,8 +204,7 @@ export default function Home() {
                             id='brand'
                             value={selectedBrand}
                             onChange={event =>
-                              setSelectedBrand(event.target.value)
-                            }
+                              setSelectedBrand(event.target.value)}
                             border='1px solid'
                             borderColor='gray.200'
                           >

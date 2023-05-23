@@ -6,6 +6,10 @@ import Navbar from '@/components/Navbar/Navbar'
 import '../styles/fonts.css'
 import CartContextProvider from '@/context/CartContextProvider'
 import Footer from '@/components/Footer/Footer'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY_PUBLIC}`)
 
 const theme = extendTheme({
   colors: {
@@ -21,19 +25,21 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <UserProvider>
-        <ChakraProvider theme={theme}>
-          <CartContextProvider>
-            <Box
-              position='sticky'
-              top='0'
-              zIndex='10'
-            >
-              <Navbar />
-            </Box>
-            <Component {...pageProps} />
-            <Footer />
-          </CartContextProvider>
-        </ChakraProvider>
+        <Elements stripe={stripe}>
+          <ChakraProvider theme={theme}>
+            <CartContextProvider>
+              <Box
+                position='sticky'
+                top='0'
+                zIndex='9999'
+              >
+                <Navbar />
+              </Box>
+              <Component {...pageProps} />
+              <Footer />
+            </CartContextProvider>
+          </ChakraProvider>
+        </Elements>
       </UserProvider>
     </Provider>
   )

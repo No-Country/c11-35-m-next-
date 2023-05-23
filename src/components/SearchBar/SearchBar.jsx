@@ -46,7 +46,7 @@ export const SearchBar = () => {
           placeholder='Search...'
           value={value}
           onChange={onChange}
-          color='inherit'
+          color='black'
           borderColor='transparent'
           bg='transparent'
           _hover={{ bg: 'transparent' }}

@@ -19,10 +19,12 @@ import {
 import { CartItem } from './CartItem'
 import { useRouter } from 'next/router'
 import { formatPrice } from './PriceTag'
+import Link from 'next/link'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 export default function Cart() {
   const router = useRouter()
-  const { cartList, toggleCartStatus, toggleCart, cartTotalPrice } =
+  const { cartList, toggleCartStatus, toggleCart, cartTotalPrice, removeList } =
     useContext(CartContext)
 
   const handleClick = () => {
@@ -107,32 +109,45 @@ export default function Cart() {
             direction='column'
             gap='5'
           >
-            {cartList.length > 0 && (
-              <Text
-                fontSize='xl'
-                fontWeight='extrabold'
+            {cartList.length > 0 ? (
+              <>
+                <Text
+                  fontSize='xl'
+                  fontWeight='extrabold'
+                >
+                  Subtotal: {formatPrice({ totalPrice })}
+                </Text>
+                <Button
+                  onClick={handleClick}
+                  variant='solid'
+                  backgroundColor='#C42F6D'
+                  color='#FAFAFA'
+                  width='100%'
+                >
+                  Checkout
+                </Button>
+                <Link
+                  href=''
+                  onClick={removeList}
+                >
+                  Delete Cart
+                  <DeleteIcon
+                    m='5px'
+                    fontSize='xl'
+                  />
+                </Link>
+              </>
+            ) : (
+              <Button
+                onClick={handleClick}
+                variant='solid'
+                backgroundColor='#C42F6D'
+                color='#FAFAFA'
+                width='100%'
               >
-                Subtotal: {formatPrice({ totalPrice })}
-              </Text>
+                Continue shopping
+              </Button>
             )}
-            <Button
-              onClick={handleClick}
-              variant='solid'
-              backgroundColor='#C42F6D'
-              color='#FAFAFA'
-              width='100%'
-            >
-              Continue shopping
-            </Button>
-            <Button
-              onClick={handleClick}
-              variant='solid'
-              backgroundColor='#C42F6D'
-              color='#FAFAFA'
-              width='100%'
-            >
-              Checkout
-            </Button>
           </Flex>
         </DrawerFooter>
       </DrawerContent>

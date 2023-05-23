@@ -11,16 +11,14 @@ import {
   Drawer,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
   DrawerFooter,
   DrawerBody
 } from '@chakra-ui/react'
 import { CartItem } from './CartItem'
 import { useRouter } from 'next/router'
 import { formatPrice } from './PriceTag'
-import Link from 'next/link'
-import { DeleteIcon } from '@chakra-ui/icons'
+
+import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function Cart() {
   const router = useRouter()
@@ -29,28 +27,28 @@ export default function Cart() {
 
   const handleClick = () => {
     toggleCart()
-    router.push('/?type=home')
   }
 
   const totalPrice = cartTotalPrice(cartList)
   return (
     <Drawer
       isOpen={toggleCartStatus}
-      placement='left'
+      placement='right'
+      zIndex={10}
     >
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader>Create your account</DrawerHeader>
-
+        <Flex
+          width='100%'
+          margin='0 auto'
+          align='center'
+          justify='space-between'
+          p='30px'
+        >
+          <Text fontSize='xx-large'>Your Cart</Text>
+          <CloseIcon onClick={handleClick} />
+        </Flex>
         <DrawerBody>
-          <Text
-            mt='30px'
-            fontSize='xl'
-            fontWeight='extrabold'
-          >
-            Your Cart
-          </Text>
           <Box
             maxW={{ base: '3xl', lg: '7xl' }}
             mx='auto'
@@ -118,7 +116,7 @@ export default function Cart() {
                   Subtotal: {formatPrice({ totalPrice })}
                 </Text>
                 <Button
-                  onClick={handleClick}
+                  onClick={() => router.push('/checkout')}
                   variant='solid'
                   backgroundColor='#C42F6D'
                   color='#FAFAFA'
@@ -126,16 +124,17 @@ export default function Cart() {
                 >
                   Checkout
                 </Button>
-                <Link
+                <Button
                   href=''
                   onClick={removeList}
+                  variant='ghost'
                 >
                   Delete Cart
                   <DeleteIcon
                     m='5px'
                     fontSize='xl'
                   />
-                </Link>
+                </Button>
               </>
             ) : (
               <Button

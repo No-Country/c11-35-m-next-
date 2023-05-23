@@ -94,6 +94,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       dispatch(fetchData())
     }
+
   }, [dispatch])
 
   useEffect(() => {

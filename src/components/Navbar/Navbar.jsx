@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import {
   Box,
   Flex,
@@ -24,9 +24,10 @@ import { useRouter } from 'next/router'
 import { CartContext } from '@/context/CartContextProvider'
 
 export default function Navbar() {
+  const btnRef = useRef()
   const router = useRouter()
   const theme = useTheme()
-  const { countItems } = useContext(CartContext)
+  const { countItems, toggleCart } = useContext(CartContext)
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
@@ -40,6 +41,10 @@ export default function Navbar() {
 
   const handleClick = itemName => {
     router.push(`/?type=${itemName}`)
+  }
+  const handleCartClick = () => {
+    toggleCart()
+    router.push('/cart')
   }
 
   return (
@@ -321,8 +326,9 @@ export default function Navbar() {
                 size='lg'
                 icon={<BsCart2 />}
                 variant='ghost'
-                onClick={() => router.push('/cart')}
+                onClick={handleCartClick}
                 right={0}
+                ref={btnRef}
               />
               <Badge
                 position='absolute'
@@ -467,7 +473,7 @@ export default function Navbar() {
               size='lg'
               icon={<BsCart2 />}
               variant='ghost'
-              onClick={() => router.push('/cart')}
+              onClick={handleCartClick}
               right={0}
             />
             <Badge

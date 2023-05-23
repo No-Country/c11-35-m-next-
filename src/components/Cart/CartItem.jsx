@@ -1,21 +1,20 @@
-import { CloseButton, Flex, Link } from '@chakra-ui/react'
-import { PriceTag } from './PriceTag'
-import { CartProductMeta } from './CartProductMeta'
+import {
+  Text,
+  Flex,
+  Image,
+  Stack,
+  useColorModeValue as mode
+} from '@chakra-ui/react'
+
 import { useContext } from 'react'
 import { CartContext } from '@/context/CartContextProvider'
 import ProductCounter from '../ProductCounter/ProductCounter'
 import useCount from '@/hooks/useCount'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 export const CartItem = props => {
   const { deleteItem } = useContext(CartContext)
-  const {
-    id,
-    isGiftWrapping,
-    name,
-    currency,
-    price,
-    qty
-  } = props
+  const { id, name, price, qty } = props
 
   const { counter, increaseCounter, decreaseCounter } = useCount(qty, id)
 
@@ -26,26 +25,50 @@ export const CartItem = props => {
   return (
     <>
       <Flex
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: 'row', md: 'row' }}
         justify='space-between'
         align='center'
+        borderBottom='solid 1px gray'
+        paddingBottom='10px'
       >
-        <CartProductMeta
+        {/* <CartProductMeta
           name={name}
           image={props.image_link}
-          isGiftWrapping={isGiftWrapping}
+        /> */}
+        <Image
+          rounded='lg'
+          width='100px'
+          height='100px'
+          fit='cover'
+          src={props.image_link}
+          alt={name}
+          draggable='false'
+          loading='lazy'
         />
-
-        <Flex
-          width='full'
-          justify='space-between'
-          display={{ base: 'none', md: 'flex' }}
-        >
+        <Stack spacing='0.5'>
+          <Text fontWeight='medium'>{name}</Text>
+          <Text
+            color={mode('gray.600', 'gray.400')}
+            fontSize='sm'
+          >
+            {counter}x ${price}
+          </Text>
           <ProductCounter
             decreaseCounter={decreaseCounter}
             increaseCounter={increaseCounter}
             counter={counter}
           />
+        </Stack>
+        <DeleteIcon
+          fontSize='xl'
+          onClick={() => onClickDelete(id)}
+        />
+
+        {/*  <Flex
+          width='full'
+          justify='space-between'
+          display={{ base: 'none', md: 'flex' }}
+        >
           <PriceTag price={(price * counter).toFixed(1)} />
           <CloseButton
             aria-label={`Delete ${name} from cart`}
@@ -60,22 +83,7 @@ export const CartItem = props => {
           justify='space-between'
           display={{ base: 'flex', md: 'none' }}
         >
-          <Link
-            fontSize='sm'
-            textDecor='underline'
-          >
-            Delete
-          </Link>
-          <ProductCounter
-            decreaseCounter={decreaseCounter}
-            increaseCounter={increaseCounter}
-            counter={counter}
-          />
-          <PriceTag
-            price={(price * counter).toFixed(1)}
-            currency={currency}
-          />
-        </Flex>
+        </Flex> */}
       </Flex>
     </>
   )

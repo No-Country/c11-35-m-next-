@@ -2,7 +2,7 @@ import { FormControl, FormLabel, Input, Button, useDisclosure, Modal, ModalOverl
 import React from 'react'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 
-export default function ModalPayment() {
+export default function ModalPayment () {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const stripe = useStripe()
   const elements = useElements()

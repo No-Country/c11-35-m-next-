@@ -1,5 +1,5 @@
 import Profile from '@/components/Profile/Profile'
 
-export default function profile() {
+export default function profile () {
   return <Profile />
 }

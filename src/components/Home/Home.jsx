@@ -20,7 +20,7 @@ import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
 import Cart from '../Cart/Cart'
-export default function Home() {
+export default function Home () {
   const router = useRouter()
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)

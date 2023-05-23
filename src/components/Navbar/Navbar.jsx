@@ -23,7 +23,7 @@ import { useRouter } from 'next/router'
 
 import { CartContext } from '@/context/CartContextProvider'
 
-export default function Navbar() {
+export default function Navbar () {
   const btnRef = useRef()
   const router = useRouter()
   const theme = useTheme()

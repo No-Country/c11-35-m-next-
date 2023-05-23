@@ -20,7 +20,7 @@ import { formatPrice } from './PriceTag'
 
 import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
-export default function Cart() {
+export default function Cart () {
   const router = useRouter()
   const { cartList, toggleCartStatus, toggleCart, cartTotalPrice, removeList } =
     useContext(CartContext)

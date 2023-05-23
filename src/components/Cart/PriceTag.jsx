@@ -1,6 +1,6 @@
 import { HStack, Text, useColorModeValue as mode } from '@chakra-ui/react'
 
-export function formatPrice(value) {
+export function formatPrice (value) {
   return `$ ${value.totalPrice.toFixed(1)}`
 }
 

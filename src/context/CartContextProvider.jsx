@@ -2,7 +2,7 @@ import { createContext, React, useState } from 'react'
 
 export const CartContext = createContext({ cart: [] })
 
-export default function CartContextProvider({ children }) {
+export default function CartContextProvider ({ children }) {
   const [cartList, setCartList] = useState([])
   const [toggleCartStatus, setToggleCartStatus] = useState(false)
 

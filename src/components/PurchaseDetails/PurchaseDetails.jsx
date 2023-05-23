@@ -13,7 +13,7 @@ import { useContext } from 'react'
 import { CartItem } from '../Cart/CartItem'
 import { CartOrderSummary } from '../Cart/CartOrderSummary'
 
-export default function PurchaseDetails() {
+export default function PurchaseDetails () {
   const { cartList, cartTotalPrice } =
     useContext(CartContext)
   const totalPrice = cartTotalPrice(cartList)

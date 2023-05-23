@@ -26,7 +26,7 @@ import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
 import Cart from '../Cart/Cart'
 
-export default function ProductDetails({ id }) {
+export default function ProductDetails ({ id }) {
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
 

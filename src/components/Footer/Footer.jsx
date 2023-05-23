@@ -1,6 +1,6 @@
 import { Box, Center, Flex, Icon, Text } from '@chakra-ui/react'
 import { BsWhatsapp, BsEnvelope, BsFacebook, BsInstagram } from 'react-icons/bs'
-export default function Footer() {
+export default function Footer () {
   return (
     <>
       <Box bg='rgba(33, 74, 95, 0.5)'>

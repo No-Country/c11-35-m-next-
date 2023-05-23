@@ -1,6 +1,6 @@
 import { Button, Flex, HStack } from '@chakra-ui/react'
 
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
+export default function Pagination ({ currentPage, totalPages, onPageChange }) {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1)

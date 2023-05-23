@@ -4,7 +4,7 @@ export const CartContext = createContext({ cart: [] })
 
 export default function CartContextProvider({ children }) {
   const [cartList, setCartList] = useState([])
-  const [toggleCartStatus, setToggleCartStatus] = useState(true)
+  const [toggleCartStatus, setToggleCartStatus] = useState(false)
 
   const addToCart = (item, qty) => {
     if (isInCart(item.id)) {

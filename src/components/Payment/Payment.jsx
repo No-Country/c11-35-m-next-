@@ -87,7 +87,7 @@ export default function PaymentForm ({ formData }) {
           <Input ref={lastNameRef} placeholder='Last name' />
         </FormControl>
         <div style={{ marginTop: '30px' }}>
-          <CardElement options={{ style: { base: { fontSize: '25px' } } }} />
+          <CardElement options={{ style: { base: { fontSize: '15px' } } }} />
         </div>
         <Center>
 

@@ -20,7 +20,6 @@ import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
 import Cart from '../Cart/Cart'
-import Swal from 'sweetalert2'
 
 export default function Home () {
   const router = useRouter()

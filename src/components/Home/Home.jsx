@@ -64,7 +64,7 @@ export default function Home () {
   }
 
   const sortItems = (items, orderBy) => {
-    const sortedItems = items.slice()
+    let sortedItems = items.slice()
 
     switch (orderBy) {
       case 'name':
@@ -77,33 +77,19 @@ export default function Home () {
         break
     }
 
-    let filteredItems = sortedItems
-
     if (minPrice !== '') {
-      filteredItems = filteredItems.filter(item => item.price >= parseInt(minPrice))
+      sortedItems = sortedItems.filter(item => item.price >= parseInt(minPrice))
     }
 
     if (maxPrice !== '') {
-      filteredItems = filteredItems.filter(item => item.price <= parseInt(maxPrice))
+      sortedItems = sortedItems.filter(item => item.price <= parseInt(maxPrice))
     }
 
     if (selectedBrand !== '') {
-      filteredItems = filteredItems.filter(item => item.brand === selectedBrand)
+      sortedItems = sortedItems.filter(item => item.brand === selectedBrand)
     }
 
-    if (filteredItems.length === 0) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'No items found!',
-        footer: '<a href="">Why do I have this issue?</a>'
-      })
-      setMinPrice('')
-      setMaxPrice('')
-      setSelectedBrand('')
-    }
-
-    return filteredItems
+    return sortedItems
   }
 
   useEffect(() => {

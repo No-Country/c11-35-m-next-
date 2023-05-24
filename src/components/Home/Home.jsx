@@ -32,7 +32,7 @@ export default function Home () {
   const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
   const itemsPerPage = 8
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
-  let filteredDataLength = filteredData ? filteredData.length : 0
+  const filteredDataLength = filteredData ? filteredData.length : 0
   const currentItems = filteredData.length > 0 ? filteredData : data || []
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
@@ -87,9 +87,7 @@ export default function Home () {
 
     if (selectedBrand !== '') {
       sortedItems = sortedItems.filter(item => item.brand === selectedBrand)
-      filteredDataLength = sortedItems.length
     }
-
     if (sortedItems.length === 0) {
       Swal.fire({
         icon: 'error',
@@ -137,6 +135,14 @@ export default function Home () {
         className='main'
         style={{ width: '100%' }}
       >
+        {!filteredData.length && (
+          <Box width='100%'>
+            <Image
+              src='images/carousel1.jpg'
+              alt='Descripción de la imagen'
+            />
+          </Box>
+        )}
         {filteredData.length && (
           <>
             <Text>
@@ -242,12 +248,6 @@ export default function Home () {
           </>
         )}
         <Box>
-          <Box width='100%'>
-            <Image
-              src='images/carousel1.jpg'
-              alt='Descripción de la imagen'
-            />
-          </Box>
           <SimpleGrid
             columns={cardColumns}
             spacing={10}

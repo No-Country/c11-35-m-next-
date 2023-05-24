@@ -1,60 +1,147 @@
+import React, { useContext, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchData } from '@/store/reducers/data'
 import {
-  ButtonGroup,
   Card,
-  CardBody,
-  CardFooter,
-  Heading,
   Stack,
-  Text,
+  CardBody,
+  Heading,
+  CardFooter,
   Image,
-  IconButton,
+  Text,
+  Box,
+  Tab,
+  Tabs,
+  TabList,
+  TabIndicator,
+  Button,
   Flex
 } from '@chakra-ui/react'
-import { BsCart2 } from 'react-icons/bs'
+import { StarIcon } from '@chakra-ui/icons'
+import ProductColors from '../ProductColors/ProductColors'
+import ProductCounter from '../ProductCounter/ProductCounter'
+import { CartContext } from '@/context/CartContextProvider'
+import useCount from '@/hooks/useCount'
+import Cart from '../Cart/Cart'
 
-export default function ProductCard ({ title, price, image, onClick }) {
+export default function ProductCart ({ id }) {
+  const dispatch = useDispatch()
+  const data = useSelector(state => state.data.data)
+
+  const { addToCart } = useContext(CartContext)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      dispatch(fetchData())
+    }
+  }, [dispatch])
+
+  const product = data && data.find(product => product.id === parseInt(id))
+
+  const handleAdd = qty => {
+    addToCart(product, qty)
+  }
+
+  const { counter, increaseCounter, decreaseCounter } = useCount(1)
   return (
-    <Card onClick={onClick}>
-      <Flex
-        direction='column'
-        align='center'
-      >
-        <Image
-          src={image}
-          alt='Green double couch with wooden legs'
-          borderRadius='lg'
-        />
-        <CardBody
-          _hover={{
-            cursor: 'pointer'
-          }}
+    <>
+      <Cart />
+      {product ? (
+        <Card
+          direction={{ base: 'column', sm: 'row' }}
+          overflow='hidden'
+          variant='outline'
+          padding='1rem'
+          width='100vw'
+          margin='2rem auto'
+          border='none'
         >
-          <Stack
-            mt='6'
-            spacing='3'
-          >
-            <Heading size='md'>{title}</Heading>
-            <Text
-              color='#1A1A1A'
-              fontSize='2xl'
-            >
-              ${price}
-            </Text>
+          <Image
+            src={product.api_featured_image}
+            alt='product image'
+            borderRadius='lg'
+            boxSize='lg'
+            padding='0px'
+          />
+
+          <Stack>
+            <CardBody padding='0px'>
+              <Text py='2'>{product.brand.toUpperCase()}</Text>
+              <Heading size='md'>{product.name}</Heading>
+              <Box
+                display='flex'
+                mt='2'
+                alignItems='center'
+              >
+                <Box>
+                  {Array(5)
+                    .fill('')
+                    .map((_, i) => (
+                      <StarIcon
+                        key={i}
+                        color={i < product.rating ? 'teal.500' : 'gray.300'}
+                      />
+                    ))}
+                  {product.product_colors.length > 0 ? (
+                    <>
+                      <ProductColors colors={product.product_colors} />
+                    </>
+                  ) : null}
+                </Box>
+              </Box>
+              <Text
+                color='#1A1A1A'
+                fontSize='2xl'
+                fontWeight='bold'
+              >
+                ${product.price}
+              </Text>
+              <Flex
+                marginTop='20px'
+                justifyContent='space-between'
+              >
+                <ProductCounter
+                  decreaseCounter={decreaseCounter}
+                  increaseCounter={increaseCounter}
+                  counter={counter}
+                />
+                <Button
+                  onClick={() => {
+                    handleAdd(counter)
+                  }}
+                  variant='solid'
+                  backgroundColor='#C42F6D'
+                  color='#FAFAFA'
+                  width='200px'
+                >
+                  Add to cart
+                </Button>
+              </Flex>
+            </CardBody>
+
+            <CardFooter padding='0px'>
+              <Tabs
+                isFitted
+                variant='unstyled'
+                defaultIndex={0}
+              >
+                <TabList>
+                  <Tab>Details</Tab>
+                  <Tab>Reviews</Tab>
+                </TabList>
+                <TabIndicator
+                  mt='-1.5px'
+                  height='2px'
+                  bg='#C42F6D'
+                  borderRadius='1px'
+                />
+              </Tabs>
+            </CardFooter>
           </Stack>
-        </CardBody>
-        <CardFooter>
-          <ButtonGroup
-            spacing='2'
-            ml='auto'
-          >
-            <IconButton
-              icon={<BsCart2 />}
-              bg='#C43F6D'
-              textColor='#FAFAFA'
-            />
-          </ButtonGroup>
-        </CardFooter>
-      </Flex>
-    </Card>
+        </Card>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
   )
 }

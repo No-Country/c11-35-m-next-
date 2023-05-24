@@ -21,6 +21,7 @@ export default function ProductCard ({
   image,
   onClick
 }) {
+  const imagePath = '/images/carousel1.jpg'
   // const item = { title, description, price, image }
   // const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
@@ -33,7 +34,7 @@ export default function ProductCard ({
         align='center'
       >
         <Image
-          src={image}
+          src={image || imagePath}
           alt='Green double couch with wooden legs'
           borderRadius='lg'
         />

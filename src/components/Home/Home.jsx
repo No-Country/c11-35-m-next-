@@ -64,7 +64,7 @@ export default function Home () {
   }
 
   const sortItems = (items, orderBy) => {
-    let sortedItems = items.slice()
+    const sortedItems = items.slice()
 
     switch (orderBy) {
       case 'name':
@@ -77,18 +77,21 @@ export default function Home () {
         break
     }
 
+    let filteredItems = sortedItems
+
     if (minPrice !== '') {
-      sortedItems = sortedItems.filter(item => item.price >= parseInt(minPrice))
+      filteredItems = filteredItems.filter(item => item.price >= parseInt(minPrice))
     }
 
     if (maxPrice !== '') {
-      sortedItems = sortedItems.filter(item => item.price <= parseInt(maxPrice))
+      filteredItems = filteredItems.filter(item => item.price <= parseInt(maxPrice))
     }
 
     if (selectedBrand !== '') {
-      sortedItems = sortedItems.filter(item => item.brand === selectedBrand)
+      filteredItems = filteredItems.filter(item => item.brand === selectedBrand)
     }
-    if (sortedItems.length === 0) {
+
+    if (filteredItems.length === 0) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -100,7 +103,7 @@ export default function Home () {
       setSelectedBrand('')
     }
 
-    return sortedItems
+    return filteredItems
   }
 
   useEffect(() => {

@@ -20,6 +20,8 @@ import Pagination from '../Pagination/Pagination'
 import { useRouter } from 'next/router'
 import { BsFilterRight } from 'react-icons/bs'
 import Cart from '../Cart/Cart'
+import Swal from 'sweetalert2'
+
 export default function Home () {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -88,6 +90,18 @@ export default function Home () {
       filteredDataLength = sortedItems.length
     }
 
+    if (sortedItems.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No items found!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+      setMinPrice('')
+      setMaxPrice('')
+      setSelectedBrand('')
+    }
+
     return sortedItems
   }
 
@@ -123,14 +137,6 @@ export default function Home () {
         className='main'
         style={{ width: '100%' }}
       >
-        {!filteredData.length && (
-          <Box width='100%'>
-            <Image
-              src='images/carousel1.jpg'
-              alt='Descripción de la imagen'
-            />
-          </Box>
-        )}
         {filteredData.length && (
           <>
             <Text>
@@ -236,6 +242,12 @@ export default function Home () {
           </>
         )}
         <Box>
+          <Box width='100%'>
+            <Image
+              src='images/carousel1.jpg'
+              alt='Descripción de la imagen'
+            />
+          </Box>
           <SimpleGrid
             columns={cardColumns}
             spacing={10}

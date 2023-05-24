@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
 
-function UserForm () {
+function UserForm ({ onSubmit }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -25,26 +25,23 @@ function UserForm () {
 
   const totalPrice = cartTotalPrice(cartList)
 
-  const user = {
-    firstName,
-    lastName,
-    email
-  }
-  const address = {
-    postal,
-    province,
-    city,
-    street,
-    number,
-    department,
-    dni
-  }
-
   const handleSubmit = event => {
     event.preventDefault()
-    alert(user.firstName)
-    alert(address.dni)
-    alert(totalPrice)
+    const formData = {
+      firstName,
+      lastName,
+      email,
+      postal,
+      province,
+      city,
+      street,
+      number,
+      department,
+      dni,
+      totalPrice
+    }
+
+    onSubmit(formData)
   }
 
   return (
@@ -239,7 +236,7 @@ function UserForm () {
             htmlFor='postal'
             fontWeight='normal'
           >
-            DNI o CUIL
+            DNI or CUIL
           </FormLabel>
           <Input
             id='dni'

@@ -1,19 +1,22 @@
-import { FormControl, FormLabel, Input, Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react'
-import React from 'react'
+import { FormControl, FormLabel, Input, Button, Center, Box } from '@chakra-ui/react'
+import React, { useRef } from 'react'
+import { useRouter } from 'next/router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
+import Swal from 'sweetalert2'
 
-export default function ModalPayment () {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export default function PaymentForm ({ formData }) {
   const stripe = useStripe()
+  const router = useRouter()
   const elements = useElements()
+  console.log(formData.totalPrice)
 
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
+  const firstNameRef = useRef(null)
+  const lastNameRef = useRef(null)
 
   const createPayment = async () => {
     const requestBody = {
-      amount: 10 * 100, // poner el payment correcto
-      description: 'pay of "prducto seleccionado"' // colocar nomber del product
+      amount: formData.totalPrice * 100, // poner el payment correcto
+      description: 'pay of "producto seleccionado"' // colocar nombre del producto
     }
 
     try {
@@ -35,56 +38,64 @@ export default function ModalPayment () {
 
   const confirmPayment = async (paymentIntentClientSecret) => {
     if (stripe) {
-      const { token } = await stripe?.createToken(elements?.getElement(CardElement))
-      const results = await stripe?.confirmCardPayment(paymentIntentClientSecret, {
-        payment_method: {
-          card: elements?.getElement(CardElement),
-          billing_details: {
-            name: 'matias ferrari',
-            email: 'matias.ferrari@gmail.com'
+      try {
+        const results = await stripe?.confirmCardPayment(paymentIntentClientSecret, {
+          payment_method: {
+            card: elements?.getElement(CardElement),
+            billing_details: {
+              name: `${firstNameRef.current.value} ${lastNameRef.current.value}`
+            }
           }
+        })
+
+        if (results.paymentIntent.status === 'succeeded') {
+          Swal.fire(
+            'Good job!',
+            'your purchase was successful!!',
+            'success'
+          ).then(() => {
+            // Redireccionar al Home
+            router.push('/')
+          })
+        } else {
+          Swal.fire(
+            'Error',
+            'There was an error processing your payment.',
+            'error'
+          )
         }
-      })
-      console.log(results)
-      console.log(token)
+      } catch (error) {
+        console.error(error)
+        Swal.fire(
+          'Error',
+          'There was an error processing your payment.',
+          'error'
+        )
+      }
     }
   }
 
   return (
     <>
-      <Button onClick={onOpen}>Pay</Button>
+      <Box m={7}>
+        <FormControl>
+          <FormLabel>first name credit card</FormLabel>
+          <Input ref={firstNameRef} placeholder='First name' />
+        </FormControl>
+        <FormControl mt={4}>
+          <FormLabel>Last name credit card</FormLabel>
+          <Input ref={lastNameRef} placeholder='Last name' />
+        </FormControl>
+        <div style={{ marginTop: '30px' }}>
+          <CardElement options={{ style: { base: { fontSize: '25px' } } }} />
+        </div>
+        <Center>
 
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Pay</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder='First name' />
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder='Last name' />
-            </FormControl>
-            <div style={{ marginTop: '30px' }}>
-              <CardElement options={{ style: { base: { fontSize: '25px' } } }} />
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={createPayment}>
-              Buy
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          <Button colorScheme='blue' mt={4} onClick={createPayment}>
+            Buy
+          </Button>
+        </Center>
+      </Box>
     </>
   )
 }

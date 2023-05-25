@@ -124,14 +124,16 @@ export default function Home () {
     <Box width='100%'>
       <Cart />
       <Box width='100%'>
-
         {!filteredData.length > 0 && (
           <>
             <Box width='100%'>
               <Carousel />
             </Box>
             <Text marginTop={10}>Best rated</Text>
-            <Box marginTop={25} marginBottom={60}>
+            <Box
+              marginTop={25}
+              marginBottom={60}
+            >
               <SliderComponent data={dataHome} />
             </Box>
           </>
@@ -249,16 +251,19 @@ export default function Home () {
               spacing={10}
               margin='50px'
             >
-              {sortedItems.slice(indexOfFirstItem, indexOfLastItem).map(item => (
-                <ProductCard
-                  onClick={() => handleClickProduct(item.id)}
-                  key={item.name}
-                  title={item.name}
-                  description={item.description}
-                  price={item.price}
-                  image={item.image_link}
-                />
-              ))}
+              {sortedItems
+                .slice(indexOfFirstItem, indexOfLastItem)
+                .map(item => (
+                  <ProductCard
+                    onClick={() => handleClickProduct(item.id)}
+                    id={item.id}
+                    key={item.name}
+                    title={item.name}
+                    description={item.description}
+                    price={item.price}
+                    image={item.image_link}
+                  />
+                ))}
             </SimpleGrid>
             <Pagination
               currentPage={currentPage}

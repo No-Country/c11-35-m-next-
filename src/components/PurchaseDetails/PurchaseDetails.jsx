@@ -19,7 +19,7 @@ export default function PurchaseDetails () {
   const totalPrice = cartTotalPrice(cartList)
 
   return (
-    <Accordion allowToggle>
+    <Accordion allowToggle defaultIndex={0}>
       <AccordionItem>
         <h2>
           <AccordionButton>
@@ -36,22 +36,13 @@ export default function PurchaseDetails () {
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>
+        <AccordionPanel p={4}>
           <Stack spacing='6'>
             {cartList.length > 0 ? (
-              cartList.map(item => (
-                <CartItem
-                  key={item.id}
-                  {...item}
-                />
-              ))
+              cartList.map(item => <CartItem key={item.id} {...item} />)
             ) : (
               <>
-                <Text
-                  m='50px auto'
-                  fontWeight='semibold'
-                  height='200px'
-                >
+                <Text m='50px auto' fontWeight='semibold' height='200px'>
                   Your Cart is Empty
                 </Text>
               </>

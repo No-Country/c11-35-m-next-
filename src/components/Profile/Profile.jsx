@@ -1,4 +1,4 @@
-import { useUser } from '@auth0/nextjs-auth0/client'
+import { UserContext } from '@/context/UserContextProvider'
 import {
   Button,
   Card,
@@ -11,10 +11,11 @@ import {
   Image,
   Flex
 } from '@chakra-ui/react'
+import { useContext } from 'react'
 
 export default function Profile () {
-  const { user } = useUser()
-
+  const { currentUser } = useContext(UserContext)
+  console.log(currentUser)
   return (
     <Flex
       direction='column'
@@ -23,7 +24,7 @@ export default function Profile () {
       minHeight='100vh'
       bg='gray.100'
     >
-      {user && ( // Verificación de seguridad para 'user'
+      {currentUser && ( // Verificación de seguridad para 'user'
         <Card
           maxWidth='500px'
           width='100%'
@@ -36,8 +37,8 @@ export default function Profile () {
               align='center'
             >
               <Image
-                src={user.picture}
-                alt={user.name}
+                src={currentUser.photoURL}
+                alt={currentUser.displayName}
                 borderRadius='full'
                 boxSize='150px'
               />
@@ -45,9 +46,9 @@ export default function Profile () {
                 as='h2'
                 size='lg'
               >
-                {user.name}
+                {currentUser.displayName}
               </Heading>
-              <Text>{user.email}</Text>
+              <Text>{currentUser.email}</Text>
               <Divider />
               <Text>Additional profile information goes here...</Text>
             </Stack>

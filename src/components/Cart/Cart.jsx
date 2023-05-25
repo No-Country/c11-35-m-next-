@@ -34,7 +34,7 @@ export default function Cart () {
     <Drawer
       isOpen={toggleCartStatus}
       placement='right'
-      zIndex={10}
+      zIndex={11}
     >
       <DrawerOverlay />
       <DrawerContent>

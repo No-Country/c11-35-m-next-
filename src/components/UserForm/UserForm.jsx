@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
 
-function UserForm ({ onSubmit }) {
+function UserForm({ onSubmit }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -55,13 +55,10 @@ function UserForm ({ onSubmit }) {
       >
         User Registration
       </Heading>
-      <form onSubmit={handleSubmit}>
+      <FormControl onSubmit={handleSubmit}>
         <Flex padding='0 20px'>
           <FormControl mr='5%'>
-            <FormLabel
-              htmlFor='first-name'
-              fontWeight='normal'
-            >
+            <FormLabel htmlFor='first-name' fontWeight='normal'>
               First name
             </FormLabel>
             <Input
@@ -73,10 +70,7 @@ function UserForm ({ onSubmit }) {
           </FormControl>
 
           <FormControl>
-            <FormLabel
-              htmlFor='last-name'
-              fontWeight='normal'
-            >
+            <FormLabel htmlFor='last-name' fontWeight='normal'>
               Last name
             </FormLabel>
             <Input
@@ -87,14 +81,8 @@ function UserForm ({ onSubmit }) {
             />
           </FormControl>
         </Flex>
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='email'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='email' fontWeight='normal'>
             Email address
           </FormLabel>
           <Input
@@ -115,14 +103,8 @@ function UserForm ({ onSubmit }) {
           Shipping Address
         </Heading>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='postal'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='postal' fontWeight='normal'>
             Postal Code
           </FormLabel>
           <Input
@@ -133,14 +115,8 @@ function UserForm ({ onSubmit }) {
           />
         </FormControl>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='province'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='province' fontWeight='normal'>
             Province
           </FormLabel>
           <Input
@@ -150,14 +126,8 @@ function UserForm ({ onSubmit }) {
           />
         </FormControl>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='city'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='city' fontWeight='normal'>
             City
           </FormLabel>
           <Input
@@ -167,14 +137,8 @@ function UserForm ({ onSubmit }) {
           />
         </FormControl>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='street'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='street' fontWeight='normal'>
             Street
           </FormLabel>
           <Input
@@ -184,14 +148,8 @@ function UserForm ({ onSubmit }) {
           />
         </FormControl>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='number'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='number' fontWeight='normal'>
             Number
           </FormLabel>
           <Input
@@ -201,14 +159,8 @@ function UserForm ({ onSubmit }) {
           />
         </FormControl>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='department'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='department' fontWeight='normal'>
             Department
           </FormLabel>
           <Input
@@ -228,14 +180,8 @@ function UserForm ({ onSubmit }) {
           Bill Data
         </Heading>
 
-        <FormControl
-          padding='0 20px'
-          mt='2%'
-        >
-          <FormLabel
-            htmlFor='postal'
-            fontWeight='normal'
-          >
+        <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='postal' fontWeight='normal'>
             DNI or CUIL
           </FormLabel>
           <Input
@@ -245,19 +191,20 @@ function UserForm ({ onSubmit }) {
             onChange={event => setDni(event.target.value)}
           />
         </FormControl>
-
-        <Button
-          textAlign='center'
-          margin='20px auto'
-          type='submit'
-          variant='solid'
-          backgroundColor='#C42F6D'
-          color='#FAFAFA'
-          width='200px'
-        >
-          Continue
-        </Button>
-      </form>
+        <FormControl padding='0 20px' textAlign='center'>
+          <Button
+            textAlign='center'
+            margin='20px auto'
+            type='submit'
+            variant='solid'
+            backgroundColor='#C42F6D'
+            color='#FAFAFA'
+            width='200px'
+          >
+            Continue
+          </Button>
+        </FormControl>
+      </FormControl>
     </>
   )
 }

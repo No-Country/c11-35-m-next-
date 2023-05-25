@@ -2,7 +2,6 @@ import { useContext, useRef, useState } from 'react'
 import {
   Box,
   Flex,
-  Image,
   Menu,
   MenuButton,
   MenuList,
@@ -14,7 +13,7 @@ import {
   useTheme,
   Badge
 } from '@chakra-ui/react'
-import { useUser } from '@auth0/nextjs-auth0/client'
+
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
 import { BsCart2 } from 'react-icons/bs'
@@ -22,6 +21,7 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
 
 import { CartContext } from '@/context/CartContextProvider'
+import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 
 export default function Navbar () {
   const btnRef = useRef()
@@ -31,7 +31,6 @@ export default function Navbar () {
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
-  const { user } = useUser()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -103,14 +102,14 @@ export default function Navbar () {
                 </Box>
                 <Flex
                   direction='column'
-                  marginTop='30px'
+                  marginTop='10px'
                   alignItems='flex-start'
                 >
                   <Button
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -122,7 +121,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -134,7 +133,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -146,7 +145,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -158,7 +157,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -170,7 +169,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -182,7 +181,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -194,7 +193,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -206,7 +205,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -218,7 +217,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -230,7 +229,7 @@ export default function Navbar () {
                     style={{
                       background: 'none',
                       padding: 0,
-                      margin: 10
+                      margin: 5
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
@@ -240,51 +239,7 @@ export default function Navbar () {
                   </Button>
                 </Flex>
               </Flex>
-              <Box
-                mt='auto'
-                px={4}
-              >
-                {!user ? (
-                  <Button>
-                    <NextLink href='/api/auth/login'>
-                      <Text color={textColor}>Login</Text>
-                    </NextLink>
-                  </Button>
-                ) : (
-                  <Menu>
-                    <MenuButton
-                      as={Flex}
-                      alignItems='center'
-                    >
-                      <Flex>
-                        <Image
-                          src={user.picture}
-                          alt='user picture'
-                          boxSize={10}
-                          borderRadius='full'
-                          mr={2}
-                        />
-                        <Text
-                          paddingTop={2}
-                          paddingLeft={2}
-                          color={textColor}
-                          fontFamily='Playfair'
-                        >
-                          My account
-                        </Text>
-                      </Flex>
-                    </MenuButton>
-                    <MenuList>
-                      <NextLink href='/api/auth/logout'>
-                        <MenuItem color='blackAlpha.700'>Logout</MenuItem>
-                      </NextLink>
-                      <NextLink href='/profile'>
-                        <MenuItem color='blackAlpha.700'>Profile</MenuItem>
-                      </NextLink>
-                    </MenuList>
-                  </Menu>
-                )}
-              </Box>
+              <UserLoginLogout />
             </Flex>
           )}
           <Box
@@ -436,36 +391,7 @@ export default function Navbar () {
           >
             <SearchBar />
           </Box>
-          <Flex alignItems='center'>
-            {!user ? (
-              <Button>
-                <NextLink href='/api/auth/login'>Login</NextLink>
-              </Button>
-            ) : (
-              <Menu>
-                <MenuButton
-                  as={Flex}
-                  alignItems='center'
-                >
-                  <Image
-                    src={user.picture}
-                    alt='user picture'
-                    boxSize={10}
-                    borderRadius='full'
-                    mr={2}
-                  />
-                </MenuButton>
-                <MenuList>
-                  <NextLink href='/api/auth/logout'>
-                    <MenuItem color='blackAlpha.700'>Logout</MenuItem>
-                  </NextLink>
-                  <NextLink href='/profile'>
-                    <MenuItem color='blackAlpha.700'>Profile</MenuItem>
-                  </NextLink>
-                </MenuList>
-              </Menu>
-            )}
-          </Flex>
+          <UserLoginLogout />
           <Flex alignItems='center'>
             <IconButton
               color={textColor}

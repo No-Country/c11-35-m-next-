@@ -1,5 +1,4 @@
 import { ChakraProvider, extendTheme, Box } from '@chakra-ui/react'
-import { UserProvider } from '@auth0/nextjs-auth0/client'
 import { Provider } from 'react-redux'
 import store from '../store/index'
 import Navbar from '@/components/Navbar/Navbar'
@@ -8,6 +7,7 @@ import CartContextProvider from '@/context/CartContextProvider'
 import Footer from '@/components/Footer/Footer'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
+import { UserContextProvider } from '@/context/UserContextProvider'
 
 const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY_PUBLIC}`)
 
@@ -24,14 +24,14 @@ const theme = extendTheme({
 export default function App ({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <UserProvider>
+      <UserContextProvider>
         <Elements stripe={stripe}>
           <ChakraProvider theme={theme}>
             <CartContextProvider>
               <Box
                 position='sticky'
                 top='0'
-                zIndex='9999'
+                zIndex='10'
               >
                 <Navbar />
               </Box>
@@ -40,7 +40,7 @@ export default function App ({ Component, pageProps }) {
             </CartContextProvider>
           </ChakraProvider>
         </Elements>
-      </UserProvider>
+      </UserContextProvider>
     </Provider>
   )
 }

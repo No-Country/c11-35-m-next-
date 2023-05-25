@@ -28,6 +28,7 @@ export const SliderComponent = ({ data }) => {
       {Array.isArray(data) && data.map((item) => (
         <ProductCard
           onClick={() => handleClickProduct(item.id)}
+          id={item.id}
           key={item.name}
           title={item.name}
           description={item.description}

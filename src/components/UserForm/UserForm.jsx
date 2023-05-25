@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
 
-function UserForm({ onSubmit }) {
+function UserForm ({ onSubmit }) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')

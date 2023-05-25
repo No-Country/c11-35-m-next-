@@ -63,6 +63,9 @@ export default function ProductDetails ({ id }) {
             alt='product image'
             borderRadius='lg'
             boxSize='lg'
+            maxHeight='300px'
+            maxWidth='300px'
+            margin='0 auto'
             padding='0px'
           />
 

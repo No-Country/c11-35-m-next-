@@ -14,9 +14,10 @@ import { DeleteIcon } from '@chakra-ui/icons'
 
 export const CartItem = props => {
   const { deleteItem } = useContext(CartContext)
-  const { id, name, price, qty } = props
+  const { id, name, price, qty, image } = props
 
   const { counter, increaseCounter, decreaseCounter } = useCount(qty, id)
+  console.log(props)
 
   const onClickDelete = id => {
     deleteItem(id)
@@ -40,13 +41,13 @@ export const CartItem = props => {
           width='100px'
           height='100px'
           fit='cover'
-          src={props.image_link}
+          src={props.image_link || image}
           alt={name}
           draggable='false'
           loading='lazy'
         />
         <Stack spacing='0.5'>
-          <Text fontWeight='medium'>{name}</Text>
+          <Text fontWeight='medium'>{props.title || name}</Text>
           <Text
             color={mode('gray.600', 'gray.400')}
             fontSize='sm'

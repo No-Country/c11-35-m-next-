@@ -1,4 +1,5 @@
 // import { CartContext } from '@/context/CartContextProvider'
+import { CartContext } from '@/context/CartContextProvider'
 import {
   ButtonGroup,
   Card,
@@ -11,10 +12,12 @@ import {
   IconButton,
   Flex
 } from '@chakra-ui/react'
+import { useContext } from 'react'
 // import { useContext } from 'react'
 import { BsCart2 } from 'react-icons/bs'
 
 export default function ProductCard ({
+  id,
   title,
   description,
   price,
@@ -22,21 +25,25 @@ export default function ProductCard ({
   onClick
 }) {
   const imagePath = '/images/carousel1.jpg'
-  // const item = { title, description, price, image }
-  // const { addToCart } = useContext(CartContext)
+  const item = { id, title, description, price, image }
+  const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
+    console.log(item)
+    addToCart(item, 1)
+
     // addToCart(item, 1) TODO: hay que identificar el producto al que se le hizo click para agregarlo a la bolsa
   }
   return (
     <Card>
-      <Flex
-        direction='column'
-        align='center'
-      >
+      <Flex direction='column' align='center'>
         <Image
           src={image || imagePath}
           alt='Green double couch with wooden legs'
           borderRadius='lg'
+          onClick={onClick}
+          _hover={{
+            cursor: 'pointer'
+          }}
         />
         <CardBody
           onClick={onClick}
@@ -44,24 +51,15 @@ export default function ProductCard ({
             cursor: 'pointer'
           }}
         >
-          <Stack
-            mt='6'
-            spacing='3'
-          >
+          <Stack mt='6' spacing='3'>
             <Heading size='md'>{title}</Heading>
-            <Text
-              color='#1A1A1A'
-              fontSize='2xl'
-            >
+            <Text color='#1A1A1A' fontSize='2xl'>
               ${price}
             </Text>
           </Stack>
         </CardBody>
         <CardFooter>
-          <ButtonGroup
-            spacing='2'
-            ml='auto'
-          >
+          <ButtonGroup spacing='2' ml='auto'>
             <IconButton
               icon={<BsCart2 />}
               bg='#C43F6D'

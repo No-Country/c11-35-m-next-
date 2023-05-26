@@ -26,10 +26,8 @@ export default function Steps ({ ind }) {
 
   useEffect(() => {
     setActiveStep(ind)
-    console.log(ind)
   }, [ind])
 
-  console.log(activeStep)
   return (
     <Stepper size='sm' index={activeStep} p='10px'>
       {steps.map((step, index) => (
@@ -51,36 +49,4 @@ export default function Steps ({ ind }) {
       ))}
     </Stepper>
   )
-  /*  const { activeStep } = useSteps({
-    index: 2,
-    count: steps.length
-  })
-  console.log(activeStep.index)
-  return (
-    <Stepper
-      size='sm'
-      index={activeStep}
-      p='10px'
-    >
-      {steps.map((step, index) => (
-        <Step key={index}>
-          <Flex direction='column' align='center'>
-            <StepIndicator>
-              <StepStatus
-                complete={<StepIcon />}
-                incomplete={<StepNumber />}
-                active={<StepNumber />}
-              />
-            </StepIndicator>
-
-            <Box flexShrink='0'>
-              <StepTitle>{step.title}</StepTitle>
-            </Box>
-          </Flex>
-
-          <StepSeparator />
-        </Step>
-      ))}
-    </Stepper>
-  ) */
 }

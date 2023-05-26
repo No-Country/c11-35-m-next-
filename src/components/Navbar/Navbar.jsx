@@ -22,12 +22,14 @@ import { useRouter } from 'next/router'
 
 import { CartContext } from '@/context/CartContextProvider'
 import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
+import { UserContext } from '@/context/UserContextProvider'
 
 export default function Navbar () {
   const btnRef = useRef()
   const router = useRouter()
   const theme = useTheme()
   const { countItems, toggleCart } = useContext(CartContext)
+  const { currentUser } = useContext(UserContext)
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
@@ -37,7 +39,7 @@ export default function Navbar () {
   }
 
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
-
+  console.log(currentUser)
   const handleClick = itemName => {
     router.push(`/?type=${itemName}`)
   }
@@ -65,14 +67,8 @@ export default function Navbar () {
               zIndex={10}
               marginTop={0}
             >
-              <Flex
-                direction='column'
-                alignItems='flex-start'
-              >
-                <Box
-                  w='100%'
-                  justifyContent='flex-start'
-                >
+              <Flex direction='column' alignItems='flex-start'>
+                <Box w='100%' justifyContent='flex-start'>
                   <Flex
                     width='100%'
                     marginTop='10px'
@@ -312,11 +308,7 @@ export default function Navbar () {
               <Text color={textColor}>Home</Text>
             </NextLink>
             <Menu>
-              <MenuButton
-                as={Flex}
-                alignItems='center'
-                color={textColor}
-              >
+              <MenuButton as={Flex} alignItems='center' color={textColor}>
                 Product type
               </MenuButton>
               <MenuList>

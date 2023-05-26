@@ -27,7 +27,6 @@ export default function Home () {
   const router = useRouter()
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
-  console.log(data)
   const dataHome = useSelector(state => state.dataHome.dataHome)
   const itemType = router.query.type
   const [filteredData, setFilteredData] = useState(data || [])

@@ -15,7 +15,6 @@ import { useContext } from 'react'
 
 export default function Profile () {
   const { currentUser } = useContext(UserContext)
-  console.log(currentUser)
   return (
     <Flex
       direction='column'

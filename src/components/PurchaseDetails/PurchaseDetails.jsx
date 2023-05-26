@@ -19,7 +19,7 @@ export default function PurchaseDetails () {
   const totalPrice = cartTotalPrice(cartList)
 
   return (
-    <Accordion allowToggle defaultIndex={0}>
+    <Accordion allowToggle>
       <AccordionItem>
         <h2>
           <AccordionButton>

@@ -47,7 +47,7 @@ export default function PaymentForm ({ formData }) {
             }
           }
         })
-
+        console.log(results)
         if (results.paymentIntent.status === 'succeeded') {
           Swal.fire(
             'Good job!',

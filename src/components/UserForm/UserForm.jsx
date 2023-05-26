@@ -40,7 +40,6 @@ function UserForm ({ onSubmit }) {
       dni,
       totalPrice
     }
-
     onSubmit(formData)
   }
 
@@ -191,19 +190,19 @@ function UserForm ({ onSubmit }) {
             onChange={event => setDni(event.target.value)}
           />
         </FormControl>
-        <FormControl padding='0 20px' textAlign='center'>
-          <Button
-            textAlign='center'
-            margin='20px auto'
-            type='submit'
-            variant='solid'
-            backgroundColor='#C42F6D'
-            color='#FAFAFA'
-            width='200px'
-          >
-            Continue
-          </Button>
-        </FormControl>
+
+        <Button
+          textAlign='center'
+          margin='20px auto'
+          type='submit'
+          onClick={handleSubmit}
+          variant='solid'
+          backgroundColor='#C42F6D'
+          color='#FAFAFA'
+          width='200px'
+        >
+          Continue
+        </Button>
       </FormControl>
     </>
   )

@@ -28,7 +28,6 @@ export default function ProductCard ({
   const item = { id, title, description, price, image }
   const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
-    console.log(item)
     addToCart(item, 1)
 
     // addToCart(item, 1) TODO: hay que identificar el producto al que se le hizo click para agregarlo a la bolsa

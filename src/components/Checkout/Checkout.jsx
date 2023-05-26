@@ -7,12 +7,10 @@ import PurchaseDetails from '../PurchaseDetails/PurchaseDetails'
 export default function Checkout () {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({})
-  // console.log(formData)
 
   const handleFormSubmit = data => {
     setFormData(data)
     setCurrentStep(2)
-    console.log(data)
   }
 
   return (

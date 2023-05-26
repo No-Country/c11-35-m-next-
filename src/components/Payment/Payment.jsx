@@ -8,7 +8,6 @@ export default function PaymentForm ({ formData }) {
   const stripe = useStripe()
   const router = useRouter()
   const elements = useElements()
-  console.log(formData.totalPrice)
 
   const firstNameRef = useRef(null)
   const lastNameRef = useRef(null)

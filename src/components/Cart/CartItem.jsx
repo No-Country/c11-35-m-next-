@@ -17,7 +17,6 @@ export const CartItem = props => {
   const { id, name, price, qty, image } = props
 
   const { counter, increaseCounter, decreaseCounter } = useCount(qty, id)
-  console.log(props)
 
   const onClickDelete = id => {
     deleteItem(id)
@@ -48,10 +47,7 @@ export const CartItem = props => {
         />
         <Stack spacing='0.5'>
           <Text fontWeight='medium'>{props.title || name}</Text>
-          <Text
-            color={mode('gray.600', 'gray.400')}
-            fontSize='sm'
-          >
+          <Text color={mode('gray.600', 'gray.400')} fontSize='sm'>
             {counter}x ${price}
           </Text>
           <ProductCounter
@@ -60,10 +56,7 @@ export const CartItem = props => {
             counter={counter}
           />
         </Stack>
-        <DeleteIcon
-          fontSize='xl'
-          onClick={() => onClickDelete(id)}
-        />
+        <DeleteIcon fontSize='xl' onClick={() => onClickDelete(id)} />
 
         {/*  <Flex
           width='full'

@@ -5,21 +5,22 @@ import ModalPayment from '../Payment/Payment'
 import PurchaseDetails from '../PurchaseDetails/PurchaseDetails'
 
 export default function Checkout () {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({})
   // console.log(formData)
 
-  const handleFormSubmit = (data) => {
+  const handleFormSubmit = data => {
     setFormData(data)
-    setCurrentStep(1)
+    setCurrentStep(2)
+    console.log(data)
   }
 
   return (
     <>
-      <Steps />
+      <Steps ind={currentStep} />
       <PurchaseDetails />
-      {currentStep === 0 ? (
-        <UserForm onSubmit={handleFormSubmit} />
+      {currentStep === 1 ? (
+        <UserForm onSubmit={data => handleFormSubmit(data)} />
       ) : (
         <ModalPayment formData={formData} />
       )}

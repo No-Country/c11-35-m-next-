@@ -22,47 +22,41 @@ const storeUser = async (authCredentials, id, name) => {
   await setDoc(doc(db, 'users', id), user)
 }
 
-export const signWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then(result => {
-      const user = result.user
-      storeUser(user, user.uid)
-    })
-    .catch(error => {
-      console.error(error)
-    })
+export const signWithGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider)
+    const user = result.user
+    storeUser(user, user.uid, user.displayName)
+  } catch (error) {
+    console.error(error)
+  }
 }
 
-export const createUser = credentials => {
-  createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
-    .then(result => {
-      const user = result.user
-      const displayName = credentials.displayName
-      storeUser(user, user.uid, displayName)
-      // ...
-    })
-    .catch(error => {
-      const errorCode = error.code
-      console.log(errorCode)
-      const errorMessage = error.message
-      console.log(errorMessage)
-      // ..
-    })
+export const createUser = async credentials => {
+  try {
+    const result = await createUserWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    )
+    const user = result.user
+    const displayName = credentials.displayName
+    storeUser(user, user.uid, displayName)
+  } catch (error) {
+    return error
+  }
 }
 
-export const signWithEmail = credentials => {
-  signInWithEmailAndPassword(auth, credentials.email, credentials.password)
-    .then(userCredential => {
-      // Signed in
-
-      // ...
-    })
-    .catch(error => {
-      const errorCode = error.code
-      console.log(errorCode)
-      const errorMessage = error.message
-      console.log(errorMessage)
-    })
+export const signWithEmail = async credentials => {
+  try {
+    await signInWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    )
+  } catch (error) {
+    return error
+  }
 }
 
 export const logOut = () => {

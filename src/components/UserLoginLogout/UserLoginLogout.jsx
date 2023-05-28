@@ -10,7 +10,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { UserContext } from '@/context/UserContextProvider'
@@ -26,6 +27,7 @@ import {
 } from '@/services/firebase-auth'
 
 export default function UserLoginLogout () {
+  const toast = useToast()
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { currentUser } = useContext(UserContext)
@@ -39,16 +41,51 @@ export default function UserLoginLogout () {
     onClose()
     router.push('/')
   }
-  const handleSignUp = credentials => {
-    createUser(credentials)
-    onClose()
-    router.push('/')
+  const handleSignUp = async credentials => {
+    const error = await createUser(credentials)
+    if (!error) {
+      toast({
+        title: 'User Created Successfully',
+        status: 'success',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+      onClose()
+      router.push('/')
+    } else {
+      toast({
+        title: 'There is a problem with your email',
+        status: 'error',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+    }
   }
 
-  const handleLogin = credentials => {
-    signWithEmail(credentials)
-    onClose()
-    router.push('/')
+  const handleLogin = async credentials => {
+    const error = await signWithEmail(credentials)
+    if (error) {
+      toast({
+        title: 'Ooops!!',
+        description: 'Invalid Email/Password',
+        status: 'error',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+    } else {
+      toast({
+        title: 'Welcome Back!',
+        status: 'success',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+      onClose()
+      router.push('/')
+    }
   }
 
   const handleClickSign = () => {

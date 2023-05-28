@@ -11,24 +11,51 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link
+  Link,
+  useToast
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 export default function SignupCard ({ handleSignUp, handleClickSign }) {
+  const toast = useToast()
   const [showPassword, setShowPassword] = useState(false)
   const [credentials, setCredentials] = useState({
     displayName: '',
     email: '',
     password: ''
   })
+  function checkPasswordLength (pass) {
+    return pass.length >= 6
+  }
 
+  function checkMail (text) {
+    const regEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+    return regEx.test(text)
+  }
   const handleChange = e => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
   const handleClick = () => {
-    handleSignUp(credentials)
+    if (
+      !checkMail(credentials.email) ||
+      !checkPasswordLength(credentials.password)
+    ) {
+      toast({
+        title: 'Ooops!!',
+        description: 'Invalid Email/Password',
+        status: 'error',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+    } else if (
+      checkMail(credentials.email) &&
+      checkPasswordLength(credentials.password)
+    ) {
+      handleSignUp(credentials)
+    }
   }
 
   return (

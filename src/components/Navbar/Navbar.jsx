@@ -29,7 +29,7 @@ export default function Navbar () {
   const router = useRouter()
   const theme = useTheme()
   const { countItems, toggleCart } = useContext(CartContext)
-  const { currentUser } = useContext(UserContext)
+  const { privilege } = useContext(UserContext)
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
@@ -39,7 +39,6 @@ export default function Navbar () {
   }
 
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
-  console.log(currentUser)
   const handleClick = itemName => {
     router.push(`/?type=${itemName}`)
   }
@@ -96,11 +95,146 @@ export default function Navbar () {
                     />
                   </Flex>
                 </Box>
-                <Flex
-                  direction='column'
-                  marginTop='10px'
-                  alignItems='flex-start'
-                >
+                {privilege === 'customer' ? (
+                  <Flex
+                    direction='column'
+                    marginTop='10px'
+                    alignItems='flex-start'
+                  >
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('home')}
+                    >
+                      Home
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Blush')}
+                    >
+                      Blush
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Bronzer')}
+                    >
+                      Bronzer
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Eyebrow')}
+                    >
+                      Eyebrow
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Eyeliner')}
+                    >
+                      Eyeliner
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Eyeshadow')}
+                    >
+                      Eyeshadow
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Foundation')}
+                    >
+                      Foundation
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Lip liner')}
+                    >
+                      Lip liner
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Lipstick')}
+                    >
+                      Lipstick
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Mascara')}
+                    >
+                      Mascara
+                    </Button>
+                    <Button
+                      style={{
+                        background: 'none',
+                        padding: 0,
+                        margin: 5
+                      }}
+                      fontFamily='Playfair'
+                      colorScheme='gray'
+                      onClick={() => handleClick('Nail polish')}
+                    >
+                      Nail polish
+                    </Button>
+                  </Flex>
+                ) : (
                   <Button
                     style={{
                       background: 'none',
@@ -109,131 +243,10 @@ export default function Navbar () {
                     }}
                     fontFamily='Playfair'
                     colorScheme='gray'
-                    onClick={() => handleClick('home')}
                   >
-                    Home
+                    Admin Dashboard
                   </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Blush')}
-                  >
-                    Blush
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Bronzer')}
-                  >
-                    Bronzer
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Eyebrow')}
-                  >
-                    Eyebrow
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Eyeliner')}
-                  >
-                    Eyeliner
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Eyeshadow')}
-                  >
-                    Eyeshadow
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Foundation')}
-                  >
-                    Foundation
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Lip liner')}
-                  >
-                    Lip liner
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Lipstick')}
-                  >
-                    Lipstick
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Mascara')}
-                  >
-                    Mascara
-                  </Button>
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                    onClick={() => handleClick('Nail polish')}
-                  >
-                    Nail polish
-                  </Button>
-                </Flex>
+                )}
               </Flex>
               <UserLoginLogout />
             </Flex>
@@ -303,7 +316,7 @@ export default function Navbar () {
           color='white'
           justifyContent='space-between'
         >
-          <Flex gap={5}>
+          <Flex gap={5}> {/* TODO renderizado opcional por privilegio admin o user */}
             <NextLink href='/'>
               <Text color={textColor}>Home</Text>
             </NextLink>

@@ -19,7 +19,6 @@ import NextLink from 'next/link'
 import { BsCart2 } from 'react-icons/bs'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
-
 import { CartContext } from '@/context/CartContextProvider'
 import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 import { UserContext } from '@/context/UserContextProvider'
@@ -235,17 +234,9 @@ export default function Navbar () {
                     </Button>
                   </Flex>
                 ) : (
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                  >
-                    Admin Dashboard
-                  </Button>
+                  <NextLink href='/admin-dashboard'>
+                    <Text color={textColor}>Admin</Text>
+                  </NextLink>
                 )}
               </Flex>
               <UserLoginLogout />
@@ -316,77 +307,85 @@ export default function Navbar () {
           color='white'
           justifyContent='space-between'
         >
-          <Flex gap={5}> {/* TODO renderizado opcional por privilegio admin o user */}
+          <Flex gap={5}>
+            {' '}
+            {/* TODO renderizado opcional por privilegio admin o user */}
             <NextLink href='/'>
               <Text color={textColor}>Home</Text>
             </NextLink>
-            <Menu>
-              <MenuButton as={Flex} alignItems='center' color={textColor}>
-                Product type
-              </MenuButton>
-              <MenuList>
-                <MenuItem
-                  onClick={() => handleClick('Blush')}
-                  color='blackAlpha.700'
-                >
-                  Blush
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Bronzer')}
-                  color='blackAlpha.700'
-                >
-                  Bronzer
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyebrow')}
-                  color='blackAlpha.700'
-                >
-                  Eyebrow
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyeliner')}
-                  color='blackAlpha.700'
-                >
-                  Eyeliner
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyeshadow')}
-                  color='blackAlpha.700'
-                >
-                  Eyeshadow
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Foundation')}
-                  color='blackAlpha.700'
-                >
-                  Foundation
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Lip liner')}
-                  color='blackAlpha.700'
-                >
-                  Lip liner
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Lipstick')}
-                  color='blackAlpha.700'
-                >
-                  Lipstick
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Mascara')}
-                  color='blackAlpha.700'
-                >
-                  Mascara
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Nail polish')}
-                  color='blackAlpha.700'
-                >
-                  Nail polish
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            {privilege === 'customer' ? (
+              <Menu>
+                <MenuButton as={Flex} alignItems='center' color={textColor}>
+                  Product type
+                </MenuButton>
+                <MenuList>
+                  <MenuItem
+                    onClick={() => handleClick('Blush')}
+                    color='blackAlpha.700'
+                  >
+                    Blush
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Bronzer')}
+                    color='blackAlpha.700'
+                  >
+                    Bronzer
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyebrow')}
+                    color='blackAlpha.700'
+                  >
+                    Eyebrow
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyeliner')}
+                    color='blackAlpha.700'
+                  >
+                    Eyeliner
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyeshadow')}
+                    color='blackAlpha.700'
+                  >
+                    Eyeshadow
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Foundation')}
+                    color='blackAlpha.700'
+                  >
+                    Foundation
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Lip liner')}
+                    color='blackAlpha.700'
+                  >
+                    Lip liner
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Lipstick')}
+                    color='blackAlpha.700'
+                  >
+                    Lipstick
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Mascara')}
+                    color='blackAlpha.700'
+                  >
+                    Mascara
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Nail polish')}
+                    color='blackAlpha.700'
+                  >
+                    Nail polish
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <NextLink href='/admin-dashboard'>
+                <Text color={textColor}>Admin</Text>
+              </NextLink>
+            )}
           </Flex>
           <Box
             display='flex'

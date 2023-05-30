@@ -39,7 +39,7 @@ export default function PurchaseDetails () {
         <AccordionPanel p={4}>
           <Stack spacing='6'>
             {cartList.length > 0 ? (
-              cartList.map(item => <CartItem key={item.id} {...item} />)
+              cartList.map(item => <CartItem key={item.id} {...item} counterEnabled={false} />)
             ) : (
               <>
                 <Text m='50px auto' fontWeight='semibold' height='200px'>

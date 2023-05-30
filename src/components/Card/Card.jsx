@@ -30,6 +30,8 @@ export default function ProductCard ({
   const imagePath = '/images/carousel1.jpg'
   const item = { id, title, description, price, image, colors, brand }
   const theme = useTheme()
+  const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
   const toast = useToast()
   const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
@@ -78,8 +80,8 @@ export default function ProductCard ({
           <ButtonGroup spacing='2' ml='auto'>
             <IconButton
               icon={<BiShoppingBag />}
-              backgroundColor={theme.colors.custom.background}
-              textColor='#FAFAFA'
+              backgroundColor={backgroundColor}
+              color={primaryColor}
               onClick={() => handleAdd()}
             />
           </ButtonGroup>

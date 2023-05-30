@@ -62,7 +62,13 @@ export default function Cart () {
               <Stack spacing={{ base: '8', md: '10' }} flex='2'>
                 <Stack spacing='6'>
                   {cartList.length > 0 ? (
-                    cartList.map(item => <CartItem key={item.id} {...item} />)
+                    cartList.map(item => (
+                      <CartItem
+                        key={item.id}
+                        {...item}
+                        counterEnabled
+                      />
+                    ))
                   ) : (
                     <>
                       <Text m='50px auto' fontWeight='semibold' height='200px'>

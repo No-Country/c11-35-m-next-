@@ -6,35 +6,26 @@ export default function Footer () {
       <Box bg='rgba(33, 74, 95, 0.5)'>
         <Box padding={5}>
           <Text>Contact</Text>
-          <Box
-            paddingLeft={5}
-            paddingTop={2}
-          >
-            <Flex>
-              <Icon icon={<BsWhatsapp size='40px' />} />
+          <Box paddingLeft={5} paddingTop={2}>
+            <Flex gap='2' alignItems='center' mb='3'>
+              <Icon boxSize={6} as={BsWhatsapp} />
               <Text>11 293-292</Text>
             </Flex>
-            <Flex>
-              <Icon icon={<BsEnvelope size='40px' />} />
+            <Flex gap='2' alignItems='center' mb='3'>
+              <Icon boxSize={6} as={BsEnvelope} />
               <Text>sunkiss.makeup@gmail.com</Text>
             </Flex>
           </Box>
         </Box>
-        <Box
-          padding={5}
-          paddingTop={0}
-        >
+        <Box padding={5} paddingTop={0}>
           <Text>Follow</Text>
-          <Box
-            paddingLeft={5}
-            paddingTop={2}
-          >
-            <Flex>
-              <Icon icon={<BsFacebook size='40px' />} />
+          <Box paddingLeft={5} paddingTop={2}>
+            <Flex gap='2' alignItems='center' mb='3'>
+              <Icon boxSize={6} as={BsFacebook} />
               <Text>Sunkiss Make up</Text>
             </Flex>
-            <Flex>
-              <Icon icon={<BsInstagram size='40px' />} />
+            <Flex gap='2' alignItems='center' mb='3'>
+              <Icon boxSize={6} as={BsInstagram} />
               <Text>sunkiss.makeup</Text>
             </Flex>
           </Box>

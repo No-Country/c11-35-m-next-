@@ -16,7 +16,7 @@ import {
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { BsCart2 } from 'react-icons/bs'
+import { BiShoppingBag } from 'react-icons/bi'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
 import { CartContext } from '@/context/CartContextProvider'
@@ -32,6 +32,7 @@ export default function Navbar () {
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -278,22 +279,26 @@ export default function Navbar () {
               <IconButton
                 color={textColor}
                 size='lg'
-                icon={<BsCart2 />}
+                icon={<BiShoppingBag />}
                 variant='ghost'
                 onClick={handleCartClick}
                 right={0}
                 ref={btnRef}
+                fontSize='30px'
               />
-              <Badge
-                position='absolute'
-                right={5}
-                top={6}
-                fontSize='10px'
-                colorScheme='green'
-                borderRadius='50%'
-              >
-                {qty}
-              </Badge>
+              {qty > 0 && (
+                <Badge
+                  position='absolute'
+                  right={5}
+                  top={6}
+                  fontSize='10px'
+                  backgroundColor={backgroundColor}
+                  color={theme.colors.custom.primary}
+                  borderRadius='50%'
+                >
+                  {qty}
+                </Badge>
+              )}
             </Flex>
           </Box>
         </>
@@ -399,22 +404,27 @@ export default function Navbar () {
           <Flex alignItems='center'>
             <IconButton
               color={textColor}
-              size='lg'
-              icon={<BsCart2 />}
+              icon={<BiShoppingBag />}
               variant='ghost'
               onClick={handleCartClick}
               right={0}
+              fontSize='30px'
             />
-            <Badge
-              position='absolute'
-              right={5}
-              top={6}
-              fontSize='10px'
-              colorScheme='green'
-              borderRadius='50%'
-            >
-              {qty}
-            </Badge>
+            {qty > 0 && (
+              <Badge
+                position='absolute'
+                w={4}
+                h={4}
+                right={4}
+                top={6}
+                fontSize='10px'
+                backgroundColor={backgroundColor}
+                color={theme.colors.custom.primary}
+                borderRadius='50%'
+              >
+                {qty}
+              </Badge>
+            )}
           </Flex>
         </Flex>
       )}

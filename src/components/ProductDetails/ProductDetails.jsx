@@ -17,7 +17,8 @@ import {
   TabList,
   TabIndicator,
   Button,
-  Flex
+  Flex,
+  useToast
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import ProductColors from '../ProductColors/ProductColors'
@@ -25,8 +26,13 @@ import ProductCounter from '../ProductCounter/ProductCounter'
 import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
 import Cart from '../Cart/Cart'
+import { useTheme } from '@emotion/react'
 
 export default function ProductDetails ({ id }) {
+  const toast = useToast()
+  const theme = useTheme()
+  const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
 
@@ -42,6 +48,13 @@ export default function ProductDetails ({ id }) {
 
   const handleAdd = qty => {
     addToCart(product, qty)
+    toast({
+      title: 'Product added to cart',
+      status: 'success',
+      position: 'top',
+      duration: 3000,
+      isClosable: true
+    })
   }
 
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
@@ -63,8 +76,8 @@ export default function ProductDetails ({ id }) {
             alt='product image'
             borderRadius='lg'
             boxSize='lg'
-            maxHeight='300px'
-            maxWidth='300px'
+            maxHeight='230px'
+            maxWidth='200px'
             margin='0 auto'
             padding='0px'
           />
@@ -73,11 +86,7 @@ export default function ProductDetails ({ id }) {
             <CardBody padding='0px'>
               <Text py='2'>{product.brand.toUpperCase()}</Text>
               <Heading size='md'>{product.name}</Heading>
-              <Box
-                display='flex'
-                mt='2'
-                alignItems='center'
-              >
+              <Box display='flex' mt='2' alignItems='center'>
                 <Box>
                   {Array(5)
                     .fill('')
@@ -94,17 +103,10 @@ export default function ProductDetails ({ id }) {
                   ) : null}
                 </Box>
               </Box>
-              <Text
-                color='#1A1A1A'
-                fontSize='2xl'
-                fontWeight='bold'
-              >
+              <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>
                 ${product.price}
               </Text>
-              <Flex
-                marginTop='20px'
-                justifyContent='space-between'
-              >
+              <Flex marginTop='20px' justifyContent='space-between'>
                 <ProductCounter
                   decreaseCounter={decreaseCounter}
                   increaseCounter={increaseCounter}
@@ -115,8 +117,8 @@ export default function ProductDetails ({ id }) {
                     handleAdd(counter)
                   }}
                   variant='solid'
-                  backgroundColor='#C42F6D'
-                  color='#FAFAFA'
+                  backgroundColor={backgroundColor}
+                  color={primaryColor}
                   width='200px'
                 >
                   Add to cart
@@ -125,11 +127,7 @@ export default function ProductDetails ({ id }) {
             </CardBody>
 
             <CardFooter padding='0px'>
-              <Tabs
-                isFitted
-                variant='unstyled'
-                defaultIndex={0}
-              >
+              <Tabs isFitted variant='unstyled' defaultIndex={0}>
                 <TabList>
                   <Tab>Details</Tab>
                   <Tab>Reviews</Tab>
@@ -137,7 +135,7 @@ export default function ProductDetails ({ id }) {
                 <TabIndicator
                   mt='-1.5px'
                   height='2px'
-                  bg='#C42F6D'
+                  backgroundColor={backgroundColor}
                   borderRadius='1px'
                 />
                 <TabPanels>

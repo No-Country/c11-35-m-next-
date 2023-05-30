@@ -5,11 +5,15 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Input
+  Input,
+  useTheme,
+  Box
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
 
 function UserForm ({ onSubmit }) {
+  const theme = useTheme()
+  const backgroundColor = theme.colors.custom.background
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -190,19 +194,21 @@ function UserForm ({ onSubmit }) {
             onChange={event => setDni(event.target.value)}
           />
         </FormControl>
+        <Box display='flex'>
+          <Button
+            textAlign='center'
+            margin='20px auto'
+            type='submit'
+            onClick={handleSubmit}
+            variant='solid'
+            backgroundColor={backgroundColor}
+            color='#FAFAFA'
+            width='200px'
+          >
+            Continue
+          </Button>
 
-        <Button
-          textAlign='center'
-          margin='20px auto'
-          type='submit'
-          onClick={handleSubmit}
-          variant='solid'
-          backgroundColor='#C42F6D'
-          color='#FAFAFA'
-          width='200px'
-        >
-          Continue
-        </Button>
+        </Box>
       </FormControl>
     </>
   )

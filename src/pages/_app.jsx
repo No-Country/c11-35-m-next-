@@ -16,7 +16,7 @@ const theme = extendTheme({
     custom: {
       text: '#1A1A1A',
       primary: '#FAFAFA',
-      background: '#C42F6D'
+      background: '#214A5F'
     }
   }
 })

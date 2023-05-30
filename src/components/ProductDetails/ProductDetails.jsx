@@ -84,7 +84,7 @@ export default function ProductDetails ({ id }) {
 
           <Stack>
             <CardBody padding='0px'>
-              <Text py='2'>{product.brand.toUpperCase()}</Text>
+              <Text py='2'>{product.brand && product.brand.toUpperCase()}</Text>
               <Heading size='md'>{product.name}</Heading>
               <Box display='flex' mt='2' alignItems='center'>
                 <Box>

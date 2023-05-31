@@ -33,7 +33,7 @@ export default function Home () {
   const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
   const itemsPerPage = 8
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
-  const filteredDataLength = filteredData ? filteredData.length : 0
+  const [filteredDataLength, setFilteredDataLength] = useState(filteredData ? filteredData.length : 0)
   const currentItems = filteredData.length > 0 ? filteredData : data || []
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
@@ -103,13 +103,28 @@ export default function Home () {
 
   useEffect(() => {
     if (itemType && data) {
-      const filteredItems = data.filter(
+      let filteredItems = data.filter(
         item => item.productType === itemType.toLowerCase()
       )
+
+      if (minPrice !== '') {
+        filteredItems = filteredItems.filter(item => item.price >= parseInt(minPrice))
+      }
+
+      if (maxPrice !== '') {
+        filteredItems = filteredItems.filter(item => item.price <= parseInt(maxPrice))
+      }
+
+      if (selectedBrand !== '') {
+        filteredItems = filteredItems.filter(item => item.brand === selectedBrand)
+      }
+
       setFilteredData(filteredItems)
-      setCurrentPage(1) // Restablecer la página actual al cambiar el tipo de producto o los filtros
+      setFilteredDataLength(filteredItems.length) // Actualizar la longitud de los datos filtrados
+      setCurrentPage(1) // Restablecer la página actual al aplicar filtros adicionales
     } else {
       setFilteredData([])
+      setFilteredDataLength(0) // Restablecer la longitud de los datos filtrados
       setCurrentPage(1) // Restablecer la página actual cuando no hay un tipo de producto seleccionado
     }
   }, [data, itemType, minPrice, maxPrice, selectedBrand])

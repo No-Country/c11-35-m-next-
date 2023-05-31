@@ -7,7 +7,6 @@ const stripe = new Stripe(process.env.STRIPE_KEY_SECRET, {
 export default async function handler (req, res) {
   if (req.method === 'POST') {
     try {
-      console.log(req.body)
       const { amount, description } = req.body
       const paymentIntent = await stripe.paymentIntents.create({
         amount,

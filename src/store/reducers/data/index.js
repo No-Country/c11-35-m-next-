@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-/* import { getDocs, collection, query, where } from '@firebase/firestore'
-import { db } from '@/services/db' */
+import { getDocs, collection } from '@firebase/firestore'
+import { db } from '@/services/db'
 
 const initialState = {
   data: null,
@@ -9,24 +8,15 @@ const initialState = {
   error: null
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async props => {
-  // const productsDB = collection(db, 'products') // se
+export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
   try {
-    let url = 'https://makeup-api.herokuapp.com/api/v1/products.json'
-    if (props === undefined) {
-      url += ''
-    }
+    const productsDB = collection(db, 'products')
+    const querySnapshot = await getDocs(productsDB)
+    const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
 
-    const response = await axios.get(url)
-    let data = response.data
-    /*  const data2 = await getDocs(productsDB)
-    let data = data2.docs.map(doc => ({ id: doc.id, ...doc.data() }))
- */
-    // console.log(data)
     if (props !== undefined) {
-      console.log(props)
       const lowercaseProps = props.toLowerCase()
-      data = data.filter(item =>
+      return data.filter((item) =>
         item.name.toLowerCase().includes(lowercaseProps)
       )
     }
@@ -41,9 +31,9 @@ const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, state => {
+      .addCase(fetchData.pending, (state) => {
         state.loading = true
       })
       .addCase(fetchData.fulfilled, (state, action) => {

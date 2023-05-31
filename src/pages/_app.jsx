@@ -25,9 +25,9 @@ export default function App ({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <UserContextProvider>
-        <Elements stripe={stripe}>
-          <ChakraProvider theme={theme}>
-            <CartContextProvider>
+        <ChakraProvider theme={theme}>
+          <CartContextProvider>
+            <Elements stripe={stripe}>
               <Box
                 position='sticky'
                 top='0'
@@ -37,9 +37,9 @@ export default function App ({ Component, pageProps }) {
               </Box>
               <Component {...pageProps} />
               <Footer />
-            </CartContextProvider>
-          </ChakraProvider>
-        </Elements>
+            </Elements>
+          </CartContextProvider>
+        </ChakraProvider>
       </UserContextProvider>
     </Provider>
   )

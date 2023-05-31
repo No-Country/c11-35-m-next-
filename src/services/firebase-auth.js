@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup
 } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { app, db } from './db'
 
 const provider = new GoogleAuthProvider()
@@ -17,7 +17,8 @@ const storeUser = async (authCredentials, id, name) => {
     displayName: name,
     email: authCredentials.email,
     orders: [],
-    role: 'customer'
+    role: 'customer',
+    address: []
   }
   await setDoc(doc(db, 'users', id), user)
 }
@@ -65,4 +66,23 @@ export const logOut = () => {
     .catch(error => {
       console.log(error)
     })
+}
+
+export const addUserAddress = async (id, data) => {
+  const updatedAddress = []
+  updatedAddress.push(data)
+  const user = {
+    address: updatedAddress
+  }
+  await setDoc(doc(db, 'users', id), user, { merge: true })
+}
+
+export const fetchUser = async currentUser => {
+  const itemDB = doc(db, 'users', currentUser && currentUser.uid)
+  try {
+    const userInDb = await getDoc(itemDB)
+    return userInDb.data()
+  } catch (error) {
+    console.log(error)
+  }
 }

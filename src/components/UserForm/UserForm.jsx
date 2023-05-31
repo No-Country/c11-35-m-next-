@@ -1,18 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Button,
   Heading,
-  Flex,
   FormControl,
   FormLabel,
-  Input
+  Input,
+  useTheme,
+  Box,
+  useToast,
+  IconButton,
+  Flex,
+  Text
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
-
+import { UserContext } from '@/context/UserContextProvider'
+import { fetchUser } from '@/services/firebase-auth'
+import { FiMapPin } from 'react-icons/fi'
 function UserForm ({ onSubmit }) {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
+  const theme = useTheme()
+  const backgroundColor = theme.colors.custom.background
   const [postal, setPostal] = useState('')
   const [province, setProvince] = useState('')
   const [city, setCity] = useState('')
@@ -20,17 +26,15 @@ function UserForm ({ onSubmit }) {
   const [number, setNumber] = useState('')
   const [department, setDepartment] = useState('')
   const [dni, setDni] = useState('')
-
+  const toast = useToast()
   const { cartList, cartTotalPrice } = useContext(CartContext)
-
+  const { currentUser } = useContext(UserContext)
   const totalPrice = cartTotalPrice(cartList)
+  const [address, setAddress] = useState('')
 
   const handleSubmit = event => {
     event.preventDefault()
     const formData = {
-      firstName,
-      lastName,
-      email,
       postal,
       province,
       city,
@@ -40,8 +44,35 @@ function UserForm ({ onSubmit }) {
       dni,
       totalPrice
     }
-    onSubmit(formData)
+    if ((
+      !postal ||
+      !province ||
+      !city ||
+      !street ||
+      !number ||
+      !department ||
+      !dni
+    ) && !address) {
+      toast({
+        title: 'Please fill out all information',
+        status: 'error',
+        position: 'top',
+        duration: 3000,
+        isClosable: true
+      })
+    } else {
+      onSubmit(formData)
+      console.log(formData)
+    }
   }
+
+  const callUser = async currentUser => {
+    const user = await fetchUser(currentUser)
+    setAddress(user.address)
+  }
+  useEffect(() => {
+    callUser(currentUser)
+  }, [currentUser])
 
   return (
     <>
@@ -51,46 +82,147 @@ function UserForm ({ onSubmit }) {
         textAlign='center'
         fontWeight='normal'
         mb='2%'
+        fontSize='2xl'
       >
-        User Registration
+        User Information
       </Heading>
       <FormControl onSubmit={handleSubmit}>
-        <Flex padding='0 20px'>
-          <FormControl mr='5%'>
-            <FormLabel htmlFor='first-name' fontWeight='normal'>
-              First name
-            </FormLabel>
-            <Input
-              id='first-name'
-              placeholder='First name'
-              value={firstName}
-              onChange={event => setFirstName(event.target.value)}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel htmlFor='last-name' fontWeight='normal'>
-              Last name
-            </FormLabel>
-            <Input
-              id='last-name'
-              placeholder='Last name'
-              value={lastName}
-              onChange={event => setLastName(event.target.value)}
-            />
-          </FormControl>
-        </Flex>
         <FormControl padding='0 20px' mt='2%'>
+          <FormLabel htmlFor='first-name' fontWeight='normal'>
+            User name
+          </FormLabel>
+          <Input
+            id='first-name'
+            placeholder='First name'
+            value={currentUser && currentUser.displayName}
+            disabled='true'
+          />
+        </FormControl>
+        <FormControl padding='0 20px' mt='2%' mb='20px'>
           <FormLabel htmlFor='email' fontWeight='normal'>
             Email address
           </FormLabel>
           <Input
             id='email'
             type='email'
-            value={email}
-            onChange={event => setEmail(event.target.value)}
+            value={currentUser && currentUser.email}
+            disabled='true'
           />
         </FormControl>
+        {address ? (
+          <Flex
+            p='10px'
+            margin='0 auto'
+            maxW='90%'
+            alignItems='center'
+            border='solid 1px'
+            borderRadius='10px'
+          >
+            <IconButton
+              fontSize='25px'
+              width='30%'
+              backgroundColor='white'
+              icon={<FiMapPin />}
+            />
+            {address.map(item => (
+              <Flex
+                key={item.dni}
+                flexDirection='column'
+                alignItems='left'
+                width='100%'
+              >
+                <Text>Street: {item.street}</Text>
+                <Text>Number: {item.number}</Text>
+                <Text>Department: {item.department}</Text>
+                <Text>Province: {item.province}</Text>
+                <Text>City: {item.city}</Text>
+              </Flex>
+            ))}
+            <Button backgroundColor='white' textColor='teal'>
+              Edit or Add
+            </Button>
+          </Flex>
+        ) : (
+          <>
+            <Heading
+              padding='20px'
+              w='100%'
+              textAlign='center'
+              fontWeight='normal'
+              mb='2%'
+              fontSize='2xl'
+            >
+              Shipping Address
+            </Heading>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='postal' fontWeight='normal'>
+                Postal Code
+              </FormLabel>
+              <Input
+                id='postal'
+                type='number'
+                value={postal}
+                onChange={event => setPostal(event.target.value)}
+              />
+            </FormControl>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='province' fontWeight='normal'>
+                Province
+              </FormLabel>
+              <Input
+                id='province'
+                value={province}
+                onChange={event => setProvince(event.target.value)}
+              />
+            </FormControl>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='city' fontWeight='normal'>
+                City
+              </FormLabel>
+              <Input
+                id='city'
+                value={city}
+                onChange={event => setCity(event.target.value)}
+              />
+            </FormControl>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='street' fontWeight='normal'>
+                Street
+              </FormLabel>
+              <Input
+                id='street'
+                value={street}
+                onChange={event => setStreet(event.target.value)}
+              />
+            </FormControl>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='number' fontWeight='normal'>
+                Number
+              </FormLabel>
+              <Input
+                id='number'
+                value={number}
+                onChange={event => setNumber(event.target.value)}
+              />
+            </FormControl>
+
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='department' fontWeight='normal'>
+                Department
+              </FormLabel>
+              <Input
+                id='department'
+                value={department}
+                onChange={event => setDepartment(event.target.value)}
+              />
+            </FormControl>
+          </>
+        )}
 
         <Heading
           padding='20px'
@@ -98,83 +230,7 @@ function UserForm ({ onSubmit }) {
           textAlign='center'
           fontWeight='normal'
           mb='2%'
-        >
-          Shipping Address
-        </Heading>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='postal' fontWeight='normal'>
-            Postal Code
-          </FormLabel>
-          <Input
-            id='postal'
-            type='number'
-            value={postal}
-            onChange={event => setPostal(event.target.value)}
-          />
-        </FormControl>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='province' fontWeight='normal'>
-            Province
-          </FormLabel>
-          <Input
-            id='province'
-            value={province}
-            onChange={event => setProvince(event.target.value)}
-          />
-        </FormControl>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='city' fontWeight='normal'>
-            City
-          </FormLabel>
-          <Input
-            id='city'
-            value={city}
-            onChange={event => setCity(event.target.value)}
-          />
-        </FormControl>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='street' fontWeight='normal'>
-            Street
-          </FormLabel>
-          <Input
-            id='street'
-            value={street}
-            onChange={event => setStreet(event.target.value)}
-          />
-        </FormControl>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='number' fontWeight='normal'>
-            Number
-          </FormLabel>
-          <Input
-            id='number'
-            value={number}
-            onChange={event => setNumber(event.target.value)}
-          />
-        </FormControl>
-
-        <FormControl padding='0 20px' mt='2%'>
-          <FormLabel htmlFor='department' fontWeight='normal'>
-            Department
-          </FormLabel>
-          <Input
-            id='department'
-            value={department}
-            onChange={event => setDepartment(event.target.value)}
-          />
-        </FormControl>
-
-        <Heading
-          padding='20px'
-          w='100%'
-          textAlign='center'
-          fontWeight='normal'
-          mb='2%'
+          fontSize='2xl'
         >
           Bill Data
         </Heading>
@@ -190,19 +246,20 @@ function UserForm ({ onSubmit }) {
             onChange={event => setDni(event.target.value)}
           />
         </FormControl>
-
-        <Button
-          textAlign='center'
-          margin='20px auto'
-          type='submit'
-          onClick={handleSubmit}
-          variant='solid'
-          backgroundColor='#C42F6D'
-          color='#FAFAFA'
-          width='200px'
-        >
-          Continue
-        </Button>
+        <Box display='flex'>
+          <Button
+            textAlign='center'
+            margin='20px auto'
+            type='submit'
+            onClick={handleSubmit}
+            variant='solid'
+            backgroundColor={backgroundColor}
+            color='#FAFAFA'
+            width='200px'
+          >
+            Continue
+          </Button>
+        </Box>
       </FormControl>
     </>
   )

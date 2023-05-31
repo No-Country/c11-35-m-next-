@@ -1,6 +1,8 @@
 import { Button, Flex, HStack } from '@chakra-ui/react'
+import { useTheme } from '@emotion/react'
 
 export default function Pagination ({ currentPage, totalPages, onPageChange }) {
+  const theme = useTheme()
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1)
@@ -25,7 +27,9 @@ export default function Pagination ({ currentPage, totalPages, onPageChange }) {
           key={i}
           onClick={() => onPageChange(i)}
           variant={currentPage === i ? 'solid' : 'outline'}
-          bg={currentPage === i ? '#C43F6D' : ''}
+          backgroundColor={
+            currentPage === i ? theme.colors.custom.background : ''
+          }
           textColor={currentPage === i ? '#FAFAFA' : ''}
         >
           {i}
@@ -36,16 +40,8 @@ export default function Pagination ({ currentPage, totalPages, onPageChange }) {
   }
 
   return (
-    <Flex
-      justifyContent='center'
-      alignItems='center'
-      margin='50px'
-    >
-      <Button
-        onClick={handlePrevPage}
-        disabled={currentPage === 1}
-        mx={2}
-      >
+    <Flex justifyContent='center' alignItems='center' margin='50px'>
+      <Button onClick={handlePrevPage} disabled={currentPage === 1} mx={2}>
         Prev
       </Button>
       <HStack spacing={2}>{renderPageButtons()}</HStack>

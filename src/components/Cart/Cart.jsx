@@ -12,7 +12,8 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerFooter,
-  DrawerBody
+  DrawerBody,
+  useTheme
 } from '@chakra-ui/react'
 import { CartItem } from './CartItem'
 import { useRouter } from 'next/router'
@@ -21,6 +22,8 @@ import { formatPrice } from './PriceTag'
 import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function Cart () {
+  const theme = useTheme()
+  const backgroundColor = theme.colors.custom.background
   const router = useRouter()
   const { cartList, toggleCartStatus, toggleCart, cartTotalPrice, removeList } =
     useContext(CartContext)
@@ -31,11 +34,7 @@ export default function Cart () {
 
   const totalPrice = cartTotalPrice(cartList)
   return (
-    <Drawer
-      isOpen={toggleCartStatus}
-      placement='right'
-      zIndex={11}
-    >
+    <Drawer isOpen={toggleCartStatus} placement='right' zIndex={11}>
       <DrawerOverlay />
       <DrawerContent>
         <Flex
@@ -60,25 +59,19 @@ export default function Cart () {
               align={{ lg: 'flex-start' }}
               spacing={{ base: '8', md: '16' }}
             >
-              <Stack
-                spacing={{ base: '8', md: '10' }}
-                flex='2'
-              >
+              <Stack spacing={{ base: '8', md: '10' }} flex='2'>
                 <Stack spacing='6'>
                   {cartList.length > 0 ? (
                     cartList.map(item => (
                       <CartItem
                         key={item.id}
                         {...item}
+                        counterEnabled
                       />
                     ))
                   ) : (
                     <>
-                      <Text
-                        m='50px auto'
-                        fontWeight='semibold'
-                        height='200px'
-                      >
+                      <Text m='50px auto' fontWeight='semibold' height='200px'>
                         Your Cart is Empty
                       </Text>
                     </>
@@ -86,61 +79,39 @@ export default function Cart () {
                 </Stack>
               </Stack>
 
-              <Flex
-                direction='column'
-                align='center'
-                flex='1'
-              >
-                <HStack
-                  mt='6'
-                  fontWeight='semibold'
-                />
+              <Flex direction='column' align='center' flex='1'>
+                <HStack mt='6' fontWeight='semibold' />
               </Flex>
             </Stack>
           </Box>
         </DrawerBody>
 
         <DrawerFooter borderTop='solid 1px gray'>
-          <Flex
-            margin='0 auto'
-            align='center'
-            direction='column'
-            gap='5'
-          >
+          <Flex margin='0 auto' align='center' direction='column' gap='5'>
             {cartList.length > 0 ? (
               <>
-                <Text
-                  fontSize='xl'
-                  fontWeight='extrabold'
-                >
+                <Text fontSize='xl' fontWeight='extrabold'>
                   Subtotal: {formatPrice({ totalPrice })}
                 </Text>
                 <Button
                   onClick={() => router.push('/checkout')}
                   variant='solid'
-                  backgroundColor='#C42F6D'
+                  backgroundColor={backgroundColor}
                   color='#FAFAFA'
                   width='100%'
                 >
                   Checkout
                 </Button>
-                <Button
-                  href=''
-                  onClick={removeList}
-                  variant='ghost'
-                >
+                <Button href='' onClick={removeList} variant='ghost'>
                   Delete Cart
-                  <DeleteIcon
-                    m='5px'
-                    fontSize='xl'
-                  />
+                  <DeleteIcon m='5px' fontSize='xl' />
                 </Button>
               </>
             ) : (
               <Button
                 onClick={handleClick}
                 variant='solid'
-                backgroundColor='#C42F6D'
+                backgroundColor={backgroundColor}
                 color='#FAFAFA'
                 width='100%'
               >

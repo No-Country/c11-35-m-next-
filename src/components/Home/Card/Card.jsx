@@ -15,7 +15,8 @@ import {
   TabList,
   TabIndicator,
   Button,
-  Flex
+  Flex,
+  useToast
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import ProductColors from '../ProductColors/ProductColors'
@@ -25,6 +26,7 @@ import useCount from '@/hooks/useCount'
 import Cart from '../Cart/Cart'
 
 export default function ProductCart ({ id }) {
+  const toast = useToast()
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
 
@@ -40,6 +42,13 @@ export default function ProductCart ({ id }) {
 
   const handleAdd = qty => {
     addToCart(product, qty)
+    toast({
+      title: 'Product added to cart',
+      status: 'success',
+      position: 'top',
+      duration: 3000,
+      isClosable: true
+    })
   }
 
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
@@ -66,13 +75,9 @@ export default function ProductCart ({ id }) {
 
           <Stack>
             <CardBody padding='0px'>
-              <Text py='2'>{product.brand.toUpperCase()}</Text>
+              <Text py='2'>{product.brand && product.brand.toUpperCase()}</Text>
               <Heading size='md'>{product.name}</Heading>
-              <Box
-                display='flex'
-                mt='2'
-                alignItems='center'
-              >
+              <Box display='flex' mt='2' alignItems='center'>
                 <Box>
                   {Array(5)
                     .fill('')
@@ -89,17 +94,10 @@ export default function ProductCart ({ id }) {
                   ) : null}
                 </Box>
               </Box>
-              <Text
-                color='#1A1A1A'
-                fontSize='2xl'
-                fontWeight='bold'
-              >
+              <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>
                 ${product.price}
               </Text>
-              <Flex
-                marginTop='20px'
-                justifyContent='space-between'
-              >
+              <Flex marginTop='20px' justifyContent='space-between'>
                 <ProductCounter
                   decreaseCounter={decreaseCounter}
                   increaseCounter={increaseCounter}
@@ -120,11 +118,7 @@ export default function ProductCart ({ id }) {
             </CardBody>
 
             <CardFooter padding='0px'>
-              <Tabs
-                isFitted
-                variant='unstyled'
-                defaultIndex={0}
-              >
+              <Tabs isFitted variant='unstyled' defaultIndex={0}>
                 <TabList>
                   <Tab>Details</Tab>
                   <Tab>Reviews</Tab>

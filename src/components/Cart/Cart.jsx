@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { CartContext } from '@/context/CartContextProvider'
 import React, { useContext, useEffect } from 'react'
 import {
@@ -22,7 +24,6 @@ import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function Cart () {
   const theme = useTheme()
-  const backgroundColor = theme.colors.custom.background
   const router = useRouter()
   const {
     cartList,

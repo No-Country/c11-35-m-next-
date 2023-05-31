@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import { CartContext } from '@/context/CartContextProvider'
+import { UserContext } from '@/context/UserContextProvider' 
 import React, { useContext, useEffect } from 'react'
 import {
   Box,
@@ -21,6 +22,7 @@ import { useRouter } from 'next/router'
 import { formatPrice } from './PriceTag'
 
 import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
+import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 
 export default function Cart () {
   const theme = useTheme()
@@ -33,6 +35,7 @@ export default function Cart () {
     cartTotalPrice,
     removeList
   } = useContext(CartContext)
+  const { currentUser } = useContext(UserContext);
 
   const handleClick = () => {
     toggleCart()
@@ -105,9 +108,15 @@ export default function Cart () {
                 <Text fontSize='xl' fontWeight='extrabold'>
                   Subtotal: {formatPrice({ totalPrice })}
                 </Text>
-                <Button onClick={() => router.push('/checkout')} variant='solid' backgroundColor='#C42F6D' color='#FAFAFA' width='100%'>
-                  Checkout
-                </Button>
+                {currentUser ? 
+                  <Button onClick={() => router.push('/checkout')} variant='solid' backgroundColor='#C42F6D' color='#FAFAFA' width='100%'>
+                    Checkout
+                  </Button>:
+                  <>
+                  <Text>Register before buying</Text>
+                  <UserLoginLogout/>
+                  </>
+                }
                 <Button href='' onClick={removeList} variant='ghost'>
                   Delete Cart
                   <DeleteIcon m='5px' fontSize='xl' />

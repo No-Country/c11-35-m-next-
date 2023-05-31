@@ -28,7 +28,6 @@ export default function Home () {
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
   const dataHome = useSelector(state => state.dataHome.dataHome)
-  const itemType = router.query.type
   const [filteredData, setFilteredData] = useState(data || [])
   const [currentPage, setCurrentPage] = useState(1)
   const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
@@ -41,6 +40,7 @@ export default function Home () {
   const [selectedBrand, setSelectedBrand] = useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const brandOptions = [...new Set(currentItems.map(item => item.brand))]
+  const itemType = router.query.type
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen)
@@ -104,7 +104,7 @@ export default function Home () {
   useEffect(() => {
     if (itemType && data) {
       const filteredItems = data.filter(
-        item => item.product_type === itemType.toLowerCase()
+        item => item.productType === itemType.toLowerCase()
       )
       setFilteredData(filteredItems)
       setCurrentPage(1) // Restablecer la página actual al cambiar el tipo de producto o los filtros
@@ -260,7 +260,7 @@ export default function Home () {
                     title={item.name}
                     description={item.description}
                     price={item.price}
-                    image={item.image_link}
+                    image={item.imageLink}
                     brand={item.brand}
                     colors={item.product_colors}
                   />

@@ -11,7 +11,8 @@ import {
   ModalContent,
   ModalCloseButton,
   useDisclosure,
-  useToast
+  useToast,
+  Icon
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { UserContext } from '@/context/UserContextProvider'
@@ -26,6 +27,7 @@ import {
   logOut
 } from '@/services/firebase-auth'
 
+import { FiUser } from 'react-icons/fi'
 export default function UserLoginLogout () {
   const toast = useToast()
   const router = useRouter()
@@ -101,7 +103,12 @@ export default function UserLoginLogout () {
     <>
       <Flex alignItems='center'>
         {!currentUser ? (
-          <Button variant='solid' onClick={handleClick} colorScheme='gray'>
+          <Button
+            leftIcon={<Icon as={FiUser} />}
+            variant='solid'
+            onClick={handleClick}
+            colorScheme='gray'
+          >
             Login
           </Button>
         ) : (

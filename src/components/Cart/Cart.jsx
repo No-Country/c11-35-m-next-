@@ -11,7 +11,8 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerFooter,
-  DrawerBody
+  DrawerBody,
+  useTheme
 } from '@chakra-ui/react'
 import { CartItem } from './CartItem'
 import { useRouter } from 'next/router'
@@ -20,6 +21,8 @@ import { formatPrice } from './PriceTag'
 import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function Cart () {
+  const theme = useTheme()
+  const backgroundColor = theme.colors.custom.background
   const router = useRouter()
   const {
     cartList,

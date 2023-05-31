@@ -16,10 +16,9 @@ import {
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { BsCart2 } from 'react-icons/bs'
+import { BiShoppingBag } from 'react-icons/bi'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
-
 import { CartContext } from '@/context/CartContextProvider'
 import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 import { UserContext } from '@/context/UserContextProvider'
@@ -33,6 +32,7 @@ export default function Navbar () {
   const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -235,17 +235,9 @@ export default function Navbar () {
                     </Button>
                   </Flex>
                 ) : (
-                  <Button
-                    style={{
-                      background: 'none',
-                      padding: 0,
-                      margin: 5
-                    }}
-                    fontFamily='Playfair'
-                    colorScheme='gray'
-                  >
-                    Admin Dashboard
-                  </Button>
+                  <NextLink href='/admin-dashboard'>
+                    <Text color={textColor}>Admin</Text>
+                  </NextLink>
                 )}
               </Flex>
               <UserLoginLogout />
@@ -287,22 +279,26 @@ export default function Navbar () {
               <IconButton
                 color={textColor}
                 size='lg'
-                icon={<BsCart2 />}
+                icon={<BiShoppingBag />}
                 variant='ghost'
                 onClick={handleCartClick}
                 right={0}
                 ref={btnRef}
+                fontSize='30px'
               />
-              <Badge
-                position='absolute'
-                right={5}
-                top={6}
-                fontSize='10px'
-                colorScheme='green'
-                borderRadius='50%'
-              >
-                {qty}
-              </Badge>
+              {qty > 0 && (
+                <Badge
+                  position='absolute'
+                  right={5}
+                  top={6}
+                  fontSize='10px'
+                  backgroundColor={backgroundColor}
+                  color={theme.colors.custom.primary}
+                  borderRadius='50%'
+                >
+                  {qty}
+                </Badge>
+              )}
             </Flex>
           </Box>
         </>
@@ -316,77 +312,85 @@ export default function Navbar () {
           color='white'
           justifyContent='space-between'
         >
-          <Flex gap={5}> {/* TODO renderizado opcional por privilegio admin o user */}
+          <Flex gap={5}>
+            {' '}
+            {/* TODO renderizado opcional por privilegio admin o user */}
             <NextLink href='/'>
               <Text color={textColor}>Home</Text>
             </NextLink>
-            <Menu>
-              <MenuButton as={Flex} alignItems='center' color={textColor}>
-                Product type
-              </MenuButton>
-              <MenuList>
-                <MenuItem
-                  onClick={() => handleClick('Blush')}
-                  color='blackAlpha.700'
-                >
-                  Blush
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Bronzer')}
-                  color='blackAlpha.700'
-                >
-                  Bronzer
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyebrow')}
-                  color='blackAlpha.700'
-                >
-                  Eyebrow
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyeliner')}
-                  color='blackAlpha.700'
-                >
-                  Eyeliner
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Eyeshadow')}
-                  color='blackAlpha.700'
-                >
-                  Eyeshadow
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Foundation')}
-                  color='blackAlpha.700'
-                >
-                  Foundation
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Lip liner')}
-                  color='blackAlpha.700'
-                >
-                  Lip liner
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Lipstick')}
-                  color='blackAlpha.700'
-                >
-                  Lipstick
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Mascara')}
-                  color='blackAlpha.700'
-                >
-                  Mascara
-                </MenuItem>
-                <MenuItem
-                  onClick={() => handleClick('Nail polish')}
-                  color='blackAlpha.700'
-                >
-                  Nail polish
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            {privilege === 'customer' ? (
+              <Menu>
+                <MenuButton as={Flex} alignItems='center' color={textColor}>
+                  Product type
+                </MenuButton>
+                <MenuList>
+                  <MenuItem
+                    onClick={() => handleClick('Blush')}
+                    color='blackAlpha.700'
+                  >
+                    Blush
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Bronzer')}
+                    color='blackAlpha.700'
+                  >
+                    Bronzer
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyebrow')}
+                    color='blackAlpha.700'
+                  >
+                    Eyebrow
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyeliner')}
+                    color='blackAlpha.700'
+                  >
+                    Eyeliner
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Eyeshadow')}
+                    color='blackAlpha.700'
+                  >
+                    Eyeshadow
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Foundation')}
+                    color='blackAlpha.700'
+                  >
+                    Foundation
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Lip liner')}
+                    color='blackAlpha.700'
+                  >
+                    Lip liner
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Lipstick')}
+                    color='blackAlpha.700'
+                  >
+                    Lipstick
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Mascara')}
+                    color='blackAlpha.700'
+                  >
+                    Mascara
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleClick('Nail polish')}
+                    color='blackAlpha.700'
+                  >
+                    Nail polish
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <NextLink href='/admin-dashboard'>
+                <Text color={textColor}>Admin</Text>
+              </NextLink>
+            )}
           </Flex>
           <Box
             display='flex'
@@ -400,22 +404,27 @@ export default function Navbar () {
           <Flex alignItems='center'>
             <IconButton
               color={textColor}
-              size='lg'
-              icon={<BsCart2 />}
+              icon={<BiShoppingBag />}
               variant='ghost'
               onClick={handleCartClick}
               right={0}
+              fontSize='30px'
             />
-            <Badge
-              position='absolute'
-              right={5}
-              top={6}
-              fontSize='10px'
-              colorScheme='green'
-              borderRadius='50%'
-            >
-              {qty}
-            </Badge>
+            {qty > 0 && (
+              <Badge
+                position='absolute'
+                w={4}
+                h={4}
+                right={4}
+                top={6}
+                fontSize='10px'
+                backgroundColor={backgroundColor}
+                color={theme.colors.custom.primary}
+                borderRadius='50%'
+              >
+                {qty}
+              </Badge>
+            )}
           </Flex>
         </Flex>
       )}

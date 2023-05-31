@@ -10,59 +10,78 @@ import {
   Text,
   Image,
   IconButton,
-  Flex
+  Flex,
+  useTheme,
+  useToast
 } from '@chakra-ui/react'
 import { useContext } from 'react'
-// import { useContext } from 'react'
-import { BsCart2 } from 'react-icons/bs'
-
+import { BiShoppingBag } from 'react-icons/bi'
+import ProductColors from '../ProductColors/ProductColors'
 export default function ProductCard ({
   id,
   title,
   description,
   price,
   image,
-  onClick
+  onClick,
+  colors,
+  brand
 }) {
   const imagePath = '/images/carousel1.jpg'
-  const item = { id, title, description, price, image }
+  const item = { id, title, description, price, image, colors, brand }
+  const theme = useTheme()
+  const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
+  const toast = useToast()
   const { addToCart } = useContext(CartContext)
   const handleAdd = () => {
     addToCart(item, 1)
-
-    // addToCart(item, 1) TODO: hay que identificar el producto al que se le hizo click para agregarlo a la bolsa
+    toast({
+      title: 'Product added to cart',
+      status: 'success',
+      position: 'top',
+      duration: 3000,
+      isClosable: true
+    })
   }
   return (
-    <Card>
+    <Card borderRadius='10' size='sm'>
       <Flex direction='column' align='center'>
         <Image
           src={image || imagePath}
           alt='Green double couch with wooden legs'
-          borderRadius='lg'
+          maxWidth='150px'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'
           }}
         />
         <CardBody
+          minWidth='90%'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'
           }}
         >
           <Stack mt='6' spacing='3'>
+            <Text py='2'>{brand && brand.toUpperCase()}</Text>
             <Heading size='md'>{title}</Heading>
-            <Text color='#1A1A1A' fontSize='2xl'>
-              ${price}
-            </Text>
+            {colors && colors.length > 0 ? (
+              <>
+                <ProductColors colors={colors} />
+              </>
+            ) : null}
           </Stack>
         </CardBody>
-        <CardFooter>
+        <CardFooter gap='20'>
+          <Text color='#1A1A1A' fontSize='2xl' fontWeight='extrabold'>
+            ${price}
+          </Text>
           <ButtonGroup spacing='2' ml='auto'>
             <IconButton
-              icon={<BsCart2 />}
-              bg='#C43F6D'
-              textColor='#FAFAFA'
+              icon={<BiShoppingBag />}
+              backgroundColor={backgroundColor}
+              color={primaryColor}
               onClick={() => handleAdd()}
             />
           </ButtonGroup>

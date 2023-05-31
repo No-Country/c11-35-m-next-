@@ -115,7 +115,6 @@ export default function Home () {
   }, [data, itemType, minPrice, maxPrice, selectedBrand])
 
   const sortedItems = sortItems(currentItems, orderBy)
-
   const handlePageChange = page => {
     setCurrentPage(page)
   }
@@ -249,7 +248,7 @@ export default function Home () {
             <SimpleGrid
               columns={cardColumns}
               spacing={10}
-              margin='50px'
+              margin='30px'
             >
               {sortedItems
                 .slice(indexOfFirstItem, indexOfLastItem)
@@ -262,6 +261,8 @@ export default function Home () {
                     description={item.description}
                     price={item.price}
                     image={item.imageLink}
+                    brand={item.brand}
+                    colors={item.product_colors}
                   />
                 ))}
             </SimpleGrid>

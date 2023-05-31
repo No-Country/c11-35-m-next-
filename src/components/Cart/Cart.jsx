@@ -68,7 +68,13 @@ export default function Cart () {
     <Drawer isOpen={toggleCartStatus} placement='right' zIndex={11}>
       <DrawerOverlay />
       <DrawerContent>
-        <Flex width='100%' margin='0 auto' align='center' justify='space-between' p='30px'>
+        <Flex
+          width='100%'
+          margin='0 auto'
+          align='center'
+          justify='space-between'
+          p='30px'
+        >
           <Text fontSize='xx-large'>Your Cart</Text>
           <CloseIcon onClick={handleClick} />
         </Flex>
@@ -79,11 +85,17 @@ export default function Cart () {
             px={{ base: '4', md: '8', lg: '12' }}
             py={{ base: '6', md: '8', lg: '12' }}
           >
-            <Stack direction={{ base: 'column', lg: 'row' }} align={{ lg: 'flex-start' }} spacing={{ base: '8', md: '16' }}>
+            <Stack
+              direction={{ base: 'column', lg: 'row' }}
+              align={{ lg: 'flex-start' }}
+              spacing={{ base: '8', md: '16' }}
+            >
               <Stack spacing={{ base: '8', md: '10' }} flex='2'>
                 <Stack spacing='6'>
                   {cartList.length > 0 ? (
-                    cartList.map(item => <CartItem key={item.id} {...item} />)
+                    cartList.map(item => (
+                      <CartItem key={item.id} {...item} counterEnabled />
+                    ))
                   ) : (
                     <>
                       <Text m='50px auto' fontWeight='semibold' height='200px'>
@@ -108,22 +120,35 @@ export default function Cart () {
                 <Text fontSize='xl' fontWeight='extrabold'>
                   Subtotal: {formatPrice({ totalPrice })}
                 </Text>
-                {currentUser ? 
-                  <Button onClick={() => router.push('/checkout')} variant='solid' backgroundColor='#C42F6D' color='#FAFAFA' width='100%'>
+                {currentUser ? (
+                  <Button
+                    onClick={() => router.push('/checkout')}
+                    variant='solid'
+                    backgroundColor='#C42F6D'
+                    color='#FAFAFA'
+                    width='100%'
+                  >
                     Checkout
-                  </Button>:
+                  </Button>
+                ) : (
                   <>
-                  <Text>Register before buying</Text>
-                  <UserLoginLogout/>
+                    <Text>Register before buying</Text>
+                    <UserLoginLogout />
                   </>
-                }
+                )}
                 <Button href='' onClick={removeList} variant='ghost'>
                   Delete Cart
                   <DeleteIcon m='5px' fontSize='xl' />
                 </Button>
               </>
             ) : (
-              <Button onClick={handleClick} variant='solid' backgroundColor='#C42F6D' color='#FAFAFA' width='100%'>
+              <Button
+                onClick={handleClick}
+                variant='solid'
+                backgroundColor='#C42F6D'
+                color='#FAFAFA'
+                width='100%'
+              >
                 Continue shopping
               </Button>
             )}

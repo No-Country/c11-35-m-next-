@@ -44,15 +44,16 @@ function UserForm ({ onSubmit }) {
       dni,
       totalPrice
     }
-    if ((
-      !postal ||
-      !province ||
-      !city ||
-      !street ||
-      !number ||
-      !department ||
-      !dni
-    ) && !address) {
+    if (
+      (!postal ||
+        !province ||
+        !city ||
+        !street ||
+        !number ||
+        !department ||
+        !dni) &&
+      !address
+    ) {
       toast({
         title: 'Please fill out all information',
         status: 'error',
@@ -68,12 +69,12 @@ function UserForm ({ onSubmit }) {
 
   const callUser = async currentUser => {
     const user = await fetchUser(currentUser)
-    setAddress(user.address)
+    setAddress(user && user.address)
   }
   useEffect(() => {
+    console.log('rendering')
     callUser(currentUser)
-  }, [currentUser])
-
+  }, [])
   return (
     <>
       <Heading
@@ -109,7 +110,7 @@ function UserForm ({ onSubmit }) {
             disabled='true'
           />
         </FormControl>
-        {address ? (
+        {/*  {address ? (
           <Flex
             p='10px'
             margin='0 auto'
@@ -142,87 +143,87 @@ function UserForm ({ onSubmit }) {
               Edit or Add
             </Button>
           </Flex>
-        ) : (
-          <>
-            <Heading
-              padding='20px'
-              w='100%'
-              textAlign='center'
-              fontWeight='normal'
-              mb='2%'
-              fontSize='2xl'
-            >
-              Shipping Address
-            </Heading>
+        ) : ( */}
+        <>
+          <Heading
+            padding='20px'
+            w='100%'
+            textAlign='center'
+            fontWeight='normal'
+            mb='2%'
+            fontSize='2xl'
+          >
+            Shipping Address
+          </Heading>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='postal' fontWeight='normal'>
-                Postal Code
-              </FormLabel>
-              <Input
-                id='postal'
-                type='number'
-                value={postal}
-                onChange={event => setPostal(event.target.value)}
-              />
-            </FormControl>
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='postal' fontWeight='normal'>
+              Postal Code
+            </FormLabel>
+            <Input
+              id='postal'
+              type='number'
+              value={postal}
+              onChange={event => setPostal(event.target.value)}
+            />
+          </FormControl>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='province' fontWeight='normal'>
-                Province
-              </FormLabel>
-              <Input
-                id='province'
-                value={province}
-                onChange={event => setProvince(event.target.value)}
-              />
-            </FormControl>
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='province' fontWeight='normal'>
+              Province
+            </FormLabel>
+            <Input
+              id='province'
+              value={province}
+              onChange={event => setProvince(event.target.value)}
+            />
+          </FormControl>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='city' fontWeight='normal'>
-                City
-              </FormLabel>
-              <Input
-                id='city'
-                value={city}
-                onChange={event => setCity(event.target.value)}
-              />
-            </FormControl>
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='city' fontWeight='normal'>
+              City
+            </FormLabel>
+            <Input
+              id='city'
+              value={city}
+              onChange={event => setCity(event.target.value)}
+            />
+          </FormControl>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='street' fontWeight='normal'>
-                Street
-              </FormLabel>
-              <Input
-                id='street'
-                value={street}
-                onChange={event => setStreet(event.target.value)}
-              />
-            </FormControl>
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='street' fontWeight='normal'>
+              Street
+            </FormLabel>
+            <Input
+              id='street'
+              value={street}
+              onChange={event => setStreet(event.target.value)}
+            />
+          </FormControl>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='number' fontWeight='normal'>
-                Number
-              </FormLabel>
-              <Input
-                id='number'
-                value={number}
-                onChange={event => setNumber(event.target.value)}
-              />
-            </FormControl>
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='number' fontWeight='normal'>
+              Number
+            </FormLabel>
+            <Input
+              id='number'
+              value={number}
+              onChange={event => setNumber(event.target.value)}
+            />
+          </FormControl>
 
-            <FormControl padding='0 20px' mt='2%'>
-              <FormLabel htmlFor='department' fontWeight='normal'>
-                Department
-              </FormLabel>
-              <Input
-                id='department'
-                value={department}
-                onChange={event => setDepartment(event.target.value)}
-              />
-            </FormControl>
-          </>
-        )}
+          <FormControl padding='0 20px' mt='2%'>
+            <FormLabel htmlFor='department' fontWeight='normal'>
+              Department
+            </FormLabel>
+            <Input
+              id='department'
+              value={department}
+              onChange={event => setDepartment(event.target.value)}
+            />
+          </FormControl>
+        </>
+        {/*  )} */}
 
         <Heading
           padding='20px'

@@ -21,7 +21,7 @@ import {
   useToast
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
-import ProductColors from '../ProductColors/ProductColors'
+// import ProductColors from '../ProductColors/ProductColors'
 import ProductCounter from '../ProductCounter/ProductCounter'
 import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
@@ -44,8 +44,7 @@ export default function ProductDetails ({ id }) {
     }
   }, [dispatch])
 
-  const product = data && data.find(product => product.id === parseInt(id))
-
+  const product = data && data.find(product => product.id === id)
   const handleAdd = qty => {
     addToCart(product, qty)
     toast({
@@ -72,7 +71,7 @@ export default function ProductDetails ({ id }) {
           border='none'
         >
           <Image
-            src={product.api_featured_image}
+            src={product.imageLink}
             alt='product image'
             borderRadius='lg'
             boxSize='lg'
@@ -96,11 +95,11 @@ export default function ProductDetails ({ id }) {
                         color={i < product.rating ? 'teal.500' : 'gray.300'}
                       />
                     ))}
-                  {product.product_colors.length > 0 ? (
+                  {/* {product.product_colors.length > 0 ? (
                     <>
                       <ProductColors colors={product.product_colors} />
                     </>
-                  ) : null}
+                  ) : null} */}
                 </Box>
               </Box>
               <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>

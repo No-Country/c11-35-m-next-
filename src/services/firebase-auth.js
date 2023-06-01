@@ -79,11 +79,17 @@ export const addUserAddress = async (id, data) => {
   await setDoc(doc(db, 'users', id), user, { merge: true })
 }
 
-export const fetchUser = async currentUser => {
+export const fetchUser = async (currentUser) => {
   const itemDB = doc(db, 'users', currentUser && currentUser.uid)
   try {
     const userInDb = await getDoc(itemDB)
-    return userInDb.data()
+    const userData = userInDb.data()
+    if (userData) {
+      const orders = await Promise.all(userData.orders.map((orderId) => getDoc(doc(db, 'orders', orderId))))
+      const orderData = orders.map((order) => order.data())
+      userData.orders = orderData
+    }
+    return userData
   } catch (error) {
     console.log(error)
   }

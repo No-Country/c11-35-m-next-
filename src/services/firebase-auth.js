@@ -6,7 +6,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup
 } from 'firebase/auth'
-import { doc, setDoc, getDoc } from 'firebase/firestore'
+import {
+  doc, setDoc, getDoc, addDoc, updateDoc, arrayUnion, collection
+} from 'firebase/firestore'
 import { app, db } from './db'
 
 const provider = new GoogleAuthProvider()
@@ -84,5 +86,28 @@ export const fetchUser = async currentUser => {
     return userInDb.data()
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const createOrder = async (userId, orderData) => {
+  try {
+    const orderRef = await addDoc(collection(db, 'orders'), {
+      userId,
+      ...orderData
+    })
+
+    const orderId = orderRef.id
+
+    // Actualiza el documento del usuario para agregar la orden
+    await updateDoc(doc(db, 'users', userId), {
+      orders: arrayUnion(orderId)
+    })
+
+    console.log('Orden creada con éxito')
+
+    return orderId
+  } catch (error) {
+    console.error('Error al crear la orden:', error)
+    throw error
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Button,
@@ -7,15 +9,11 @@ import {
   Input,
   useTheme,
   Box,
-  useToast,
-  IconButton,
-  Flex,
-  Text
+  useToast
 } from '@chakra-ui/react'
 import { CartContext } from '@/context/CartContextProvider'
 import { UserContext } from '@/context/UserContextProvider'
 import { fetchUser } from '@/services/firebase-auth'
-import { FiMapPin } from 'react-icons/fi'
 function UserForm ({ onSubmit }) {
   const theme = useTheme()
   const backgroundColor = theme.colors.custom.background

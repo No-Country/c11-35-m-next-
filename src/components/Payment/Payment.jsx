@@ -1,10 +1,14 @@
 import { FormControl, FormLabel, Input, Button, Center, Box } from '@chakra-ui/react'
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import Swal from 'sweetalert2'
+import { createOrder } from '@/services/firebase-auth'
+import { UserContext } from '@/context/UserContextProvider'
 
 export default function PaymentForm ({ formData }) {
+  const { currentUser } = useContext(UserContext)
+  const userId = currentUser.uid
   const stripe = useStripe()
   const router = useRouter()
   const elements = useElements()
@@ -55,6 +59,7 @@ export default function PaymentForm ({ formData }) {
           ).then(() => {
             // Redireccionar al Home
             router.push('/')
+            createOrder(userId, formData)
           })
         } else {
           Swal.fire(

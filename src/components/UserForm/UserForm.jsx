@@ -96,7 +96,7 @@ function UserForm ({ onSubmit }) {
             id='first-name'
             placeholder='First name'
             value={currentUser && currentUser.displayName}
-            disabled='true'
+            disabled
           />
         </FormControl>
         <FormControl padding='0 20px' mt='2%' mb='20px'>
@@ -107,7 +107,7 @@ function UserForm ({ onSubmit }) {
             id='email'
             type='email'
             value={currentUser && currentUser.email}
-            disabled='true'
+            disabled
           />
         </FormControl>
         {/*  {address ? (

@@ -29,7 +29,7 @@ export default function Checkout () {
           <UserForm onSubmit={data => handleFormSubmit(data)} />
         </>
       ) : (
-        <ModalPayment formData={formData} confirmation={handleConfirmation} />
+        <ModalPayment formData={formData[0]} confirmation={handleConfirmation} />
       )}
     </>
   )

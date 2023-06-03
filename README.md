@@ -50,7 +50,7 @@ El proyecto se ha construido utilizando las siguientes tecnologías y herramient
 - ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=for-the-badge&logo=vercel) Despliegue
 - ![Chakra UI](https://img.shields.io/badge/-Chakra%20UI-319795?style=for-the-badge&logo=chakra-ui) Estilos
 - ![Redux Toolkit](https://img.shields.io/badge/-Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux)
-- ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=for-the-badge&logo=firebase) Atenticación y Base de Datos
+- ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=for-the-badge&logo=firebase) Autenticación y Base de Datos
 - ![Figma](https://img.shields.io/badge/-Figma-F24E1E?style=for-the-badge&logo=figma) Diseño y Prototipado
 - ![Google Slides](https://img.shields.io/badge/-Google%20Slides-4285F4?style=for-the-badge&logo=google-slides) Pruebas de Usuarios
 - ![Optimal Workshop](https://img.shields.io/badge/-Optimal%20Workshop-000000?style=for-the-badge&logo=optimal-workshop) Card Sorting

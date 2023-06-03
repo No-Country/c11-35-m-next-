@@ -72,7 +72,7 @@ export default function PaymentForm ({ formData, confirmation }) {
           ).then(() => {
             // Redireccionar al Home
             router.push('/')
-            createOrder(userId, formData)
+            createOrder(userId, formData[0])
             removeList()
             toggleCart()
           })

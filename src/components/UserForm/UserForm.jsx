@@ -51,7 +51,7 @@ function UserForm ({ onSubmit }) {
     if (address && Object.keys(address).length > 0) {
       formData = address
     } else {
-      formData = [{
+      formData = {
         postal,
         province,
         city,
@@ -60,7 +60,7 @@ function UserForm ({ onSubmit }) {
         department,
         dni,
         totalPrice
-      }]
+      }
     }
    
     if (
@@ -82,7 +82,7 @@ function UserForm ({ onSubmit }) {
       })
     } else {
       onSubmit(formData)
-      console.log(formData)
+      
     }
   }
 

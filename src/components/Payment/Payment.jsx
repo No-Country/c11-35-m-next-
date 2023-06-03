@@ -27,7 +27,7 @@ export default function PaymentForm ({ formData, confirmation }) {
 
   const createPayment = async () => {
     const requestBody = {
-      amount: formData[0].totalPrice * 100, // poner el payment correcto
+      amount: formData.totalPrice * 100, // poner el payment correcto
       description: 'pay of "producto seleccionado"' // colocar nombre del producto
     }
     console.log(formData)

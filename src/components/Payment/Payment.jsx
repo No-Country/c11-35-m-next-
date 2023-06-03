@@ -14,7 +14,7 @@ import { createOrder } from '@/services/firebase-auth'
 import { UserContext } from '@/context/UserContextProvider'
 import { CartContext } from '@/context/CartContextProvider'
 
-export default function PaymentForm({ formData, confirmation }) {
+export default function PaymentForm ({ formData, confirmation }) {
   const { currentUser } = useContext(UserContext)
   const { removeList, toggleCart } = useContext(CartContext)
   const userId = currentUser.uid

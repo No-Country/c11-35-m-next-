@@ -18,11 +18,11 @@ const storeUser = async (authCredentials, id, name) => {
   const user = {
     displayName: name,
     email: authCredentials.email,
-    orders: [],
-    role: 'customer',
-    address: []
+    // orders: [],
+    // address: [],
+    role: 'customer'
   }
-  await setDoc(doc(db, 'users', id), user)
+  await setDoc(doc(db, 'users', id), user, { merge: true })
 }
 
 export const signWithGoogle = async () => {
@@ -71,8 +71,9 @@ export const logOut = () => {
 }
 
 export const addUserAddress = async (id, data) => {
+  console.log(data)
   const updatedAddress = []
-  updatedAddress.push(data)
+  updatedAddress.push(data[0])
   const user = {
     address: updatedAddress
   }

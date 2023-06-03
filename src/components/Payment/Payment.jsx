@@ -1,13 +1,22 @@
-import { FormControl, FormLabel, Input, Button, Center, Box } from '@chakra-ui/react'
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Center,
+  Box
+} from '@chakra-ui/react'
 import React, { useRef, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js'
 import Swal from 'sweetalert2'
 import { createOrder } from '@/services/firebase-auth'
 import { UserContext } from '@/context/UserContextProvider'
+import { CartContext } from '@/context/CartContextProvider'
 
-export default function PaymentForm ({ formData }) {
+export default function PaymentForm({ formData, confirmation }) {
   const { currentUser } = useContext(UserContext)
+  const { removeList, toggleCart } = useContext(CartContext)
   const userId = currentUser.uid
   const stripe = useStripe()
   const router = useRouter()
@@ -18,10 +27,10 @@ export default function PaymentForm ({ formData }) {
 
   const createPayment = async () => {
     const requestBody = {
-      amount: formData.totalPrice * 100, // poner el payment correcto
+      amount: formData[0].totalPrice * 100, // poner el payment correcto
       description: 'pay of "producto seleccionado"' // colocar nombre del producto
     }
-
+    console.log(formData)
     try {
       const res = await fetch('/api/intent', {
         method: 'POST',
@@ -39,19 +48,23 @@ export default function PaymentForm ({ formData }) {
     }
   }
 
-  const confirmPayment = async (paymentIntentClientSecret) => {
+  const confirmPayment = async paymentIntentClientSecret => {
     if (stripe) {
       try {
-        const results = await stripe?.confirmCardPayment(paymentIntentClientSecret, {
-          payment_method: {
-            card: elements?.getElement(CardElement),
-            billing_details: {
-              name: `${firstNameRef.current.value} ${lastNameRef.current.value}`
+        const results = await stripe?.confirmCardPayment(
+          paymentIntentClientSecret,
+          {
+            payment_method: {
+              card: elements?.getElement(CardElement),
+              billing_details: {
+                name: `${firstNameRef.current.value} ${lastNameRef.current.value}`
+              }
             }
           }
-        })
+        )
         console.log(results)
         if (results.paymentIntent.status === 'succeeded') {
+          confirmation()
           Swal.fire(
             'Good job!',
             'your purchase was successful!!',
@@ -60,6 +73,8 @@ export default function PaymentForm ({ formData }) {
             // Redireccionar al Home
             router.push('/')
             createOrder(userId, formData)
+            removeList()
+            toggleCart()
           })
         } else {
           Swal.fire(
@@ -94,7 +109,6 @@ export default function PaymentForm ({ formData }) {
           <CardElement options={{ style: { base: { fontSize: '15px' } } }} />
         </div>
         <Center>
-
           <Button colorScheme='blue' mt={4} onClick={createPayment}>
             Buy
           </Button>

@@ -105,11 +105,12 @@ export default function UserLoginLogout () {
         {!currentUser ? (
           <Button
             leftIcon={<Icon as={FiUser} />}
-            variant='solid'
+            variant='ghost'
             onClick={handleClick}
-            colorScheme='gray'
+            padding={0}
+            m='5px'
           >
-            Login
+            My Account
           </Button>
         ) : (
           <Menu>

@@ -12,10 +12,18 @@ import {
   useColorModeValue,
   Center
 } from '@chakra-ui/react'
+import { useTheme } from '@emotion/react'
 import { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 
-export default function LoginCard ({ handleLogin, handleClickSign, handleGoogle }) {
+export default function LoginCard ({
+  handleLogin,
+  handleClickSign,
+  handleGoogle
+}) {
+  const theme = useTheme()
+
+  const backgroundColor = theme.colors.custom.background
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -30,14 +38,14 @@ export default function LoginCard ({ handleLogin, handleClickSign, handleGoogle 
 
   return (
     <Flex
-      minH='100vh'
+      minH='85vh'
       align='center'
       justify='center'
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Stack spacing={8} mx='auto' maxW='lg' py={12} px={6}>
+      <Stack spacing={2} mx='auto' maxW='lg' py={12} px={6}>
         <Stack align='center'>
-          <Heading fontSize='4xl'>Sign in to your account</Heading>
+          <Heading fontSize='2xl'>Sign in to your account</Heading>
         </Stack>
         <Box
           rounded='lg'
@@ -45,7 +53,7 @@ export default function LoginCard ({ handleLogin, handleClickSign, handleGoogle 
           boxShadow='lg'
           p={8}
         >
-          <Stack spacing={4}>
+          <Stack spacing={2}>
             <FormControl id='email' isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
@@ -67,7 +75,7 @@ export default function LoginCard ({ handleLogin, handleClickSign, handleGoogle 
             <Stack spacing={10}>
               <Button
                 onClick={handleClick}
-                bg='blue.400'
+                bg={backgroundColor}
                 color='white'
                 _hover={{
                   bg: 'blue.500'

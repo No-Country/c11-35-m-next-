@@ -28,6 +28,7 @@ import {
 } from '@/services/firebase-auth'
 
 import { FiUser } from 'react-icons/fi'
+
 export default function UserLoginLogout () {
   const toast = useToast()
   const router = useRouter()
@@ -98,7 +99,7 @@ export default function UserLoginLogout () {
     logOut()
     router.push('/')
   }
-
+  console.log(currentUser)
   return (
     <>
       <Flex alignItems='center'>
@@ -115,13 +116,25 @@ export default function UserLoginLogout () {
         ) : (
           <Menu>
             <MenuButton as={Flex} alignItems='center'>
-              <Image
-                src={currentUser.photoURL}
-                alt='user picture'
-                boxSize={10}
-                borderRadius='full'
-                mr={2}
-              />
+              {currentUser.photoURL ? (
+                <Image
+                  src={currentUser.photoURL}
+                  alt='user picture'
+                  boxSize={10}
+                  borderRadius='full'
+                  mr={2}
+                />
+              ) : (
+                <Button
+                  leftIcon={<Icon as={FiUser} />}
+                  variant='ghost'
+                  onClick={handleClick}
+                  padding={0}
+                  m='5px'
+                >
+                  My Account
+                </Button>
+              )}
             </MenuButton>
             <MenuList>
               <MenuItem color='blackAlpha.700'>

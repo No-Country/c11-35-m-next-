@@ -11,6 +11,7 @@ export default function Orders () {
 
   const callUser = async (currentUser) => {
     const user = await fetchUser(currentUser)
+    console.log(user)
     const userOrders = user.orders || []
     setOrders(userOrders)
   }
@@ -25,7 +26,7 @@ export default function Orders () {
     <>
       <Flex align='center'>
         <Link href='/profile'>
-          <Button as='a' leftIcon={<FiArrowLeft />} m={2} variant='unstyled' />
+          <Button leftIcon={<FiArrowLeft />} m={2} variant='unstyled' />
         </Link>
         <Heading as='h2' size='lg' mb={4}>
           Orders

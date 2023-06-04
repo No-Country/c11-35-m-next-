@@ -93,7 +93,9 @@ export const fetchUser = async currentUser => {
     const userData = userInDb.data()
     if (userData) {
       const orders = await Promise.all(
-        userData.orders.map(orderId => getDoc(doc(db, 'orders', orderId)))
+        userData.orders
+          ? userData.orders.map(orderId => getDoc(doc(db, 'orders', orderId)))
+          : []
       )
       const orderData = orders.map(order => order.data())
       userData.orders = orderData

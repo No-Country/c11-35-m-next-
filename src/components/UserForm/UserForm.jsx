@@ -34,7 +34,7 @@ function UserForm ({ onSubmit }) {
   const totalPrice = cartTotalPrice(cartList)
   const [address, setAddress] = useState('')
   const [edit, setEdit] = useState(false)
-
+  console.log(totalPrice)
   const callUser = async currentUser => {
     const user = await fetchUser(currentUser)
     setAddress(user && user.address)
@@ -43,6 +43,7 @@ function UserForm ({ onSubmit }) {
     callUser(currentUser)
   }, [])
 
+
    let formData
   const handleSubmit = event => {
     event.preventDefault()
@@ -50,6 +51,7 @@ function UserForm ({ onSubmit }) {
 
     if (address && Object.keys(address).length > 0) {
       formData = address
+      formData.totalPrice = totalPrice
     } else {
       formData = {
         postal,
@@ -137,30 +139,30 @@ function UserForm ({ onSubmit }) {
               backgroundColor='white'
               icon={<FiMapPin />}
             />
-            {address.map(item => (
-              <Flex
-                key={item.dni}
-                flexDirection='column'
-                alignItems='left'
-                width='100%'
-              >
-                <Text>
-                  <strong>Street:</strong> {item.street}
-                </Text>
-                <Text>
-                  <strong>Number:</strong> {item.number}
-                </Text>
-                <Text>
-                  <strong>Department:</strong> {item.department}
-                </Text>
-                <Text>
-                  <strong>Province:</strong> {item.province}
-                </Text>
-                <Text>
-                  <strong>City:</strong> {item.city}
-                </Text>
-              </Flex>
-            ))}
+
+            <Flex
+              key={address.dni}
+              flexDirection='column'
+              alignItems='left'
+              width='100%'
+            >
+              <Text>
+                <strong>Street:</strong> {address.street}
+              </Text>
+              <Text>
+                <strong>Number:</strong> {address.number}
+              </Text>
+              <Text>
+                <strong>Department:</strong> {address.department}
+              </Text>
+              <Text>
+                <strong>Province:</strong> {address.province}
+              </Text>
+              <Text>
+                <strong>City:</strong> {address.city}
+              </Text>
+            </Flex>
+
             {/* <Button
               onClick={handleEdit}
               backgroundColor='white'

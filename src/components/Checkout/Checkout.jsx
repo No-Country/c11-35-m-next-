@@ -12,6 +12,7 @@ export default function Checkout () {
   const [formData, setFormData] = useState({})
 
   const handleFormSubmit = data => {
+    console.log(data)
     setFormData(data)
     setCurrentStep(1)
     addUserAddress(currentUser.uid, data)
@@ -29,7 +30,7 @@ export default function Checkout () {
           <UserForm onSubmit={data => handleFormSubmit(data)} />
         </>
       ) : (
-        <ModalPayment formData={formData[0]} confirmation={handleConfirmation} />
+        <ModalPayment formData={formData} confirmation={handleConfirmation} />
       )}
     </>
   )

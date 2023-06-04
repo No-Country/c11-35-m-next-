@@ -17,7 +17,6 @@ import { CartContext } from '@/context/CartContextProvider'
 export default function PaymentForm ({ formData, confirmation }) {
   const { currentUser } = useContext(UserContext)
   const { removeList, toggleCart } = useContext(CartContext)
-  const userId = currentUser.uid
   const stripe = useStripe()
   const router = useRouter()
   const elements = useElements()
@@ -26,6 +25,7 @@ export default function PaymentForm ({ formData, confirmation }) {
   const lastNameRef = useRef(null)
 
   const createPayment = async () => {
+    console.log(formData)
     const requestBody = {
       amount: formData.totalPrice * 100, // poner el payment correcto
       description: 'pay of "producto seleccionado"' // colocar nombre del producto
@@ -62,7 +62,7 @@ export default function PaymentForm ({ formData, confirmation }) {
             }
           }
         )
-        console.log(results)
+        console.log(currentUser)
         if (results.paymentIntent.status === 'succeeded') {
           confirmation()
           Swal.fire(
@@ -72,7 +72,7 @@ export default function PaymentForm ({ formData, confirmation }) {
           ).then(() => {
             // Redireccionar al Home
             router.push('/')
-            createOrder(userId, formData)
+            createOrder(currentUser, formData)
             removeList()
             toggleCart()
           })

@@ -16,8 +16,12 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { useTheme } from '@emotion/react'
 
 export default function SignupCard ({ handleSignUp, handleClickSign }) {
+  const theme = useTheme()
+
+  const backgroundColor = theme.colors.custom.background
   const toast = useToast()
   const [showPassword, setShowPassword] = useState(false)
   const [credentials, setCredentials] = useState({
@@ -60,14 +64,14 @@ export default function SignupCard ({ handleSignUp, handleClickSign }) {
 
   return (
     <Flex
-      minH='100vh'
+      minH='85vh'
       align='center'
       justify='center'
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Stack spacing={8} mx='auto' maxW='lg' py={12} px={6}>
+      <Stack spacing={5} mx='auto' maxW='lg' py={12} px={6}>
         <Stack align='center'>
-          <Heading fontSize='4xl' textAlign='center'>
+          <Heading fontSize='2xl' textAlign='center'>
             Sign up
           </Heading>
           <Text fontSize='lg' color='gray.600'>
@@ -125,7 +129,7 @@ export default function SignupCard ({ handleSignUp, handleClickSign }) {
                 onClick={handleClick}
                 loadingText='Submitting'
                 size='lg'
-                bg='blue.400'
+                bg={backgroundColor}
                 color='white'
                 _hover={{
                   bg: 'blue.500'

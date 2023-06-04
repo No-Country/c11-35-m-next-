@@ -239,7 +239,14 @@ export default function Navbar () {
                     </Button>
                   </Flex>
                 ) : (
-                  <NextLink href='/admin-dashboard'>
+                  <NextLink
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      margin: 5
+                    }}
+                    href='/admin-dashboard'
+                  >
                     <Text color={textColor}>Admin</Text>
                   </NextLink>
                 )}

@@ -26,6 +26,7 @@ import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 
 export default function Cart () {
   const theme = useTheme()
+    const backgroundColor = theme.colors.custom.background
   const router = useRouter()
   const {
     cartList,
@@ -124,7 +125,7 @@ export default function Cart () {
                   <Button
                     onClick={() => router.push('/checkout')}
                     variant='solid'
-                    backgroundColor='#C42F6D'
+                    backgroundColor={backgroundColor}
                     color='#FAFAFA'
                     width='100%'
                   >
@@ -145,7 +146,7 @@ export default function Cart () {
               <Button
                 onClick={handleClick}
                 variant='solid'
-                backgroundColor='#C42F6D'
+                backgroundColor={backgroundColor}
                 color='#FAFAFA'
                 width='100%'
               >

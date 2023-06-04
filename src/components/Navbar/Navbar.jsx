@@ -84,11 +84,10 @@ export default function Navbar () {
                         background: 'none'
                       }}
                       color={textColor}
-                      ml={2}
                       fontFamily='Playfair'
-                      size='xxl'
+                      size='6xl'
                     >
-                      SUNKISS
+                      <Text fontSize='2xl'>SUNKISS</Text>
                     </Button>
                     <IconButton
                       color={textColor}
@@ -96,7 +95,7 @@ export default function Navbar () {
                       variant='ghost'
                       onClick={toggleSidebar}
                       aria-label='Toggle Sidebar'
-                      marginLeft='50%'
+                      marginLeft={3}
                     />
                   </Flex>
                 </Box>

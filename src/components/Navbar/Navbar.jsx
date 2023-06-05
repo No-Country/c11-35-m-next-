@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
   Box,
   Flex,
@@ -24,16 +24,21 @@ import UserLoginLogout from '../UserLoginLogout/UserLoginLogout'
 import { UserContext } from '@/context/UserContextProvider'
 
 export default function Navbar () {
-  const btnRef = useRef()
+  // const btnRef = useRef()
   const router = useRouter()
   const theme = useTheme()
   const { countItems, toggleCart } = useContext(CartContext)
   const { privilege } = useContext(UserContext)
-  const qty = countItems()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
   const backgroundColor = theme.colors.custom.background
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [qty, setQty] = useState(0)
+  const countQty = countItems()
+  useEffect(() => {
+    setQty(countItems())
+  }, [countQty])
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
@@ -79,11 +84,10 @@ export default function Navbar () {
                         background: 'none'
                       }}
                       color={textColor}
-                      ml={2}
                       fontFamily='Playfair'
-                      size='xxl'
+                      size='6xl'
                     >
-                      SUNKISS
+                      <Text fontSize='2xl'>SUNKISS</Text>
                     </Button>
                     <IconButton
                       color={textColor}
@@ -91,7 +95,7 @@ export default function Navbar () {
                       variant='ghost'
                       onClick={toggleSidebar}
                       aria-label='Toggle Sidebar'
-                      marginLeft='50%'
+                      marginLeft={3}
                     />
                   </Flex>
                 </Box>
@@ -235,7 +239,14 @@ export default function Navbar () {
                     </Button>
                   </Flex>
                 ) : (
-                  <NextLink href='/admin-dashboard'>
+                  <NextLink
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      margin: 5
+                    }}
+                    href='/admin-dashboard'
+                  >
                     <Text color={textColor}>Admin</Text>
                   </NextLink>
                 )}
@@ -278,18 +289,18 @@ export default function Navbar () {
             <Flex alignItems='center'>
               <IconButton
                 color={textColor}
-                size='lg'
                 icon={<BiShoppingBag />}
                 variant='ghost'
                 onClick={handleCartClick}
                 right={0}
-                ref={btnRef}
                 fontSize='30px'
               />
               {qty > 0 && (
                 <Badge
                   position='absolute'
-                  right={5}
+                  w={4}
+                  h={4}
+                  right={4}
                   top={6}
                   fontSize='10px'
                   backgroundColor={backgroundColor}
@@ -361,7 +372,7 @@ export default function Navbar () {
                     Foundation
                   </MenuItem>
                   <MenuItem
-                    onClick={() => handleClick('Lip liner')}
+                    onClick={() => handleClick('lip_liner')}
                     color='blackAlpha.700'
                   >
                     Lip liner

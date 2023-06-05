@@ -56,7 +56,6 @@ export default function Home () {
   const handleClickProduct = productId => {
     router.push(`/product-details/${productId}`)
   }
-
   const handleOrderByChange = event => {
     setOrderBy(event.target.value)
     setMinPrice('')

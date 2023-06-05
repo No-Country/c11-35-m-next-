@@ -1,38 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Título del Proyecto
 
-## Getting Started
+Breve descripción o introducción del proyecto.
 
-First, run the development server:
+## Índice
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Demo](#demo)
+- [Descripción](#descripción)
+- [Capturas de Pantalla](#capturas-de-pantalla)
+- [Características](#características)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Equipo](#equipo)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Contribución](#contribución)
+- [Autor](#autor)
+- [Licencia](#licencia)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Puedes acceder a la demo del proyecto [aquí](https://c11-35-m-next.vercel.app/).
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Descripción
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Describe en detalle el propósito y las funcionalidades principales del proyecto.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Capturas de Pantalla
 
-## Learn More
+![Captura de pantalla 1](screenshots/screenshot1.png)
+_Descripción de la captura de pantalla 1._
 
-To learn more about Next.js, take a look at the following resources:
+![Captura de pantalla 2](screenshots/screenshot2.png)
+_Descripción de la captura de pantalla 2._
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Características
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Enumera las características principales del proyecto:
 
-## Deploy on Vercel
+- Característica 1
+- Característica 2
+- Característica 3
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tecnologías Utilizadas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+El proyecto se ha construido utilizando las siguientes tecnologías y herramientas:
+
+
+- ![Next.js](https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logo=next.js) Framework
+- ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=for-the-badge&logo=vercel) Despliegue
+- ![Chakra UI](https://img.shields.io/badge/-Chakra%20UI-319795?style=for-the-badge&logo=chakra-ui) Estilos
+- ![Redux Toolkit](https://img.shields.io/badge/-Redux%20Toolkit-764ABC?style=for-the-badge&logo=redux)
+- ![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?style=for-the-badge&logo=firebase) Autenticación y Base de Datos
+- ![Figma](https://img.shields.io/badge/-Figma-F24E1E?style=for-the-badge&logo=figma) Diseño y Prototipado
+- ![Google Slides](https://img.shields.io/badge/-Google%20Slides-4285F4?style=for-the-badge&logo=google-slides) Pruebas de Usuarios
+- ![Optimal Workshop](https://img.shields.io/badge/-Optimal%20Workshop-000000?style=for-the-badge&logo=optimal-workshop) Card Sorting
+- ![Freepik](https://img.shields.io/badge/-Freepik-00C7B7?style=for-the-badge&logo=freepik) Imágenes
+
+## Equipo de Desarrollo
+
+- [Micaela Samsó](https://www.linkedin.com/in/micaela-sams%C3%B3-b153541b8): Diseñador UX/UI
+- [Matias Ferrari](https://www.linkedin.com/in/matias-emanuel-ferrari/): Desarrollador Front-End
+- [Daniel Machado](https://www.linkedin.com/in/daniel-machado-4b7ab114/): Desarrollador Front-End
+
+## Requisitos
+
+Enumera los requisitos necesarios para ejecutar o contribuir al proyecto.
+
+## Instalación
+
+Proporciona instrucciones detalladas sobre cómo instalar y configurar el proyecto.
+
+## Uso
+
+Proporciona ejemplos y pasos sobre cómo utilizar el proyecto.
+
+## Contribución
+
+Explica cómo otros desarrolladores pueden contribuir al proyecto y proporciona directrices para las contribuciones.
+
+
+## Licencia
+
+Indica la licencia bajo la cual se distribuye el proyecto.

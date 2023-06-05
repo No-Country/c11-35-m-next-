@@ -8,25 +8,29 @@ import { addUserAddress } from '@/services/firebase-auth'
 
 export default function Checkout () {
   const { currentUser } = useContext(UserContext)
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState({})
 
   const handleFormSubmit = data => {
+    console.log(data)
     setFormData(data)
-    setCurrentStep(2)
+    setCurrentStep(1)
     addUserAddress(currentUser.uid, data)
+  }
+  const handleConfirmation = () => {
+    setCurrentStep(3)
   }
 
   return (
     <>
       <Steps ind={currentStep} />
-      {currentStep === 1 ? (
+      {currentStep === 0 ? (
         <>
           <PurchaseDetails />
           <UserForm onSubmit={data => handleFormSubmit(data)} />
         </>
       ) : (
-        <ModalPayment formData={formData} />
+        <ModalPayment formData={formData} confirmation={handleConfirmation} />
       )}
     </>
   )

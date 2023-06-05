@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Button,
@@ -8,14 +10,14 @@ import {
   useTheme,
   Box,
   useToast,
-  IconButton,
   Flex,
+  IconButton,
   Text
 } from '@chakra-ui/react'
+import { FiMapPin } from 'react-icons/fi'
 import { CartContext } from '@/context/CartContextProvider'
 import { UserContext } from '@/context/UserContextProvider'
 import { fetchUser } from '@/services/firebase-auth'
-import { FiMapPin } from 'react-icons/fi'
 function UserForm ({ onSubmit }) {
   const theme = useTheme()
   const backgroundColor = theme.colors.custom.background
@@ -31,19 +33,38 @@ function UserForm ({ onSubmit }) {
   const { currentUser } = useContext(UserContext)
   const totalPrice = cartTotalPrice(cartList)
   const [address, setAddress] = useState('')
+  const [edit, setEdit] = useState(false)
+  console.log(totalPrice)
+  const callUser = async currentUser => {
+    const user = await fetchUser(currentUser)
+    setAddress(user && user.address)
+  }
+  useEffect(() => {
+    callUser(currentUser)
+  }, [])
 
+
+   let formData
   const handleSubmit = event => {
     event.preventDefault()
-    const formData = {
-      postal,
-      province,
-      city,
-      street,
-      number,
-      department,
-      dni,
-      totalPrice
+   
+
+    if (address && Object.keys(address).length > 0) {
+      formData = address
+      formData.totalPrice = totalPrice
+    } else {
+      formData = {
+        postal,
+        province,
+        city,
+        street,
+        number,
+        department,
+        dni,
+        totalPrice
+      }
     }
+   
     if (
       (!postal ||
         !province ||
@@ -63,18 +84,11 @@ function UserForm ({ onSubmit }) {
       })
     } else {
       onSubmit(formData)
-      console.log(formData)
+      
     }
   }
 
-  const callUser = async currentUser => {
-    const user = await fetchUser(currentUser)
-    setAddress(user && user.address)
-  }
-  useEffect(() => {
-    console.log('rendering')
-    callUser(currentUser)
-  }, [])
+
   return (
     <>
       <Heading
@@ -96,7 +110,7 @@ function UserForm ({ onSubmit }) {
             id='first-name'
             placeholder='First name'
             value={currentUser && currentUser.displayName}
-            disabled='true'
+            disabled
           />
         </FormControl>
         <FormControl padding='0 20px' mt='2%' mb='20px'>
@@ -107,10 +121,10 @@ function UserForm ({ onSubmit }) {
             id='email'
             type='email'
             value={currentUser && currentUser.email}
-            disabled='true'
+            disabled
           />
         </FormControl>
-        {/*  {address ? (
+        {address && !edit ? (
           <Flex
             p='10px'
             margin='0 auto'
@@ -121,109 +135,123 @@ function UserForm ({ onSubmit }) {
           >
             <IconButton
               fontSize='25px'
-              width='30%'
+              width='50%'
               backgroundColor='white'
               icon={<FiMapPin />}
             />
-            {address.map(item => (
-              <Flex
-                key={item.dni}
-                flexDirection='column'
-                alignItems='left'
-                width='100%'
-              >
-                <Text>Street: {item.street}</Text>
-                <Text>Number: {item.number}</Text>
-                <Text>Department: {item.department}</Text>
-                <Text>Province: {item.province}</Text>
-                <Text>City: {item.city}</Text>
-              </Flex>
-            ))}
-            <Button backgroundColor='white' textColor='teal'>
-              Edit or Add
-            </Button>
+
+            <Flex
+              key={address.dni}
+              flexDirection='column'
+              alignItems='left'
+              width='100%'
+            >
+              <Text>
+                <strong>Street:</strong> {address.street}
+              </Text>
+              <Text>
+                <strong>Number:</strong> {address.number}
+              </Text>
+              <Text>
+                <strong>Department:</strong> {address.department}
+              </Text>
+              <Text>
+                <strong>Province:</strong> {address.province}
+              </Text>
+              <Text>
+                <strong>City:</strong> {address.city}
+              </Text>
+            </Flex>
+
+            {/* <Button
+              onClick={handleEdit}
+              backgroundColor='white'
+              textColor='teal'
+            >
+              Edit
+            </Button> */}
           </Flex>
-        ) : ( */}
-        <>
-          <Heading
-            padding='20px'
-            w='100%'
-            textAlign='center'
-            fontWeight='normal'
-            mb='2%'
-            fontSize='2xl'
-          >
-            Shipping Address
-          </Heading>
+        ) : (
+          <>
+            <Heading
+              padding='20px'
+              w='100%'
+              textAlign='center'
+              fontWeight='normal'
+              mb='2%'
+              fontSize='2xl'
+            >
+              Shipping Address
+            </Heading>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='postal' fontWeight='normal'>
-              Postal Code
-            </FormLabel>
-            <Input
-              id='postal'
-              type='number'
-              value={postal}
-              onChange={event => setPostal(event.target.value)}
-            />
-          </FormControl>
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='postal' fontWeight='normal'>
+                Postal Code
+              </FormLabel>
+              <Input
+                id='postal'
+                type='number'
+                value={postal}
+                onChange={event => setPostal(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='province' fontWeight='normal'>
-              Province
-            </FormLabel>
-            <Input
-              id='province'
-              value={province}
-              onChange={event => setProvince(event.target.value)}
-            />
-          </FormControl>
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='province' fontWeight='normal'>
+                Province
+              </FormLabel>
+              <Input
+                id='province'
+                value={province}
+                onChange={event => setProvince(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='city' fontWeight='normal'>
-              City
-            </FormLabel>
-            <Input
-              id='city'
-              value={city}
-              onChange={event => setCity(event.target.value)}
-            />
-          </FormControl>
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='city' fontWeight='normal'>
+                City
+              </FormLabel>
+              <Input
+                id='city'
+                value={city}
+                onChange={event => setCity(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='street' fontWeight='normal'>
-              Street
-            </FormLabel>
-            <Input
-              id='street'
-              value={street}
-              onChange={event => setStreet(event.target.value)}
-            />
-          </FormControl>
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='street' fontWeight='normal'>
+                Street
+              </FormLabel>
+              <Input
+                id='street'
+                value={street}
+                onChange={event => setStreet(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='number' fontWeight='normal'>
-              Number
-            </FormLabel>
-            <Input
-              id='number'
-              value={number}
-              onChange={event => setNumber(event.target.value)}
-            />
-          </FormControl>
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='number' fontWeight='normal'>
+                Number
+              </FormLabel>
+              <Input
+                id='number'
+                value={number}
+                onChange={event => setNumber(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl padding='0 20px' mt='2%'>
-            <FormLabel htmlFor='department' fontWeight='normal'>
-              Department
-            </FormLabel>
-            <Input
-              id='department'
-              value={department}
-              onChange={event => setDepartment(event.target.value)}
-            />
-          </FormControl>
-        </>
-        {/*  )} */}
+            <FormControl padding='0 20px' mt='2%'>
+              <FormLabel htmlFor='department' fontWeight='normal'>
+                Department
+              </FormLabel>
+              <Input
+                id='department'
+                value={department}
+                onChange={event => setDepartment(event.target.value)}
+              />
+            </FormControl>
+          </>
+        )}
 
         <Heading
           padding='20px'

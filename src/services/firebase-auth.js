@@ -7,7 +7,13 @@ import {
   signInWithPopup
 } from 'firebase/auth'
 import {
-  doc, setDoc, getDoc, addDoc, updateDoc, arrayUnion, collection
+  doc,
+  setDoc,
+  getDoc,
+  addDoc,
+  updateDoc,
+  arrayUnion,
+  collection
 } from 'firebase/firestore'
 import { app, db } from './db'
 
@@ -18,11 +24,11 @@ const storeUser = async (authCredentials, id, name) => {
   const user = {
     displayName: name,
     email: authCredentials.email,
-    orders: [],
-    role: 'customer',
-    address: []
+    // orders: [],
+    // address: [],
+    role: 'customer'
   }
-  await setDoc(doc(db, 'users', id), user)
+  await setDoc(doc(db, 'users', id), user, { merge: true })
 }
 
 export const signWithGoogle = async () => {
@@ -71,22 +77,27 @@ export const logOut = () => {
 }
 
 export const addUserAddress = async (id, data) => {
-  const updatedAddress = []
-  updatedAddress.push(data)
+  console.log(data)
+  /*   const updatedAddress = []
+  updatedAddress.push(data) */
   const user = {
-    address: updatedAddress
+    address: data
   }
   await setDoc(doc(db, 'users', id), user, { merge: true })
 }
 
-export const fetchUser = async (currentUser) => {
+export const fetchUser = async currentUser => {
   const itemDB = doc(db, 'users', currentUser && currentUser.uid)
   try {
     const userInDb = await getDoc(itemDB)
     const userData = userInDb.data()
     if (userData) {
-      const orders = await Promise.all(userData.orders.map((orderId) => getDoc(doc(db, 'orders', orderId))))
-      const orderData = orders.map((order) => order.data())
+      const orders = await Promise.all(
+        userData.orders
+          ? userData.orders.map(orderId => getDoc(doc(db, 'orders', orderId)))
+          : []
+      )
+      const orderData = orders.map(order => order.data())
       userData.orders = orderData
     }
     return userData
@@ -95,10 +106,15 @@ export const fetchUser = async (currentUser) => {
   }
 }
 
-export const createOrder = async (userId, orderData) => {
+export const createOrder = async (currentUser, orderData) => {
+  const userId = currentUser.uid
+  const userName = currentUser.displayName
+  const email = currentUser.email
   try {
     const orderRef = await addDoc(collection(db, 'orders'), {
       userId,
+      userName,
+      email,
       ...orderData
     })
 

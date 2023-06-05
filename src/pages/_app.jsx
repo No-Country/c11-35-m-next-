@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import { ChakraProvider, extendTheme, Box } from '@chakra-ui/react'
 import { Provider } from 'react-redux'
 import store from '../store/index'
@@ -20,6 +19,10 @@ const theme = extendTheme({
       primary: '#FAFAFA',
       background: '#214A5F'
     }
+  },
+  fonts: {
+    heading: `'Playfair Display', serif`,
+    body: `'Open Sans', sans-serif`
   }
 })
 

@@ -26,7 +26,6 @@ import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
 import Cart from '../Cart/Cart'
 import { useTheme } from '@emotion/react'
-import ProductColors from '../ProductColors/ProductColors'
 
 export default function ProductDetails ({ id }) {
   const toast = useToast()
@@ -56,18 +55,6 @@ export default function ProductDetails ({ id }) {
       isClosable: true
     })
   }
-
-  const {
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  } = product
-
-  const colors = [
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  ]
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
 
   if (!product) {
@@ -111,11 +98,6 @@ export default function ProductDetails ({ id }) {
                       color={i < product.rating ? 'teal.500' : 'gray.300'}
                     />
                   ))}
-                {/* {product.product_colors.length > 0 ? (
-                    <>
-                      <ProductColors colors={product.product_colors} />
-                    </>
-                  ) : null} */}
               </Box>
             </Box>
             <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>

@@ -31,7 +31,6 @@ export default function Steps ({ ind }) {
     },
     [setActiveStep]
   )
-
   useEffect(() => {
     handleSetActiveStep(ind)
   }, [ind, handleSetActiveStep])

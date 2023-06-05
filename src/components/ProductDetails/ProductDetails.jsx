@@ -104,7 +104,7 @@ export default function ProductDetails ({ id }) {
                     .map((_, i) => (
                       <StarIcon
                         key={i}
-                        color={i < product.rating ? 'teal.500' : 'gray.300'}
+                        color={i < product.rating ? '#C42F6D' : 'gray.300'}
                       />
                     ))}
                   {colors.length > 0 ? (
@@ -131,6 +131,7 @@ export default function ProductDetails ({ id }) {
                   backgroundColor={backgroundColor}
                   color={primaryColor}
                   width='200px'
+                  height='44px'
                 >
                   Add to cart
                 </Button>

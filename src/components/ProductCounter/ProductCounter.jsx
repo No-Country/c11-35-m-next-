@@ -11,11 +11,12 @@ export default function ProductCounter ({
         as='button'
         onClick={decreaseCounter}
         backgroundColor='#D9D9D9'
-        width='30px'
-        height='100%'
+        width='44px'
+        height='44px'
         color='#1A1A1A'
         fontSize='2xl'
         fontWeight='bold'
+        borderRadius='10px'
       >
         -
       </Box>
@@ -24,8 +25,8 @@ export default function ProductCounter ({
           color='#1A1A1A'
           fontSize='1x1'
           fontWeight='bold'
-          marginEnd='20px'
-          marginStart='20px'
+          marginEnd='15px'
+          marginStart='15px'
         >
           {counter}
         </Text>
@@ -34,11 +35,12 @@ export default function ProductCounter ({
         as='button'
         onClick={increaseCounter}
         backgroundColor='#D9D9D9'
-        width='30px'
-        height='100%'
+        width='44px'
+        height='44px'
         color='#1A1A1A'
         fontSize='2xl'
         fontWeight='bold'
+        borderRadius='10px'
       >
         +
       </Box>

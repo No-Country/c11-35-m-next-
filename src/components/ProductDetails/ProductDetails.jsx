@@ -21,13 +21,11 @@ import {
   useToast
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
-// import ProductColors from '../ProductColors/ProductColors'
 import ProductCounter from '../ProductCounter/ProductCounter'
 import { CartContext } from '@/context/CartContextProvider'
 import useCount from '@/hooks/useCount'
 import Cart from '../Cart/Cart'
 import { useTheme } from '@emotion/react'
-import ProductColors from '../ProductColors/ProductColors'
 
 export default function ProductDetails ({ id }) {
   const toast = useToast()
@@ -46,6 +44,7 @@ export default function ProductDetails ({ id }) {
   }, [dispatch])
 
   const product = data && data.find(product => product.id === id)
+
   const handleAdd = qty => {
     addToCart(product, qty)
     toast({
@@ -56,43 +55,34 @@ export default function ProductDetails ({ id }) {
       isClosable: true
     })
   }
-
-  const {
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  } = product
-
-  const colors = [
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  ]
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
+
+  if (!product) {
+    return <p>Loading...</p>
+  }
+
   return (
     <>
       <Cart />
-      {product ? (
-        <Card
-          direction={{ base: 'column', sm: 'row' }}
-          overflow='hidden'
-          variant='outline'
-          padding='1rem'
-          width='100vw'
-          margin='2rem auto'
-          border='none'
-        >
-          <Image
-            src={product.imageLink}
-            alt='product image'
-            borderRadius='lg'
-            boxSize='lg'
-            maxHeight='230px'
-            maxWidth='200px'
-            margin='0 auto'
-            padding='0px'
-          />
-
+      <Card
+        direction={{ base: 'column', sm: 'row' }}
+        overflow='hidden'
+        variant='outline'
+        padding='1rem'
+        width='100vw'
+        margin='2rem auto'
+        border='none'
+      >
+        <Image
+          src={product.imageLink}
+          alt='product image'
+          borderRadius='lg'
+          boxSize='lg'
+          maxHeight='230px'
+          maxWidth='200px'
+          margin='0 auto'
+          padding='0px'
+        />
           <Stack>
             <CardBody padding='0px'>
               <Text py='2'>{product.brand && product.brand.toUpperCase()}</Text>
@@ -137,42 +127,38 @@ export default function ProductDetails ({ id }) {
                 </Button>
               </Flex>
             </CardBody>
-
-            <CardFooter padding='0px'>
-              <Tabs isFitted variant='unstyled' defaultIndex={0}>
-                <TabList>
-                  <Tab>Details</Tab>
-                  <Tab>Reviews</Tab>
-                </TabList>
-                <TabIndicator
-                  mt='-1.5px'
-                  height='2px'
-                  backgroundColor={backgroundColor}
-                  borderRadius='1px'
-                />
-                <TabPanels>
-                  <TabPanel padding='0px'>
-                    <Text py='2'>{product.description}</Text>
-                  </TabPanel>
-                  <TabPanel padding='0px'>
-                    <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Aperiam aut fuga incidunt ad ratione accusantium nam ipsa
-                      nisi veniam in aliquam magni amet, similique impedit.
-                      Assumenda repudiandae, doloribus deleniti nobis officia
-                      blanditiis quod minima nemo, distinctio aliquid dolorum.
-                      Laboriosam, odio recusandae? Asperiores molestiae beatae
-                      nesciunt, eius natus ad numquam. Nulla?
-                    </p>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </CardFooter>
-          </Stack>
-        </Card>
-      ) : (
-        <p>Loading...</p>
-      )}
+          <CardFooter padding='0px'>
+            <Tabs isFitted variant='unstyled' defaultIndex={0}>
+              <TabList>
+                <Tab>Details</Tab>
+                <Tab>Reviews</Tab>
+              </TabList>
+              <TabIndicator
+                mt='-1.5px'
+                height='2px'
+                backgroundColor={backgroundColor}
+                borderRadius='1px'
+              />
+              <TabPanels>
+                <TabPanel padding='0px'>
+                  <Text py='2'>{product.description}</Text>
+                </TabPanel>
+                <TabPanel padding='0px'>
+                  <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Aperiam aut fuga incidunt ad ratione accusantium nam ipsa
+                    nisi veniam in aliquam magni amet, similique impedit.
+                    Assumenda repudiandae, doloribus deleniti nobis officia
+                    blanditiis quod minima nemo, distinctio aliquid dolorum.
+                    Laboriosam, odio recusandae? Asperiores molestiae beatae
+                    nesciunt, eius natus ad numquam. Nulla?
+                  </p>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </CardFooter>
+        </Stack>
+      </Card>
     </>
   )
 }

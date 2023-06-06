@@ -11,7 +11,7 @@ import {
   Stepper,
   useSteps
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 
 const steps = [
   { title: 'Information' },
@@ -21,13 +21,19 @@ const steps = [
 
 export default function Steps ({ ind }) {
   const { activeStep, setActiveStep } = useSteps({
-    index: 1,
-    count: steps.length
+    initialStep: ind,
+    steps: steps.length
   })
 
+  const handleSetActiveStep = useCallback(
+    (stepIndex) => {
+      setActiveStep(stepIndex)
+    },
+    [setActiveStep]
+  )
   useEffect(() => {
-    setActiveStep(ind)
-  }, [ind])
+    handleSetActiveStep(ind)
+  }, [ind, handleSetActiveStep])
 
   return (
     <Stepper size='sm' index={activeStep} p='5px 20px'>

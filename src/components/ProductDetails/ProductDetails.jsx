@@ -170,9 +170,9 @@ export default function ProductDetails ({ id }) {
           </Stack>
         </Card>
       ) : (
-        <Flex height='70vh' justifyContent='center' alignItems='center'>
-          <Spinner size='xl' margin='0 auto' />
-        </Flex>
+        <Box margin='0 auto'>
+          <Spinner size='xl' />
+        </Box>
       )}
     </>
   )

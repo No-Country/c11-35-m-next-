@@ -43,6 +43,7 @@ export default function Cart () {
   }
 
   const totalPrice = cartTotalPrice(cartList)
+  console.log(totalPrice)
 
   const saveCartToLocalStorage = () => {
     if (typeof window !== 'undefined') {

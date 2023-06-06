@@ -29,6 +29,7 @@ export default function Navbar () {
   // const btnRef = useRef()
   const router = useRouter()
   const theme = useTheme()
+  const buttonMargin = '3px 0px 3px 15px'
   const { countItems, toggleCart } = useContext(CartContext)
   const { privilege } = useContext(UserContext)
   const textColor = theme.colors.custom.text
@@ -59,7 +60,19 @@ export default function Navbar () {
     <>
       {isMobile && (
         <>
-          {isPageDark && <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9 }} />}
+          {isPageDark && (
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 9
+              }}
+            />
+          )}
           {isSidebarOpen && (
             <Flex
               as='nav'
@@ -70,7 +83,8 @@ export default function Navbar () {
               bg={primaryColor}
               height='100%'
               width='75%'
-              borderRadius={20}
+              borderBottomRightRadius={20}
+              borderTopRightRadius={20}
               position='fixed'
               top={0}
               left={0}
@@ -118,10 +132,11 @@ export default function Navbar () {
                         style={{
                           background: 'none',
                           padding: 0,
-                          margin: 12,
                           width: '100%'
                         }}
                         width='100%'
+                        fontSize={18}
+                        margin={buttonMargin}
                         fontFamily='Playfair'
                         colorScheme='gray'
                         onClick={() => handleClick('home')}
@@ -133,14 +148,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Blush')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Blush</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -149,14 +170,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Bronzer')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Bronzer</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -165,14 +192,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyebrow')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Eyebrow</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -181,14 +214,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyeliner')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Eyeliner</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -197,14 +236,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyeshadow')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Eyeshadow</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -213,14 +258,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Foundation')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Foundation</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -229,14 +280,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Lip liner')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Lip liner</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -245,14 +302,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Lipstick')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Lipstick</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -261,14 +324,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Mascara')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Mascara</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -277,15 +346,20 @@ export default function Navbar () {
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 15,
-                        marginBottom: 40,
                         width: '100%'
                       }}
+                      width='100%'
+                      fontSize={18}
+                      margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Nail polish')}
                     >
-                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                      <Flex
+                        justifyContent='space-between'
+                        alignItems='center'
+                        width='100%'
+                      >
                         <Text>Nail polish</Text>
                         <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
                       </Flex>
@@ -377,8 +451,6 @@ export default function Navbar () {
           justifyContent='space-between'
         >
           <Flex gap={5}>
-            {' '}
-            {/* TODO renderizado opcional por privilegio admin o user */}
             <NextLink href='/'>
               <Text color={textColor}>Home</Text>
             </NextLink>

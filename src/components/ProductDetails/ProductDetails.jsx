@@ -18,7 +18,8 @@ import {
   TabIndicator,
   Button,
   Flex,
-  useToast
+  useToast,
+  Spinner
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 // import ProductColors from '../ProductColors/ProductColors'
@@ -45,7 +46,8 @@ export default function ProductDetails ({ id }) {
     }
   }, [dispatch])
 
-  const product = data && data.find(product => product.id === id)
+  const product = data ? data.find(product => product.id === id) : null
+
   const handleAdd = qty => {
     addToCart(product, qty)
     toast({
@@ -56,18 +58,15 @@ export default function ProductDetails ({ id }) {
       isClosable: true
     })
   }
+  let colors = []
+  if (product) {
+    colors = [
+      product.productColors0HexValue,
+      product.productColors1HexValue,
+      product.productColors2HexValue
+    ]
+  }
 
-  const {
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  } = product
-
-  const colors = [
-    productColors0HexValue,
-    productColors1HexValue,
-    productColors2HexValue
-  ]
   const { counter, increaseCounter, decreaseCounter } = useCount(1)
   return (
     <>
@@ -171,7 +170,9 @@ export default function ProductDetails ({ id }) {
           </Stack>
         </Card>
       ) : (
-        <p>Loading...</p>
+        <Flex height='70vh' justifyContent='center' alignItems='center'>
+          <Spinner size='xl' margin='0 auto' />
+        </Flex>
       )}
     </>
   )

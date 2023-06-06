@@ -3,7 +3,6 @@ import { Flex, Box } from '@chakra-ui/react'
 
 export default function ProductColors ({ colors }) {
   const defaultColors = colors.slice(0, 5)
-  console.log(colors)
   return (
     <>
       <Flex wrap='wrap'>

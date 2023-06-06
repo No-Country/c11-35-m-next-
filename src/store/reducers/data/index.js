@@ -12,9 +12,8 @@ export const fetchData = createAsyncThunk('data/fetchData', async props => {
   try {
     const productsDB = collection(db, 'products')
     // const querySnapshot = await getDocs(productsDB)
-    const querySnapshot = await getDocs(query(productsDB, limit(10)))
+    const querySnapshot = await getDocs(query(productsDB, limit(50)))
     const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-    console.log(data)
     if (props !== undefined) {
       const lowercaseProps = props.toLowerCase()
       return data.filter(item =>

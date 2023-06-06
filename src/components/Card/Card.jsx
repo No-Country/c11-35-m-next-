@@ -15,7 +15,7 @@ import {
   useToast
 } from '@chakra-ui/react'
 import { useContext } from 'react'
-import { BiShoppingBag } from 'react-icons/bi'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import ProductColors from '../ProductColors/ProductColors'
 export default function ProductCard ({
   id,
@@ -24,8 +24,8 @@ export default function ProductCard ({
   price,
   image,
   onClick,
-  colors,
-  brand
+  brand,
+  colors
 }) {
   const imagePath = '/images/carousel1.jpg'
   const item = { id, title, description, price, image, colors, brand }
@@ -79,7 +79,7 @@ export default function ProductCard ({
           </Text>
           <ButtonGroup spacing='2' ml='auto'>
             <IconButton
-              icon={<BiShoppingBag />}
+              icon={<AiOutlineShoppingCart size={22} />}
               backgroundColor={backgroundColor}
               color={primaryColor}
               onClick={() => handleAdd()}

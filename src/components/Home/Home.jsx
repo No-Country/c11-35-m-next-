@@ -132,7 +132,6 @@ export default function Home () {
   const handlePageChange = page => {
     setCurrentPage(page)
   }
-
   return (
     <Box width='100%'>
       <Cart />
@@ -143,10 +142,7 @@ export default function Home () {
               <Carousel />
             </Box>
             <Text marginTop={10}>Best rated</Text>
-            <Box
-              marginTop={25}
-              marginBottom={60}
-            >
+            <Box marginTop={25} marginBottom={60}>
               <SliderComponent data={dataHome} />
             </Box>
           </>
@@ -159,15 +155,8 @@ export default function Home () {
           </Text>
           <Flex width='100%'>
             <FormControl>
-              <Flex
-                align='center'
-                direction='row'
-              >
-                <FormLabel
-                  htmlFor='orderBy'
-                  width='70%'
-                  margin={0}
-                >
+              <Flex align='center' direction='row'>
+                <FormLabel htmlFor='orderBy' width='70%' margin={0}>
                   Order by:
                 </FormLabel>
                 <Select
@@ -199,10 +188,7 @@ export default function Home () {
                     borderColor='gray.200'
                     boxShadow='sm'
                   >
-                    <Flex
-                      direction='column'
-                      p={4}
-                    >
+                    <Flex direction='column' p={4}>
                       <FormControl mb={4}>
                         <FormLabel htmlFor='minPrice'>Min Price:</FormLabel>
                         <Input
@@ -233,19 +219,13 @@ export default function Home () {
                         >
                           <option value=''>All Brands</option>
                           {brandOptions.map(brand => (
-                            <option
-                              key={brand}
-                              value={brand}
-                            >
+                            <option key={brand} value={brand}>
                               {brand}
                             </option>
                           ))}
                         </Select>
                       </FormControl>
-                      <Button
-                        mt={4}
-                        onClick={handleOptionSelect}
-                      >
+                      <Button mt={4} onClick={handleOptionSelect}>
                         Apply
                       </Button>
                     </Flex>
@@ -259,11 +239,7 @@ export default function Home () {
       <Box>
         {filteredData.length > 0 && (
           <Box>
-            <SimpleGrid
-              columns={cardColumns}
-              spacing={10}
-              margin='30px'
-            >
+            <SimpleGrid columns={cardColumns} spacing={10} margin='30px'>
               {sortedItems
                 .slice(indexOfFirstItem, indexOfLastItem)
                 .map(item => (
@@ -276,7 +252,11 @@ export default function Home () {
                     price={item.price}
                     image={item.imageLink}
                     brand={item.brand}
-                    colors={item.product_colors}
+                    colors={[
+                      item.productColors0HexValue,
+                      item.productColors1HexValue,
+                      item.productColors2HexValue
+                    ]}
                   />
                 ))}
             </SimpleGrid>
@@ -285,11 +265,7 @@ export default function Home () {
               totalPages={totalPages}
               onPageChange={handlePageChange}
             />
-            <Text
-              textAlign='center'
-              mt={2}
-              marginBottom='20px'
-            >
+            <Text textAlign='center' mt={2} marginBottom='20px'>
               Page {currentPage} of {totalPages}
             </Text>
           </Box>

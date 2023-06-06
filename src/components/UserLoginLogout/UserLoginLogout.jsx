@@ -102,7 +102,7 @@ export default function UserLoginLogout () {
   console.log(currentUser)
   return (
     <>
-      <Flex alignItems='center'>
+      <Flex alignItems='center' ml={3}>
         {!currentUser ? (
           <Button
             leftIcon={<Icon as={FiUser} />}

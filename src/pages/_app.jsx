@@ -17,7 +17,8 @@ const theme = extendTheme({
     custom: {
       text: '#1A1A1A',
       primary: '#FAFAFA',
-      background: '#214A5F'
+      background: '#214A5F',
+      secondary: '#C42F6D'
     }
   },
   fonts: {

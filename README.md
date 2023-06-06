@@ -32,7 +32,7 @@ Nuestro objetivo es brindarles una solución completa y satisfactoria al proporc
 
 
 ## Características
-Para lograr el objetivo, el proyecto se basa en las siguientes caracter+isticas: 
+Para lograr el objetivo, el proyecto se basa en las siguientes características: 
 
 **1.- Catálogo de productos:** Nuestro Ecommerce cuenta con un extenso catálogo de productos de maquillaje, incluyendo labiales, sombras de ojos, bases, delineadores y más. Los usuarios podrán explorar y filtrar los productos según su tipo, marca y otras características relevantes. Además, cada producto contará con una descripción detallada, imágenes de alta calidad y especificaciones para ayudar a los usuarios a tomar decisiones informadas de compra.
 

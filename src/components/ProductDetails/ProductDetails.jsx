@@ -83,46 +83,50 @@ export default function ProductDetails ({ id }) {
           margin='0 auto'
           padding='0px'
         />
-
-        <Stack>
-          <CardBody padding='0px'>
-            <Text py='2'>{product.brand && product.brand.toUpperCase()}</Text>
-            <Heading size='md'>{product.name}</Heading>
-            <Box display='flex' mt='2' alignItems='center'>
-              <Box>
-                {Array(5)
-                  .fill('')
-                  .map((_, i) => (
-                    <StarIcon
-                      key={i}
-                      color={i < product.rating ? 'teal.500' : 'gray.300'}
-                    />
-                  ))}
+          <Stack>
+            <CardBody padding='0px'>
+              <Text py='2'>{product.brand && product.brand.toUpperCase()}</Text>
+              <Heading size='md'>{product.name}</Heading>
+              <Box display='flex' mt='2' alignItems='center'>
+                <Box>
+                  {Array(5)
+                    .fill('')
+                    .map((_, i) => (
+                      <StarIcon
+                        key={i}
+                        color={i < product.rating ? '#C42F6D' : 'gray.300'}
+                      />
+                    ))}
+                  {colors.length > 0 ? (
+                    <>
+                      <ProductColors colors={colors} />
+                    </>
+                  ) : null}
+                </Box>
               </Box>
-            </Box>
-            <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>
-              ${product.price}
-            </Text>
-            <Flex marginTop='20px' justifyContent='space-between'>
-              <ProductCounter
-                decreaseCounter={decreaseCounter}
-                increaseCounter={increaseCounter}
-                counter={counter}
-              />
-              <Button
-                onClick={() => {
-                  handleAdd(counter)
-                }}
-                variant='solid'
-                backgroundColor={backgroundColor}
-                color={primaryColor}
-                width='200px'
-              >
-                Add to cart
-              </Button>
-            </Flex>
-          </CardBody>
-
+              <Text color='#1A1A1A' fontSize='2xl' fontWeight='bold'>
+                ${product.price}
+              </Text>
+              <Flex marginTop='20px' justifyContent='space-between'>
+                <ProductCounter
+                  decreaseCounter={decreaseCounter}
+                  increaseCounter={increaseCounter}
+                  counter={counter}
+                />
+                <Button
+                  onClick={() => {
+                    handleAdd(counter)
+                  }}
+                  variant='solid'
+                  backgroundColor={backgroundColor}
+                  color={primaryColor}
+                  width='200px'
+                  height='44px'
+                >
+                  Add to cart
+                </Button>
+              </Flex>
+            </CardBody>
           <CardFooter padding='0px'>
             <Tabs isFitted variant='unstyled' defaultIndex={0}>
               <TabList>

@@ -16,7 +16,7 @@ import {
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { BiShoppingBag } from 'react-icons/bi'
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
 import { CartContext } from '@/context/CartContextProvider'
@@ -289,7 +289,7 @@ export default function Navbar () {
             <Flex alignItems='center'>
               <IconButton
                 color={textColor}
-                icon={<BiShoppingBag />}
+                icon={<AiOutlineShoppingCart />}
                 variant='ghost'
                 onClick={handleCartClick}
                 right={0}
@@ -300,8 +300,8 @@ export default function Navbar () {
                   position='absolute'
                   w={4}
                   h={4}
-                  right={4}
-                  top={6}
+                  right={2}
+                  top={4}
                   fontSize='10px'
                   backgroundColor={backgroundColor}
                   color={theme.colors.custom.primary}
@@ -415,7 +415,7 @@ export default function Navbar () {
           <Flex alignItems='center'>
             <IconButton
               color={textColor}
-              icon={<BiShoppingBag />}
+              icon={<AiOutlineShoppingCart />}
               variant='ghost'
               onClick={handleCartClick}
               right={0}

@@ -16,7 +16,8 @@ import {
   TabIndicator,
   Button,
   Flex,
-  useToast
+  useToast,
+  Spinner
 } from '@chakra-ui/react'
 import { StarIcon } from '@chakra-ui/icons'
 import ProductColors from '../ProductColors/ProductColors'
@@ -134,7 +135,9 @@ export default function ProductCart ({ id }) {
           </Stack>
         </Card>
       ) : (
-        <p>Loading...</p>
+        <Flex height='70vh' justifyContent='center' alignItems='center'>
+          <Spinner size='xl' margin='0 auto' />
+        </Flex>
       )}
     </>
   )

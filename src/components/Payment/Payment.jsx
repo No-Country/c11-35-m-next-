@@ -4,7 +4,9 @@ import {
   Input,
   Button,
   Center,
-  Box
+  Box,
+  useTheme,
+  Heading
 } from '@chakra-ui/react'
 import React, { useRef, useContext } from 'react'
 import { useRouter } from 'next/router'
@@ -15,6 +17,9 @@ import { UserContext } from '@/context/UserContextProvider'
 import { CartContext } from '@/context/CartContextProvider'
 
 export default function PaymentForm ({ formData, confirmation }) {
+  const theme = useTheme()
+  const primaryColor = theme.colors.custom.primary
+  const backgroundColor = theme.colors.custom.background
   const { currentUser } = useContext(UserContext)
   const { removeList, toggleCart } = useContext(CartContext)
   const stripe = useStripe()
@@ -96,9 +101,22 @@ export default function PaymentForm ({ formData, confirmation }) {
 
   return (
     <>
-      <Box m={7}>
+      <Box
+        margin={{ base: '50px auto', md: '50px auto' }}
+        width={{ base: '85%', md: '60%' }}
+      >
+        <Heading
+          padding='20px'
+          w='100%'
+          textAlign='left'
+          mb='2%'
+          fontSize='32'
+          fontWeight='600'
+        >
+          Payment Information
+        </Heading>
         <FormControl>
-          <FormLabel>first name credit card</FormLabel>
+          <FormLabel>First name credit card</FormLabel>
           <Input ref={firstNameRef} placeholder='First name' />
         </FormControl>
         <FormControl mt={4}>
@@ -109,7 +127,13 @@ export default function PaymentForm ({ formData, confirmation }) {
           <CardElement options={{ style: { base: { fontSize: '15px' } } }} />
         </div>
         <Center>
-          <Button colorScheme='blue' mt={4} onClick={createPayment}>
+          <Button
+            colorScheme='blue'
+            mt={4}
+            onClick={createPayment}
+            backgroundColor={backgroundColor}
+            color={primaryColor}
+          >
             Buy
           </Button>
         </Center>

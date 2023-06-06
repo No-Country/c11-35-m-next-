@@ -149,7 +149,7 @@ export default function Home () {
         )}
       </Box>
       {filteredData.length > 0 && (
-        <Box>
+        <Box padding='5px 15px'>
           <Text>
             Home <Text as='span'>&gt;</Text> {itemType}
           </Text>

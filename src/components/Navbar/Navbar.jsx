@@ -11,12 +11,14 @@ import {
   useBreakpointValue,
   Text,
   useTheme,
-  Badge
+  Badge,
+  Icon
 } from '@chakra-ui/react'
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import NextLink from 'next/link'
-import { AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiOutlineShoppingCart, AiOutlineHome } from 'react-icons/ai'
+import { BiChevronDown } from 'react-icons/bi'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { useRouter } from 'next/router'
 import { CartContext } from '@/context/CartContextProvider'
@@ -33,6 +35,7 @@ export default function Navbar () {
   const primaryColor = theme.colors.custom.primary
   const backgroundColor = theme.colors.custom.background
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isPageDark, setIsPageDark] = useState(false)
   const [qty, setQty] = useState(0)
   const countQty = countItems()
   useEffect(() => {
@@ -41,6 +44,7 @@ export default function Navbar () {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
+    setIsPageDark(!isSidebarOpen)
   }
 
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
@@ -55,6 +59,7 @@ export default function Navbar () {
     <>
       {isMobile && (
         <>
+          {isPageDark && <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 9 }} />}
           {isSidebarOpen && (
             <Flex
               as='nav'
@@ -64,15 +69,16 @@ export default function Navbar () {
               padding={4}
               bg={primaryColor}
               height='100%'
-              width='50%'
+              width='75%'
+              borderRadius={20}
               position='fixed'
               top={0}
               left={0}
               zIndex={10}
               marginTop={0}
             >
-              <Flex direction='column' alignItems='flex-start'>
-                <Box w='100%' justifyContent='flex-start'>
+              <Flex direction='column' alignItems='flex-start' width='100%'>
+                <Box width='100%' justifyContent='flex-start'>
                   <Flex
                     width='100%'
                     marginTop='10px'
@@ -104,138 +110,185 @@ export default function Navbar () {
                     direction='column'
                     marginTop='10px'
                     alignItems='flex-start'
+                    width='100%'
                   >
+                    <Flex alignItems='center'>
+                      <Icon boxSize={8} as={AiOutlineHome} />
+                      <Button
+                        style={{
+                          background: 'none',
+                          padding: 0,
+                          margin: 12,
+                          width: '100%'
+                        }}
+                        width='100%'
+                        fontFamily='Playfair'
+                        colorScheme='gray'
+                        onClick={() => handleClick('home')}
+                      >
+                        Home
+                      </Button>
+                    </Flex>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
-                      }}
-                      fontFamily='Playfair'
-                      colorScheme='gray'
-                      onClick={() => handleClick('home')}
-                    >
-                      Home
-                    </Button>
-                    <Button
-                      style={{
-                        background: 'none',
-                        padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Blush')}
                     >
-                      Blush
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Blush</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Bronzer')}
                     >
-                      Bronzer
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Bronzer</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyebrow')}
                     >
-                      Eyebrow
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Eyebrow</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyeliner')}
                     >
-                      Eyeliner
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Eyeliner</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Eyeshadow')}
                     >
-                      Eyeshadow
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Eyeshadow</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Foundation')}
                     >
-                      Foundation
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Foundation</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Lip liner')}
                     >
-                      Lip liner
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Lip liner</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Lipstick')}
                     >
-                      Lipstick
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Lipstick</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Mascara')}
                     >
-                      Mascara
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Mascara</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                     <Button
                       style={{
                         background: 'none',
                         padding: 0,
-                        margin: 5
+                        margin: 15,
+                        marginBottom: 40,
+                        width: '100%'
                       }}
                       fontFamily='Playfair'
                       colorScheme='gray'
                       onClick={() => handleClick('Nail polish')}
                     >
-                      Nail polish
+                      <Flex justifyContent='space-between' alignItems='center' width='100%'>
+                        <Text>Nail polish</Text>
+                        <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                      </Flex>
                     </Button>
                   </Flex>
                 ) : (

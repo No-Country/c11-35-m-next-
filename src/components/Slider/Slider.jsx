@@ -17,16 +17,18 @@ export const Carousel = () => {
   }
 
   return (
-    <Slider {...settings}>
-      <Box>
-        <Image src='/images/carousel1.jpg' alt='Image 1' />
-      </Box>
-      <Box>
-        <Image src='/images/carousel2.jpg' alt='Image 2' />
-      </Box>
-      <Box>
-        <Image src='/images/carousel3.jpg' alt='Image 3' />
-      </Box>
-    </Slider>
+    <div style={{ maxWidth: '100%', margin: '0 auto' }}>
+      <Slider {...settings}>
+        <Box style={{ margin: 0, padding: 0 }}>
+          <Image src='/images/carousel1.jpg' alt='Image 1' style={{ margin: 0, padding: 0 }} />
+        </Box>
+        <Box style={{ margin: 0, padding: 0 }}>
+          <Image src='/images/carousel2.jpg' alt='Image 2' style={{ margin: 0, padding: 0 }} />
+        </Box>
+        <Box style={{ margin: 0, padding: 0 }}>
+          <Image src='/images/carousel3.jpg' alt='Image 3' style={{ margin: 0, padding: 0 }} />
+        </Box>
+      </Slider>
+    </div>
   )
 }

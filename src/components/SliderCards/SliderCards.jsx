@@ -33,7 +33,7 @@ export const SliderComponent = ({ data }) => {
           title={item.name}
           description={item.description}
           price={item.price}
-          image={item.image_link}
+          image={item.imageLink}
         />
       ))}
     </Slider>

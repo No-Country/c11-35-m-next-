@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getDocs, collection, query, limit } from '@firebase/firestore'
+import { db } from '@/services/db'
 
 const initialState = {
   dataHome: null,
@@ -9,21 +10,16 @@ const initialState = {
 
 export const fetchDataHome = createAsyncThunk('data/fetchDataHome', async (props) => {
   try {
-    let url = 'https://makeup-api.herokuapp.com/api/v1/products.json?rating_greater_than=4.9'
-    if (props === undefined) {
-      url += ''
-    }
-
-    const response = await axios.get(url)
-    let data = response.data
-
+    const productsDB = collection(db, 'products')
+    // const querySnapshot = await getDocs(productsDB)
+    const querySnapshot = await getDocs(query(productsDB, limit(5)))
+    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
     if (props !== undefined) {
       const lowercaseProps = props.toLowerCase()
-      data = data.filter(item => item.name.toLowerCase().includes(lowercaseProps))
+      return data.filter(item =>
+        item.name.toLowerCase().includes(lowercaseProps)
+      )
     }
-
-    // Filtrar los primeros 5 resultados
-    data = data.slice(0, 5)
 
     return data
   } catch (error) {

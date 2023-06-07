@@ -12,7 +12,8 @@ import {
   Text,
   useTheme,
   Badge,
-  Icon
+  Icon,
+  Center
 } from '@chakra-ui/react'
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
@@ -405,21 +406,21 @@ export default function Navbar () {
               position='absolute'
               left={0}
             />
-            <Box
-              display='flex'
-              alignItems='center'
-              justifyContent='center'
-              width='100%'
+            <Center
+              w='200px' // Ajusta el ancho a tu preferencia
+              position='fixed' // Agrega la propiedad para una posición fija
+              left='50%' // Centra horizontalmente
+              transform='translateX(-50%)'
             >
+              <Text fontSize='2xl' color='black'>SUNKISS</Text>
+            </Center>
+            <Flex alignItems='center' ml='auto'> {/* Utiliza ml='auto' para mover los elementos a la derecha */}
               <SearchBar />
-            </Box>
-            <Flex alignItems='center'>
               <IconButton
                 color={textColor}
                 icon={<AiOutlineShoppingCart />}
                 variant='ghost'
                 onClick={handleCartClick}
-                right={0}
                 fontSize='30px'
               />
               {qty > 0 && (

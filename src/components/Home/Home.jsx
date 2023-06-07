@@ -142,8 +142,12 @@ export default function Home () {
               <Carousel />
             </Box>
             <Text marginTop={10}>Best rated</Text>
-            <Box marginTop={25} marginBottom={60}>
-              <SliderComponent data={dataHome} />
+            <Box marginTop={25} marginBottom={10}>
+              {dataHome && dataHome.slice(0, 10) && <SliderComponent data={dataHome.slice(0, 10)} />}
+            </Box>
+            <Text marginTop={10}>Best sellers</Text>
+            <Box marginBottom={10}>
+              {dataHome && dataHome.slice(10, 15) && <SliderComponent data={dataHome.slice(10, 15)} />}
             </Box>
           </>
         )}

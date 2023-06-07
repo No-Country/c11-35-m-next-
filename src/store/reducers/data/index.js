@@ -8,10 +8,9 @@ const initialState = {
   error: null
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async props => {
+export const fetchData = createAsyncThunk('data/fetchData', async ({ props }) => {
   try {
     const productsDB = collection(db, 'products')
-    // const querySnapshot = await getDocs(productsDB)
     const querySnapshot = await getDocs(query(productsDB, limit(50)))
     const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
     if (props !== undefined) {

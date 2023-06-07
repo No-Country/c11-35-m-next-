@@ -34,7 +34,7 @@ export const CartItem = props => {
           width='100px'
           height='100px'
           fit='cover'
-          src={props.image_link || image}
+          src={props.imageLink || image}
           alt={name}
           draggable='false'
           loading='lazy'

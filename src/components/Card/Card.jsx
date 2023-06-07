@@ -12,7 +12,8 @@ import {
   IconButton,
   Flex,
   useTheme,
-  useToast
+  useToast,
+  Box
 } from '@chakra-ui/react'
 import { useContext } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
@@ -65,13 +66,14 @@ export default function ProductCard ({
         />
         <CardBody
           width='100%'
+          paddingBottom='0px'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'
           }}
         >
           <Stack mt='6' spacing='3'>
-            <Text py='2'>{brand && brand.toUpperCase()}</Text>
+            <Text py='1'>{brand && brand.toUpperCase()}</Text>
             <Heading
               maxWidth='80%'
               minHeight={{ base: '110px', sm: '120px' }}
@@ -81,13 +83,13 @@ export default function ProductCard ({
               {title}
             </Heading>
             {colors && colors.length > 0 ? (
-              <>
+              <Box>
                 <ProductColors colors={colors} />
-              </>
+              </Box>
             ) : null}
           </Stack>
         </CardBody>
-        <CardFooter gap='20'>
+        <CardFooter gap='20' padding='0px 15px 15px 15px'>
           <Text color='#1A1A1A' fontSize='2xl' fontWeight='extrabold'>
             ${price}
           </Text>

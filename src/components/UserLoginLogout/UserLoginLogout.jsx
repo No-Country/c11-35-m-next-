@@ -12,7 +12,8 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
-  Icon
+  Icon,
+  IconButton
 } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { UserContext } from '@/context/UserContextProvider'
@@ -104,15 +105,15 @@ export default function UserLoginLogout () {
     <>
       <Flex alignItems='center' ml={3}>
         {!currentUser ? (
-          <Button
-            leftIcon={<Icon as={FiUser} />}
-            variant='ghost'
+          <IconButton
+            icon={<Icon as={FiUser} />}
+            bg='transparent'
+            color='#000000'
             onClick={handleClick}
             padding={0}
             m='5px'
-          >
-            My Account
-          </Button>
+            fontSize='30px'
+          />
         ) : (
           <Menu>
             <MenuButton as={Flex} alignItems='center'>
@@ -131,9 +132,7 @@ export default function UserLoginLogout () {
                   onClick={handleClick}
                   padding={0}
                   m='5px'
-                >
-                  My Account
-                </Button>
+                />
               )}
             </MenuButton>
             <MenuList>

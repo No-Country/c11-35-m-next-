@@ -47,7 +47,7 @@ export default function ProductCard ({
   return (
     <Card
       borderRadius='10'
-      width={{ base: '80%', sm: '40%', lg: '20%' }}
+      width={{ base: '80%', sm: '40%', md: '30%', lg: '20%' }}
       flexShrink='0'
       minHeight={{ base: '60vh', sm: '50vh', lg: '30vh' }}
     >
@@ -57,6 +57,7 @@ export default function ProductCard ({
           alt='Green double couch with wooden legs'
           maxWidth='150px'
           height='150'
+          padding='10px'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'

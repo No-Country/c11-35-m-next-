@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchData } from '@/store/reducers/data'
+import { fetchData } from '@/store/reducers/data/index.js'
 import {
   Card,
   Stack,
@@ -38,7 +38,7 @@ export default function ProductDetails ({ id }) {
   const primaryColor = theme.colors.custom.primary
   const backgroundColor = theme.colors.custom.background
   const dispatch = useDispatch()
-  const data = useSelector(state => state.data.data)
+  const data = useSelector(state => state.dataHome.dataHome)
 
   const { addToCart } = useContext(CartContext)
 
@@ -49,7 +49,7 @@ export default function ProductDetails ({ id }) {
   }, [dispatch])
 
   const product = data ? data.find(product => product.id === id) : null
-
+  console.log(product)
   const handleAdd = qty => {
     addToCart(product, qty)
     toast({

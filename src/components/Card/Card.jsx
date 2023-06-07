@@ -45,19 +45,25 @@ export default function ProductCard ({
     })
   }
   return (
-    <Card borderRadius='10' size='sm'>
+    <Card
+      borderRadius='10'
+      width={{ base: '80%', sm: '40%', lg: '20%' }}
+      flexShrink='0'
+      minHeight={{ base: '60vh', sm: '50vh', lg: '30vh' }}
+    >
       <Flex direction='column' align='center'>
         <Image
           src={image || imagePath}
           alt='Green double couch with wooden legs'
           maxWidth='150px'
+          height='150'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'
           }}
         />
         <CardBody
-          minWidth='90%'
+          width='100%'
           onClick={onClick}
           _hover={{
             cursor: 'pointer'
@@ -65,7 +71,14 @@ export default function ProductCard ({
         >
           <Stack mt='6' spacing='3'>
             <Text py='2'>{brand && brand.toUpperCase()}</Text>
-            <Heading size='md'>{title}</Heading>
+            <Heading
+              maxWidth='80%'
+              minHeight={{ base: '110px', sm: '120px' }}
+              size='md'
+              flexWrap='wrap'
+            >
+              {title}
+            </Heading>
             {colors && colors.length > 0 ? (
               <>
                 <ProductColors colors={colors} />

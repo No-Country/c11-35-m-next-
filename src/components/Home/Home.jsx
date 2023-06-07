@@ -13,7 +13,8 @@ import {
   Flex,
   Button,
   Icon,
-  Input
+  Input,
+  Heading
 } from '@chakra-ui/react'
 import ProductCard from '@/components/Card/Card'
 import Pagination from '../Pagination/Pagination'
@@ -133,7 +134,7 @@ export default function Home () {
     setCurrentPage(page)
   }
   return (
-    <Box width='100%'>
+    <Box width='100%' margin='0 auto'>
       <Cart />
       <Box width='100%'>
         {!filteredData.length > 0 && (
@@ -141,13 +142,51 @@ export default function Home () {
             <Box width='100%'>
               <Carousel />
             </Box>
-            <Text marginTop={10}>Best rated</Text>
-            <Box marginTop={25} marginBottom={10}>
-              {dataHome && dataHome.slice(0, 10) && <SliderComponent data={dataHome.slice(0, 10)} />}
+            <Heading margin={10}>Top rated</Heading>
+            <Box
+              margin='25px auto'
+              padding={5}
+              overflowX='scroll'
+              width='85vw'
+              css={{
+                '&::-webkit-scrollbar': {
+                  width: '4px'
+                },
+                '&::-webkit-scrollbar-track': {
+                  width: '6px'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: '#EAEAEA',
+                  borderRadius: '24px'
+                }
+              }}
+            >
+              {dataHome && dataHome.slice(0, 10) && (
+                <SliderComponent data={dataHome.slice(0, 10)} />
+              )}
             </Box>
-            <Text marginTop={10}>Best sellers</Text>
-            <Box marginBottom={10}>
-              {dataHome && dataHome.slice(10, 15) && <SliderComponent data={dataHome.slice(10, 15)} />}
+            <Heading margin={10}>Best sellers</Heading>
+            <Box
+              margin='25px auto'
+              padding={5}
+              overflowX='scroll'
+              width='85vw'
+              css={{
+                '&::-webkit-scrollbar': {
+                  width: '4px'
+                },
+                '&::-webkit-scrollbar-track': {
+                  width: '6px'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: '#EAEAEA',
+                  borderRadius: '24px'
+                }
+              }}
+            >
+              {dataHome && dataHome.slice(10, 15) && (
+                <SliderComponent data={dataHome.slice(10, 20)} />
+              )}
             </Box>
           </>
         )}

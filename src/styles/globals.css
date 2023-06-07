@@ -25,3 +25,6 @@ nav {
     margin: 0;
     padding: 0;
   }
+  html{
+    width: 100vw;
+  }

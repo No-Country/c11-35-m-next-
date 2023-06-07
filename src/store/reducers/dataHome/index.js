@@ -9,6 +9,7 @@ const initialState = {
 }
 
 export const fetchDataHome = createAsyncThunk('data/fetchDataHome', async (props) => {
+  console.log('hola')
   try {
     const productsDB = collection(db, 'products')
     // const querySnapshot = await getDocs(productsDB)

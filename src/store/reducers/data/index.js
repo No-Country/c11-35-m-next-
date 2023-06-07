@@ -8,23 +8,29 @@ const initialState = {
   error: null
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async ({ props }) => {
-  try {
-    const productsDB = collection(db, 'products')
-    const querySnapshot = await getDocs(query(productsDB, limit(50)))
-    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-    if (props !== undefined) {
-      const lowercaseProps = props.toLowerCase()
-      return data.filter(item =>
-        item.name.toLowerCase().includes(lowercaseProps)
-      )
-    }
+export const fetchData = createAsyncThunk(
+  'data/fetchData',
+  async ({ props }) => {
+    try {
+      const productsDB = collection(db, 'products')
+      const querySnapshot = await getDocs(query(productsDB, limit(50)))
+      const data = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      if (props !== undefined) {
+        const lowercaseProps = props.toLowerCase()
+        return data.filter(item =>
+          item.name.toLowerCase().includes(lowercaseProps)
+        )
+      }
 
-    return data
-  } catch (error) {
-    throw new Error(error)
+      return data
+    } catch (error) {
+      throw new Error(error)
+    }
   }
-})
+)
 
 const dataSlice = createSlice({
   name: 'data',

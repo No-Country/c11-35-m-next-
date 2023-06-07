@@ -2,10 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import {
   Box,
   Flex,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
   IconButton,
   useBreakpointValue,
@@ -13,7 +9,8 @@ import {
   useTheme,
   Badge,
   Icon,
-  Center
+  Center,
+  Heading
 } from '@chakra-ui/react'
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
@@ -108,7 +105,7 @@ export default function Navbar () {
                       fontFamily='Playfair'
                       size='6xl'
                     >
-                      <Text fontSize='2xl'>SUNKISS</Text>
+                      <Heading fontSize='2xl'>SUNKISS</Heading>
                     </Button>
                     <IconButton
                       color={textColor}
@@ -412,9 +409,11 @@ export default function Navbar () {
               left='50%' // Centra horizontalmente
               transform='translateX(-50%)'
             >
-              <Text fontSize='2xl' color='black'>SUNKISS</Text>
+              <Heading fontSize='2xl' color='black'>
+                SUNKISS
+              </Heading>
             </Center>
-            <Flex alignItems='center' ml='auto'> {/* Utiliza ml='auto' para mover los elementos a la derecha */}
+            <Flex alignItems='center' ml='auto'>
               <SearchBar />
               <IconButton
                 color={textColor}
@@ -443,127 +442,307 @@ export default function Navbar () {
         </>
       )}
       {!isMobile && (
-        <Flex
-          as='nav'
-          align='center'
-          padding={4}
-          bg={primaryColor}
-          color='white'
-          justifyContent='space-between'
-        >
-          <Flex gap={5}>
-            <NextLink href='/'>
-              <Text color={textColor}>Home</Text>
-            </NextLink>
-            {privilege === 'customer' ? (
-              <Menu>
-                <MenuButton as={Flex} alignItems='center' color={textColor}>
-                  Product type
-                </MenuButton>
-                <MenuList>
-                  <MenuItem
-                    onClick={() => handleClick('Blush')}
-                    color='blackAlpha.700'
-                  >
-                    Blush
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Bronzer')}
-                    color='blackAlpha.700'
-                  >
-                    Bronzer
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Eyebrow')}
-                    color='blackAlpha.700'
-                  >
-                    Eyebrow
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Eyeliner')}
-                    color='blackAlpha.700'
-                  >
-                    Eyeliner
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Eyeshadow')}
-                    color='blackAlpha.700'
-                  >
-                    Eyeshadow
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Foundation')}
-                    color='blackAlpha.700'
-                  >
-                    Foundation
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('lip_liner')}
-                    color='blackAlpha.700'
-                  >
-                    Lip liner
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Lipstick')}
-                    color='blackAlpha.700'
-                  >
-                    Lipstick
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Mascara')}
-                    color='blackAlpha.700'
-                  >
-                    Mascara
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() => handleClick('Nail polish')}
-                    color='blackAlpha.700'
-                  >
-                    Nail polish
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            ) : (
-              <NextLink href='/admin-dashboard'>
-                <Text color={textColor}>Admin</Text>
-              </NextLink>
-            )}
-          </Flex>
-          <Box
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-            width='100%'
+        <Box bg={primaryColor}>
+          <Heading
+            fontSize='76px'
+            fontWeight='600'
+            textAlign='center'
+            bg={primaryColor}
           >
-            <SearchBar />
-          </Box>
-          <UserLoginLogout />
-          <Flex alignItems='center'>
-            <IconButton
-              color={textColor}
-              icon={<AiOutlineShoppingCart />}
-              variant='ghost'
-              onClick={handleCartClick}
-              right={0}
-              fontSize='30px'
-            />
-            {qty > 0 && (
-              <Badge
-                position='absolute'
-                w={4}
-                h={4}
-                right={4}
-                top={6}
-                fontSize='10px'
-                backgroundColor={backgroundColor}
-                color={theme.colors.custom.primary}
-                borderRadius='50%'
-              >
-                {qty}
-              </Badge>
-            )}
+            <NextLink href='/'> SUNKISS</NextLink>
+          </Heading>
+          <Flex
+            margin='0 auto'
+            align='center'
+            padding='3px'
+            width='90%'
+            bg={primaryColor}
+            color='white'
+            justifyContent='right'
+            gap={5}
+          >
+            <Box
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              width='75%'
+            >
+              <SearchBar />
+            </Box>
+            <UserLoginLogout />
+            <Flex alignItems='center' ml='30px'>
+              <IconButton
+                color={textColor}
+                icon={<AiOutlineShoppingCart />}
+                variant='ghost'
+                onClick={handleCartClick}
+                right={0}
+                fontSize='30px'
+              />
+              {qty > 0 && (
+                <Badge
+                  position='absolute'
+                  w='15px'
+                  h='15px'
+                  right={20}
+                  top='45%'
+                  fontSize='10px'
+                  backgroundColor={backgroundColor}
+                  color={theme.colors.custom.primary}
+                  borderRadius='50%'
+                >
+                  {qty}
+                </Badge>
+              )}
+            </Flex>
           </Flex>
-        </Flex>
+          <Box width='100%' margin='0 auto' backgroundColor={primaryColor} padding='10px'>
+            <Flex gap={5}>
+              {privilege === 'customer' ? (
+                <Flex
+                  direction='row'
+                  marginTop='10px'
+                  alignItems='flex-start'
+                  width='90%'
+                  margin='0 auto'
+                  backgroundColor={primaryColor}
+                >
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Blush')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Blush</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Bronzer')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Bronzer</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Eyebrow')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Eyebrow</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Eyeliner')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Eyeliner</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Eyeshadow')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Eyeshadow</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Foundation')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Foundation</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Lip liner')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Lip liner</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Lipstick')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Lipstick</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Mascara')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Mascara</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                  <Button
+                    style={{
+                      background: 'none',
+                      padding: 0,
+                      width: '100%'
+                    }}
+                    width='100%'
+                    fontSize={18}
+                    margin={buttonMargin}
+                    fontFamily='Playfair'
+                    colorScheme='gray'
+                    onClick={() => handleClick('Nail polish')}
+                  >
+                    <Flex
+                      justifyContent='space-between'
+                      alignItems='center'
+                      width='100%'
+                    >
+                      <Text>Nail polish</Text>
+                      <Icon boxSize={8} as={BiChevronDown} marginRight={10} />
+                    </Flex>
+                  </Button>
+                </Flex>
+              ) : (
+                <Flex
+                  justifyContent='center'
+                  alignItems='center'
+                  margin='0 auto'
+                >
+                  <NextLink href='/admin-dashboard'>
+                    <Text color={textColor}>Admin</Text>
+                  </NextLink>
+                  <UserLoginLogout />
+                </Flex>
+              )}
+            </Flex>
+          </Box>
+        </Box>
       )}
     </>
   )

@@ -17,7 +17,7 @@ export const SliderComponent = ({ data }) => {
           <ProductCard
             onClick={() => handleClickProduct(item.id)}
             id={item.id}
-            key={item.name}
+            key={item.id}
             title={item.name}
             description={item.description}
             price={item.price}

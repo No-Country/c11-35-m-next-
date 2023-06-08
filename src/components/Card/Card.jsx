@@ -47,6 +47,7 @@ export default function ProductCard ({
   }
   return (
     <Card
+      key={id}
       borderRadius='10'
       width={{ base: '80%', sm: '40%', md: '30%', lg: '20%' }}
       flexShrink='0'

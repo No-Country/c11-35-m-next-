@@ -6,9 +6,9 @@ export default function ProductColors ({ colors }) {
   return (
     <>
       <Flex wrap='wrap'>
-        {defaultColors.map(color => (
+        {defaultColors.map((color, index) => (
           <Box
-            key={color}
+            key={index}
             p='4'
             bg={color}
             color='white'

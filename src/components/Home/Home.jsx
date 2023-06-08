@@ -28,6 +28,7 @@ export default function Home () {
   const router = useRouter()
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
+  console.log(data)
   const dataHome = useSelector(state => state.dataHome.dataHome)
   const [filteredData, setFilteredData] = useState(data || [])
   const [currentPage, setCurrentPage] = useState(1)
@@ -96,10 +97,10 @@ export default function Home () {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      dispatch(fetchData())
       dispatch(fetchDataHome())
+      dispatch(fetchData({ props: itemType }))
     }
-  }, [dispatch])
+  }, [dispatch, itemType])
 
   useEffect(() => {
     if (itemType && data) {

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getDocs, collection, query, limit } from '@firebase/firestore'
+import { getDocs, collection, query, limit } from 'firebase/firestore'
 import { db } from '@/services/db'
 
 const initialState = {
@@ -8,29 +8,18 @@ const initialState = {
   error: null
 }
 
-export const fetchData = createAsyncThunk(
-  'data/fetchData',
-  async ({ props }) => {
-    try {
-      const productsDB = collection(db, 'products')
-      const querySnapshot = await getDocs(query(productsDB, limit(50)))
-      const data = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }))
-      if (props !== undefined) {
-        const lowercaseProps = props.toLowerCase()
-        return data.filter(item =>
-          item.name.toLowerCase().includes(lowercaseProps)
-        )
-      }
-
-      return data
-    } catch (error) {
-      throw new Error(error)
-    }
+export const fetchData = createAsyncThunk('data/fetchData', async (props) => {
+  try {
+    const productsDB = collection(db, 'products')
+    const querySnapshot = await getDocs(query(productsDB, limit()))
+    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    return data.filter(item =>
+      item.productType.toLowerCase().includes(props.toLowerCase())
+    )
+  } catch (error) {
+    throw new Error(error)
   }
-)
+})
 
 const dataSlice = createSlice({
   name: 'data',

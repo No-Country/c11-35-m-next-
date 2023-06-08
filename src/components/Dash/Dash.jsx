@@ -27,7 +27,7 @@ export default function Dash () {
       </Flex>
       {orders.length > 0 ? (
         orders.map((order, index) => (
-          <Card key={order.id} my={4}>
+          <Card key={index} my={4}>
             <CardBody>
               <Heading as='h3' size='md' mb={2} fontWeight='medium'>
                 <strong> Order Id: </strong>

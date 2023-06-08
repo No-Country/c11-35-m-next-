@@ -18,7 +18,7 @@ import { fetchData } from '@/store/reducers/data'
 import { useDispatch } from 'react-redux'
 
 export const SearchBar = () => {
-  const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
+  const isMobile = useBreakpointValue({ base: true, lg: false, sm: true })
   const theme = useTheme()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary

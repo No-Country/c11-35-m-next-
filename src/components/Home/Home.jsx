@@ -34,8 +34,10 @@ export default function Home () {
   const [currentPage, setCurrentPage] = useState(1)
   const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
   const itemsPerPage = 8
-  const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 4 })
-  const [filteredDataLength, setFilteredDataLength] = useState(filteredData ? filteredData.length : 0)
+  const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 2, lg: 4 })
+  const [filteredDataLength, setFilteredDataLength] = useState(
+    filteredData ? filteredData.length : 0
+  )
   const currentItems = filteredData.length > 0 ? filteredData : data || []
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
@@ -109,15 +111,21 @@ export default function Home () {
       )
 
       if (minPrice !== '') {
-        filteredItems = filteredItems.filter(item => item.price >= parseInt(minPrice))
+        filteredItems = filteredItems.filter(
+          item => item.price >= parseInt(minPrice)
+        )
       }
 
       if (maxPrice !== '') {
-        filteredItems = filteredItems.filter(item => item.price <= parseInt(maxPrice))
+        filteredItems = filteredItems.filter(
+          item => item.price <= parseInt(maxPrice)
+        )
       }
 
       if (selectedBrand !== '') {
-        filteredItems = filteredItems.filter(item => item.brand === selectedBrand)
+        filteredItems = filteredItems.filter(
+          item => item.brand === selectedBrand
+        )
       }
 
       setFilteredData(filteredItems)

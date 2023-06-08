@@ -21,7 +21,7 @@ export const Carousel = () => {
       <Slider {...settings}>
         <Box style={{ margin: 0, padding: 0 }}>
           <Image
-            src='/images/carousel1.jpg'
+            src='/images/carousel1-min.jpg'
             alt='Image 1'
             objectFit='cover'
             style={{
@@ -34,7 +34,7 @@ export const Carousel = () => {
         </Box>
         <Box style={{ margin: 0, padding: 0 }}>
           <Image
-            src='/images/carousel2.jpg'
+            src='/images/carousel2-min.jpg'
             alt='Image 2'
             objectFit='cover'
             style={{
@@ -47,7 +47,7 @@ export const Carousel = () => {
         </Box>
         <Box style={{ margin: 0, padding: 0 }}>
           <Image
-            src='/images/carousel3.jpg'
+            src='/images/carousel3-min.jpg'
             alt='Image 3'
             objectFit='cover'
             style={{

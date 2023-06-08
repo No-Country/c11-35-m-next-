@@ -17,7 +17,7 @@ export default function Profile () {
 
   return (
     <>
-      <Card direction='column' alignItems='center' minHeight='100%' bg='transparent' boxShadow='none'>
+      <Card direction='column' alignItems='center' minHeight='100%' bg='transparent' boxShadow='none' mt={10}>
         <Image
           src={currentUser.photoURL}
           alt={currentUser.displayName}
@@ -76,7 +76,7 @@ export default function Profile () {
               </Button>
             </Box>
           </Link>
-          <Link href='/address'>
+          <Link href='/help'>
             <Box height='48px' margin='20px' marginTop='8px'>
               <Button
                 as='a'

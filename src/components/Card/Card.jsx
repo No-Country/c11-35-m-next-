@@ -26,15 +26,17 @@ export default function ProductCard ({
   image,
   onClick,
   brand,
-  colors
+  colors,
+  slider
 }) {
-  const imagePath = '/images/carousel1.jpg'
+  // const imagePath = '/images/carousel1.jpg'
   const item = { id, title, description, price, image, colors, brand }
   const theme = useTheme()
   const primaryColor = theme.colors.custom.primary
   const backgroundColor = theme.colors.custom.background
   const toast = useToast()
   const { addToCart } = useContext(CartContext)
+  const cardWidthSlider = { base: '80%', sm: '40%', md: '40%', lg: '25%' }
   const handleAdd = () => {
     addToCart(item, 1)
     toast({
@@ -49,14 +51,14 @@ export default function ProductCard ({
     <Card
       key={id}
       borderRadius='10'
-      width={{ base: '80%', sm: '40%', md: '30%', lg: '20%' }}
+      width={slider ? cardWidthSlider : '100%'}
       flexShrink='0'
-      minHeight={{ base: '60vh', sm: '50vh', lg: '30vh' }}
+      minHeight={{ base: '40vh', sm: '40vh', lg: '30vh' }}
     >
       <Flex direction='column' align='center'>
         <Image
-          src={image || imagePath}
-          alt='Green double couch with wooden legs'
+          src={image}
+          alt={title.slice(0, 20)}
           maxWidth='150px'
           height='150'
           padding='10px'
@@ -81,7 +83,7 @@ export default function ProductCard ({
               size='md'
               flexWrap='wrap'
             >
-              {title}
+              {title.slice(0, 35)}
             </Heading>
             {colors && colors.length > 0 ? (
               <Box>
@@ -90,7 +92,7 @@ export default function ProductCard ({
             ) : null}
           </Stack>
         </CardBody>
-        <CardFooter gap='20' padding='0px 15px 15px 15px'>
+        <CardFooter gap='20px' padding='0px 15px 15px 15px' width='80%'>
           <Text color='#1A1A1A' fontSize='2xl' fontWeight='extrabold'>
             ${price}
           </Text>

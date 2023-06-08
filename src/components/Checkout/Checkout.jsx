@@ -13,7 +13,6 @@ export default function Checkout () {
   const [formData, setFormData] = useState({})
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
   const handleFormSubmit = data => {
-    console.log(data)
     setFormData(data)
     setCurrentStep(1)
     addUserAddress(currentUser.uid, data)

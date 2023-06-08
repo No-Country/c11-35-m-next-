@@ -100,7 +100,6 @@ export default function UserLoginLogout () {
     logOut()
     router.push('/')
   }
-  console.log(currentUser)
   return (
     <>
       <Flex alignItems='center' ml={3}>

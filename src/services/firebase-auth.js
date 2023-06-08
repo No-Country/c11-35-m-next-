@@ -77,7 +77,6 @@ export const logOut = () => {
 }
 
 export const addUserAddress = async (id, data) => {
-  console.log(data)
   /*   const updatedAddress = []
   updatedAddress.push(data) */
   const user = {

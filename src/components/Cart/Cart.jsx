@@ -43,7 +43,6 @@ export default function Cart () {
   }
 
   const totalPrice = cartTotalPrice(cartList)
-  console.log(totalPrice)
 
   const saveCartToLocalStorage = () => {
     if (typeof window !== 'undefined') {
@@ -64,8 +63,8 @@ export default function Cart () {
 
   useEffect(() => {
     getCartFromLocalStorage()
-  }, []) // Llamar a getCartFromLocalStorage solo una vez, en el montaje del componente
-console.log(cartList)
+  }, [])
+  
   return (
     <Drawer isOpen={toggleCartStatus} placement='right' zIndex={11}>
       <DrawerOverlay />

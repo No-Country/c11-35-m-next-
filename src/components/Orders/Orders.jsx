@@ -7,11 +7,9 @@ import { Card, CardBody, Heading, Text, Link, Button, Flex } from '@chakra-ui/re
 export default function Orders () {
   const { currentUser } = useContext(UserContext)
   const [orders, setOrders] = useState([])
-  console.log(orders)
 
   const callUser = async (currentUser) => {
     const user = await fetchUser(currentUser)
-    console.log(user)
     const userOrders = user.orders || []
     setOrders(userOrders)
   }

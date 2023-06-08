@@ -30,12 +30,10 @@ export default function PaymentForm ({ formData, confirmation }) {
   const lastNameRef = useRef(null)
 
   const createPayment = async () => {
-    console.log(formData)
     const requestBody = {
       amount: formData.totalPrice * 100, // poner el payment correcto
       description: 'pay of "producto seleccionado"' // colocar nombre del producto
     }
-    console.log(formData)
     try {
       const res = await fetch('/api/intent', {
         method: 'POST',
@@ -46,7 +44,6 @@ export default function PaymentForm ({ formData, confirmation }) {
       })
 
       const data = await res.json()
-      console.log(data)
       confirmPayment(data.paymentIntent.client_secret)
     } catch (error) {
       console.error(error)
@@ -67,7 +64,6 @@ export default function PaymentForm ({ formData, confirmation }) {
             }
           }
         )
-        console.log(currentUser)
         if (results.paymentIntent.status === 'succeeded') {
           confirmation()
           Swal.fire(

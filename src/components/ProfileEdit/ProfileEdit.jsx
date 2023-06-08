@@ -10,12 +10,13 @@ import {
   Input,
   Stack,
   useToast,
-  Link,
   Flex
 } from '@chakra-ui/react'
 import { FiArrowLeft } from 'react-icons/fi'
+import { useRouter } from 'next/router'
 
 export default function Profile () {
+  const router = useRouter()
   const { currentUser } = useContext(UserContext)
   const toast = useToast()
 
@@ -48,14 +49,14 @@ export default function Profile () {
     }
   }, [currentUser])
 
-  const handleInputChange = (e) => {
-    setFormData((prevData) => ({
+  const handleInputChange = e => {
+    setFormData(prevData => ({
       ...prevData,
       [e.target.name]: e.target.value
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
 
     const errors = {}
@@ -92,13 +93,19 @@ export default function Profile () {
       isClosable: true
     })
   }
+  const handleBack = () => {
+    router.back()
+  }
 
   return (
     <Box p={4}>
       <Flex align='center'>
-        <Link href='/profile'>
-          <Button as='a' leftIcon={<FiArrowLeft />} m={2} variant='unstyled' />
-        </Link>
+        <Button
+          leftIcon={<FiArrowLeft />}
+          m={2}
+          variant='unstyled'
+          onClick={handleBack}
+        />
         <Heading as='h2' size='lg' mb={4}>
           Edit Profile
         </Heading>

@@ -15,7 +15,8 @@ import {
   DrawerContent,
   DrawerFooter,
   DrawerBody,
-  useTheme
+  useTheme,
+  Heading
 } from '@chakra-ui/react'
 import { CartItem } from './CartItem'
 import { useRouter } from 'next/router'
@@ -76,20 +77,21 @@ export default function Cart () {
           justify='space-between'
           p='30px'
         >
-          <Text fontSize='xx-large'>Your Cart</Text>
+          <Heading fontSize='xx-large'>Your Cart</Heading>
           <CloseIcon onClick={handleClick} />
         </Flex>
         <DrawerBody>
           <Box
             maxW={{ base: '3xl', lg: '6xl' }}
             mx='auto'
-            px={{ base: '4', md: '6', lg: '6' }}
+            px={4}
             py={{ base: '6', md: '6', lg: '6' }}
           >
             <Stack
               direction={{ base: 'column', lg: 'row' }}
               align={{ lg: 'flex-start' }}
               spacing={{ base: '8', md: '16' }}
+              width='100%'
             >
               <Stack spacing={{ base: '8', md: '10' }} flex='2'>
                 <Stack spacing='6'>
@@ -107,9 +109,7 @@ export default function Cart () {
                 </Stack>
               </Stack>
 
-              <Flex direction='column' align='center' flex='1'>
-                <HStack mt='6' fontWeight='semibold' />
-              </Flex>
+             
             </Stack>
           </Box>
         </DrawerBody>

@@ -56,7 +56,7 @@ El proyecto se ha construido utilizando las siguientes tecnologías y herramient
 - ![Google Slides](https://img.shields.io/badge/-Google%20Slides-4285F4?style=for-the-badge&logo=google-slides) Pruebas de Usuarios
 - ![Optimal Workshop](https://img.shields.io/badge/-Optimal%20Workshop-000000?style=for-the-badge&logo=optimal-workshop) Card Sorting
 - ![Freepik](https://img.shields.io/badge/-Freepik-00C7B7?style=for-the-badge&logo=freepik) Imágenes
-
+- ![Behance](https://img.shields.io/badge/-Behance-00C7B7?style=for-the-badge&logo=freepik) Imágenes
 ## Equipo de Desarrollo
 
 - [Micaela Samsó](https://www.linkedin.com/in/micaela-sams%C3%B3-b153541b8): Diseñador UX/UI

@@ -2,13 +2,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import { fetchUser } from '@/services/firebase-auth'
 import { UserContext } from '@/context/UserContextProvider'
 import { FiArrowLeft } from 'react-icons/fi'
-import { Card, CardBody, Heading, Text, Link, Button, Flex } from '@chakra-ui/react'
+import {
+  Card,
+  CardBody,
+  Heading,
+  Text,
+  Button,
+  Flex
+} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 export default function Orders () {
+  const router = useRouter()
   const { currentUser } = useContext(UserContext)
   const [orders, setOrders] = useState([])
 
-  const callUser = async (currentUser) => {
+  const callUser = async currentUser => {
     const user = await fetchUser(currentUser)
     const userOrders = user.orders || []
     setOrders(userOrders)
@@ -20,12 +29,20 @@ export default function Orders () {
     }
   }, [currentUser])
 
+  const handleBack = () => {
+    router.back()
+  }
+
   return (
     <>
       <Flex align='center'>
-        <Link href='/profile'>
-          <Button leftIcon={<FiArrowLeft />} m={2} variant='unstyled' />
-        </Link>
+        <Button
+          leftIcon={<FiArrowLeft />}
+          m={2}
+          variant='unstyled'
+          onClick={handleBack}
+        />
+
         <Heading as='h2' size='lg' mb={4}>
           Orders
         </Heading>

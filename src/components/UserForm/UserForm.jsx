@@ -105,7 +105,11 @@ function UserForm({ onSubmit }) {
         User Information
       </Heading>
       <FormControl onSubmit={handleSubmit}>
-        <FormControl padding='0 20px' mt='2%' width='50%'>
+        <FormControl
+          padding='0 20px'
+          mt='2%'
+          width={{ base: '100%', md: '50%' }}
+        >
           <FormLabel htmlFor='first-name' fontWeight='normal'>
             User name
           </FormLabel>
@@ -117,7 +121,12 @@ function UserForm({ onSubmit }) {
             disabled
           />
         </FormControl>
-        <FormControl padding='0 20px' mt='2%' mb='20px' width='50%'>
+        <FormControl
+          padding='0 20px'
+          mt='2%'
+          mb='20px'
+          width={{ base: '100%', md: '50%' }}
+        >
           <FormLabel htmlFor='email' fontWeight='normal'>
             Email address
           </FormLabel>
@@ -374,7 +383,11 @@ function UserForm({ onSubmit }) {
           Bill Data
         </Heading>
 
-        <FormControl padding='0 20px' mt='2%' width='50%'>
+        <FormControl
+          padding='0 20px'
+          mt='2%'
+          width={{ base: '100%', md: '50%' }}
+        >
           <FormLabel htmlFor='postal' fontWeight='normal'>
             DNI or CUIL
           </FormLabel>

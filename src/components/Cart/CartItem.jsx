@@ -23,10 +23,10 @@ export const CartItem = props => {
   return (
     <>
       <Flex
-        direction={{ base: 'row', md: 'row' }}
+        direction={{ base: 'row' }}
         justify='space-between'
         align='center'
-        borderBottom='solid 1px gray'
+        borderBottom='solid 1px #EAEAEA'
         paddingBottom='10px'
       >
         <Image

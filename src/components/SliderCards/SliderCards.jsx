@@ -28,6 +28,7 @@ export const SliderComponent = ({ data }) => {
               item.productColors1HexValue,
               item.productColors2HexValue
             ]}
+            slider
           />
         ))}
     </HStack>

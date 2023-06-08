@@ -46,7 +46,7 @@ export default function Navbar () {
     setIsPageDark(!isSidebarOpen)
   }
 
-  const isMobile = useBreakpointValue({ base: true, lg: false, sm: false })
+  const isMobile = useBreakpointValue({ base: true, lg: false, sm: true })
   const handleClick = itemName => {
     router.push(`/?type=${itemName}`)
   }
@@ -285,7 +285,7 @@ export default function Navbar () {
                       margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
-                      onClick={() => handleClick('Lip liner')}
+                      onClick={() => handleClick('lip_liner')}
                     >
                       <Flex
                         justifyContent='space-between'
@@ -351,7 +351,7 @@ export default function Navbar () {
                       margin={buttonMargin}
                       fontFamily='Playfair'
                       colorScheme='gray'
-                      onClick={() => handleClick('Nail polish')}
+                      onClick={() => handleClick('nail_polish')}
                     >
                       <Flex
                         justifyContent='space-between'
@@ -496,7 +496,12 @@ export default function Navbar () {
               )}
             </Flex>
           </Flex>
-          <Box width='100%' margin='0 auto' backgroundColor={primaryColor} padding='10px'>
+          <Box
+            width='100%'
+            margin='0 auto'
+            backgroundColor={primaryColor}
+            padding='10px'
+          >
             <Flex gap={5}>
               {privilege === 'customer' ? (
                 <Flex
@@ -650,7 +655,7 @@ export default function Navbar () {
                     margin={buttonMargin}
                     fontFamily='Playfair'
                     colorScheme='gray'
-                    onClick={() => handleClick('Lip liner')}
+                    onClick={() => handleClick('lip_liner')}
                   >
                     <Flex
                       justifyContent='space-between'
@@ -716,7 +721,7 @@ export default function Navbar () {
                     margin={buttonMargin}
                     fontFamily='Playfair'
                     colorScheme='gray'
-                    onClick={() => handleClick('Nail polish')}
+                    onClick={() => handleClick('nail_polish')}
                   >
                     <Flex
                       justifyContent='space-between'

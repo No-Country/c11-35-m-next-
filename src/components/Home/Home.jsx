@@ -28,8 +28,8 @@ export default function Home () {
   const router = useRouter()
   const dispatch = useDispatch()
   const data = useSelector(state => state.data.data)
+  // console.log(data)
   const dataHome = useSelector(state => state.dataHome.dataHome)
-  console.log(dataHome)
   const [filteredData, setFilteredData] = useState(data || [])
   const [currentPage, setCurrentPage] = useState(1)
   const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
@@ -98,7 +98,7 @@ export default function Home () {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       dispatch(fetchDataHome())
-      dispatch(fetchDataHome({ props: itemType }))
+      dispatch(fetchData({ props: itemType }))
     }
   }, [dispatch, itemType])
 

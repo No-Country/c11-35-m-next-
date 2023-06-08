@@ -10,15 +10,9 @@ const initialState = {
 
 export const fetchDataHome = createAsyncThunk('data/fetchDataHome', async (props) => {
   try {
-    console.log(props)
     const productsDB = collection(db, 'products')
     const querySnapshot = await getDocs(query(productsDB, limit()))
     const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-    if (props === 'Eyebrow') {
-      return data.filter(item =>
-        item.productType.toLowerCase().includes(props.toLowerCase())
-      )
-    }
     if (props !== undefined) {
       const lowercaseProps = props.toLowerCase()
       return data.filter(item =>

@@ -14,7 +14,7 @@ import {
   Grid
 } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
-import { fetchDataHome } from '@/store/reducers/dataHome'
+import { fetchData } from '@/store/reducers/data'
 import { useDispatch } from 'react-redux'
 
 export const SearchBar = () => {
@@ -31,7 +31,7 @@ export const SearchBar = () => {
   }
 
   const handleSearch = () => {
-    dispatch(fetchDataHome({ props: value }))
+    dispatch(fetchData({ props: value }))
   }
 
   const handleOnSubmit = e => {

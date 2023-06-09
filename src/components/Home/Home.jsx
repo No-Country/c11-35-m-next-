@@ -23,7 +23,6 @@ import { BsFilterRight } from 'react-icons/bs'
 import Cart from '../Cart/Cart'
 import { Carousel } from '../Slider/Slider'
 import { SliderComponent } from '../SliderCards/SliderCards'
-import { query } from 'firebase/firestore'
 
 export default function Home () {
   const router = useRouter()

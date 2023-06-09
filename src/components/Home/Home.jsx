@@ -23,6 +23,7 @@ import { BsFilterRight } from 'react-icons/bs'
 import Cart from '../Cart/Cart'
 import { Carousel } from '../Slider/Slider'
 import { SliderComponent } from '../SliderCards/SliderCards'
+import { query } from 'firebase/firestore'
 
 export default function Home () {
   const router = useRouter()
@@ -46,8 +47,10 @@ export default function Home () {
   const [search, setSearch] = useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const brandOptions = [...new Set(currentItems.map(item => item.brand))]
+  const brandQuery = router.query.type
   useEffect(() => {
     const query = router.query.type
+    console.log(query)
     if (query === 'Blush' || query === 'Bronzer' || query === 'Eyebrow' || query === 'Eyeliner' || query === 'Eyeshadow' || query === 'Foundation' || query === 'lip_liner' || query === 'Lipstick' || query === 'Mascara' || query === 'nail_polish') {
       setItemType(query)
     } else if (query) {
@@ -169,7 +172,7 @@ export default function Home () {
     <Box width='100%' margin='0 auto'>
       <Cart />
       <Box width='100%'>
-        {!filteredData.length > 0 && (
+        {!(brandQuery) && (
           <>
             <Box width='100%'>
               <Carousel />
@@ -223,7 +226,7 @@ export default function Home () {
           </>
         )}
       </Box>
-      {filteredData.length > 0 && (
+      {brandQuery && (
         <Box padding='5px 15px'>
           <Text>
             Home <Text as='span'>&gt;</Text> {itemType}
@@ -312,7 +315,7 @@ export default function Home () {
         </Box>
       )}
       <Box>
-        {filteredData.length > 0 && (
+        {brandQuery && (
           <Box>
             <SimpleGrid columns={cardColumns} spacing={10} margin='30px'>
               {sortedItems

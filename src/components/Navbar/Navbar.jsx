@@ -51,6 +51,9 @@ export default function Navbar () {
   const handleClick = itemName => {
     router.push(`/?type=${itemName}`)
   }
+  const handleClickHome = () => {
+    router.push('/')
+  }
   const handleCartClick = () => {
     toggleCart()
   }
@@ -138,7 +141,7 @@ export default function Navbar () {
                         margin={buttonMargin}
                         fontFamily='Playfair'
                         colorScheme='gray'
-                        onClick={() => handleClick('home')}
+                        onClick={() => handleClickHome('home')}
                       >
                         Home
                       </Button>

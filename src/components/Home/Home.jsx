@@ -32,7 +32,7 @@ export default function Home () {
   const dataHome = useSelector(state => state.dataHome.dataHome)
   const [filteredData, setFilteredData] = useState(data || [])
   const [currentPage, setCurrentPage] = useState(1)
-  const [orderBy, setOrderBy] = useState('') // Estado para almacenar el tipo de ordenamiento seleccionado
+  const [orderBy, setOrderBy] = useState('')
   const itemsPerPage = 8
   const cardColumns = useBreakpointValue({ base: 1, sm: 2, md: 2, lg: 4 })
   const [filteredDataLength, setFilteredDataLength] = useState(
@@ -42,9 +42,18 @@ export default function Home () {
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
   const [selectedBrand, setSelectedBrand] = useState('')
+  const [itemType, setItemType] = useState('')
+  const [search, setSearch] = useState('')
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const brandOptions = [...new Set(currentItems.map(item => item.brand))]
-  const itemType = router.query.type
+  useEffect(() => {
+    const query = router.query.type
+    if (query === 'Blush' || query === 'Bronzer' || query === 'Eyebrow' || query === 'Eyeliner' || query === 'Eyeshadow' || query === 'Foundation' || query === 'lip_liner' || query === 'Lipstick' || query === 'Mascara' || query === 'nail_polish') {
+      setItemType(query)
+    } else if (query) {
+      setSearch(query.toLowerCase())
+    }
+  }, [router.query.type])
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen)
@@ -102,13 +111,11 @@ export default function Home () {
       dispatch(fetchDataHome())
       dispatch(fetchData({ props: itemType }))
     }
-  }, [dispatch, itemType])
+  }, [dispatch])
 
   useEffect(() => {
-    if (itemType && data) {
-      let filteredItems = data.filter(
-        item => item.productType === itemType.toLowerCase()
-      )
+    if (data) {
+      let filteredItems = data
 
       if (minPrice !== '') {
         filteredItems = filteredItems.filter(
@@ -128,15 +135,31 @@ export default function Home () {
         )
       }
 
-      setFilteredData(filteredItems)
-      setFilteredDataLength(filteredItems.length) // Actualizar la longitud de los datos filtrados
-      setCurrentPage(1) // Restablecer la página actual al aplicar filtros adicionales
-    } else {
-      setFilteredData([])
-      setFilteredDataLength(0) // Restablecer la longitud de los datos filtrados
-      setCurrentPage(1) // Restablecer la página actual cuando no hay un tipo de producto seleccionado
+      if (itemType) {
+        filteredItems = filteredItems.filter(
+          item => item.productType === itemType.toLowerCase()
+        )
+      }
+
+      if (filteredItems.length > 0) {
+        if (search) {
+          const filteredData = filteredItems.filter(item =>
+            item.name.toLowerCase().includes(search)
+          )
+          setFilteredData(filteredData)
+          setFilteredDataLength(filteredData.length)
+        } else {
+          setFilteredData(filteredItems)
+          setFilteredDataLength(filteredItems.length)
+        }
+      } else {
+        setFilteredData([])
+        setFilteredDataLength(0)
+      }
+
+      setCurrentPage(1)
     }
-  }, [data, itemType, minPrice, maxPrice, selectedBrand])
+  }, [data, itemType, minPrice, maxPrice, selectedBrand, search])
 
   const sortedItems = sortItems(currentItems, orderBy)
   const handlePageChange = page => {

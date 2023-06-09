@@ -37,6 +37,7 @@ export default function Navbar () {
   const [isPageDark, setIsPageDark] = useState(false)
   const [qty, setQty] = useState(0)
   const countQty = countItems()
+
   useEffect(() => {
     setQty(countItems())
   }, [countQty])
@@ -404,9 +405,9 @@ export default function Navbar () {
               left={0}
             />
             <Center
-              w='200px' // Ajusta el ancho a tu preferencia
-              position='fixed' // Agrega la propiedad para una posición fija
-              left='50%' // Centra horizontalmente
+              w='200px'
+              position='fixed'
+              left='50%'
               transform='translateX(-50%)'
             >
               <Heading fontSize='2xl' color='black'>
@@ -466,9 +467,7 @@ export default function Navbar () {
               alignItems='center'
               justifyContent='center'
               width='75%'
-            >
-              <SearchBar />
-            </Box>
+            />
             <UserLoginLogout />
             <Flex alignItems='center' ml='30px'>
               <IconButton

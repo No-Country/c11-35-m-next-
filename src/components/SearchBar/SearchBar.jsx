@@ -14,24 +14,23 @@ import {
   Grid
 } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
-import { fetchData } from '@/store/reducers/data'
-import { useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 export const SearchBar = () => {
   const isMobile = useBreakpointValue({ base: true, lg: false, sm: true })
   const theme = useTheme()
+  const router = useRouter()
   const textColor = theme.colors.custom.text
   const primaryColor = theme.colors.custom.primary
   const [value, setValue] = useState('')
-  const [showInput, setShowInput] = useState(false) // Nuevo estado para controlar la visibilidad del campo de entrada
-  const dispatch = useDispatch()
+  const [showInput, setShowInput] = useState(false)
 
   const onChange = e => {
     setValue(e.target.value)
   }
 
   const handleSearch = () => {
-    dispatch(fetchData({ props: value }))
+    router.push(`/?type=${value}`)
   }
 
   const handleOnSubmit = e => {

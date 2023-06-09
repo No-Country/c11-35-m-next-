@@ -104,7 +104,7 @@ export const SearchBar = () => {
         </>
       ) : (
         <Flex justifyContent='center' alignItems='center'>
-          <Grid templateColumns='1fr auto' width='50vw'>
+          <InputGroup templateColumns='1fr auto' width='50vw'>
             <Input
               type='text'
               name='search'
@@ -119,15 +119,16 @@ export const SearchBar = () => {
               autoFocus
             />
             <IconButton
-              onClick={handleSearch}
+              onClick={handleOnSubmit}
               size='sm'
               backgroundColor='transparent'
               icon={<Search2Icon size='40px' color='#8C8C8C' />}
               _hover={{ bg: 'transparent' }}
               ml='-40px'
               mt='5px'
+              zIndex={1}
             />
-          </Grid>
+          </InputGroup>
         </Flex>
       )}
     </>

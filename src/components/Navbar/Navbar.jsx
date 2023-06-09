@@ -465,11 +465,23 @@ export default function Navbar () {
             justifyContent='right'
             gap={5}
           >
+            <Center
+              w='200px' // Ajusta el ancho a tu preferencia
+              position='fixed' // Agrega la propiedad para una posición fija
+              left='50%' // Centra horizontalmente
+              transform='translateX(-50%)'
+            >
+              <SearchBar />
+            </Center>
             <Box
               display='flex'
               alignItems='center'
               justifyContent='center'
               width='75%'
+              w='200px'
+              position='fixed'
+              left='50%'
+              transform='translateX(-50%)'
             />
             <UserLoginLogout />
             <Flex alignItems='center' ml='30px'>

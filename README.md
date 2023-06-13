@@ -61,7 +61,7 @@ El proyecto se ha construido utilizando las siguientes tecnologías y herramient
 
 - [Micaela Samsó](https://www.linkedin.com/in/micaela-sams%C3%B3-b153541b8): Diseñador UX/UI
 - [Matias Ferrari](https://www.linkedin.com/in/matias-emanuel-ferrari/): Desarrollador Front-End
-- [Daniel Machado](https://www.linkedin.com/in/daniel-machado-4b7ab114/): Desarrollador Front-End
+- [Daniel Machado](https://www.linkedin.com/in/daniel-machado-a21a5a27a/): Desarrollador Front-End
 
 ## Requisitos
 
